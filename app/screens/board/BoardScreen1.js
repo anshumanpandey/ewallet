@@ -12,6 +12,23 @@ const styles = StyleSheet.create({
    },
    imageBook:{
      marginTop:Dimensions.pro5
+   },
+   viewContainer:{
+      display:'flex',
+      justifyContent:'center',
+      alignItems:'center'
+   },
+   passportImage:{
+     resizeMode:'contain',
+   },
+   title:{
+     letterSpacing:-0.03,
+     fontWeight:'bold',
+     lineHeight:32,
+     fontSize:24,
+     textAlign:'center',
+     marginTop:Dimensions.px20,
+     color:'#fff'
    }
 })
 
@@ -25,7 +42,19 @@ export default function BoardScreen1() {
       source={Images.Book}
       style={styles.imageBook}
     />
-
+    <View
+     style={styles.viewContainer}
+    >
+        <Image
+          source={Images.Passport}
+          style={styles.passportImage}
+        />
+        <Text
+         style={styles.title}
+        >
+          Welcome to your first Career Companion!
+        </Text>
+    </View>
        
     </ImageBackground>
   );
