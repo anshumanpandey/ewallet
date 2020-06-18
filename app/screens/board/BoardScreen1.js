@@ -23,12 +23,15 @@ const styles = StyleSheet.create({
    },
    title:{
      letterSpacing:-0.03,
-     fontWeight:'bold',
      lineHeight:32,
      fontSize:24,
      textAlign:'center',
      marginTop:Dimensions.px20,
-     color:'#fff'
+     color:'#fff',
+     fontFamily:'RedHatDisplay-Bold'
+   },
+   desContainer:{
+
    }
 })
 
@@ -54,6 +57,12 @@ export default function BoardScreen1() {
         >
           Welcome to your first Career Companion!
         </Text>
+    </View>
+
+    <View 
+     style={styles.desContainer}
+    >
+      
     </View>
        
     </ImageBackground>
