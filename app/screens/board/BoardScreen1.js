@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
      resizeMode:'contain',
    },
    title:{
+     maxWidth:250,
      letterSpacing:-0.03,
      lineHeight:32,
      fontSize:24,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
    },
    detailText:{
     fontFamily:'RedHatDisplay-Regular',
-    fontSize:20,
+    fontSize:18,
     marginLeft:Dimensions.px20,
     color:'#fff'
    }
