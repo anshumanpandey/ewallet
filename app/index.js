@@ -1,6 +1,11 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import ReduxThunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import reducers from './redux/reducer'
+
 import NavigationService from './navigation/NavigationService.js'
 import OnBoardScreens from './screens/board/index.js'
 import SignUp from './screens/signup/SignUp.js';
@@ -41,13 +46,18 @@ const MainStack = createStackNavigator(
 
 
 const AppMain =()=> {
-    const Apps = createAppContainer(MainStack);
+
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
+    const Apps=createAppContainer(MainStack)
   return (
-    <Apps
+    <Provider store={store}>
+     <Apps
     ref={navigatorRef => {
         NavigationService.setTopLevelNavigator(navigatorRef)
       }}
     />
+    </Provider>
+   
   );
 }
 

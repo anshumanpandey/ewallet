@@ -7,7 +7,7 @@ const Images ={
     Hat:require('../assets/images/hat.png'),
     Hand:require('../assets/images/hand.png'),
     Avatar:require('../assets/images/Avatar.png'),
-    Finger:require('../assets/images/finger.png'),
+    Finger:require('../assets/images/finger.jpg'),
     Mark:require('../assets/images/mark.png'),
     Lamp:require('../assets/images/lamp.png'),
     Tool:require('../assets/images/tool.png'),
@@ -16,7 +16,14 @@ const Images ={
     Print:require('../assets/images/print.png'),
     Personal:require('../assets/images/personal.png'),
     Side:require('../assets/images/side.png'),
-    Left:require('../assets/images/left.png')
+    Left:require('../assets/images/leftarrow.png'),
+    Icon1:require('../assets/images/icon1.png'),
+    Icon2:require('../assets/images/icon2.png'),
+    Icon3:require('../assets/images/icon3.png'),
+    Icon4:require('../assets/images/icon4.png'),
+    Icon5:require('../assets/images/icon5.png'),
+    Icon6:require('../assets/images/icon6.png'),
+
 }
 
 export default Images;

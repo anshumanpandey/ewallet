@@ -15,6 +15,11 @@ const styles =StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
+
+    container:{
+        height:Dimension.deviceHeight,
+        
+    }
   
 })
 

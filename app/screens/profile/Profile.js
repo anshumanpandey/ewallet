@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,FlatList,TouchableOpacity,Text} from 'react-native'
+import {View,FlatList,TouchableOpacity,Text,Image} from 'react-native'
 
 import {Icon} from 'native-base'
 import {Data} from './data'
@@ -53,10 +53,8 @@ const ItemCard = ({item,onTabClick}) =>{
          >
            <View style={styles.card}>
              <View style={{alignItems:'center',justifyContent:'center'}}>
-               <View style={{backgroundColor:'#999CF9',width:40,height:40,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
-                  <Icon type={item.iconType} name={item.iconName} style={{fontSize:20,color:'white'}}/>
-               </View>
-                <Text style={{textAlign:'center',maxWidth:110,marginTop:20}}>{item.title}</Text>
+                <Image source={item.iconType} style={{width:40,height:40}}/>
+                <Text style={{textAlign:'center',marginTop:15,paddingHorizontal:30,fontSize:12}}>{item.title}</Text>
              </View>
            </View>
          </TouchableOpacity>
@@ -65,7 +63,7 @@ const ItemCard = ({item,onTabClick}) =>{
 
 const Profile =(props)=> {
   return (
-    <View style={{width:'100%',height:'100%'}}>
+    <View style={styles.container}>
      <FlatList
        horizontal={false}
        data ={Data}

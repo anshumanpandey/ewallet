@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
      resizeMode:'contain',
    },
    title:{
-     maxWidth:Dimensions.px300,
+    //  maxWidth:Dimensions.px300,
+     paddingHorizontal:Dimensions.px40,
      letterSpacing:-0.03,
      lineHeight:32,
      fontSize:24,
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
    },
    desContainer:{
       marginTop:Dimensions.px60,
-      width:'90%',
+      width:Dimensions.deviceWidth-30,
       backgroundColor:'#fff',
       borderRadius:10,
       padding:15
@@ -57,7 +58,8 @@ const styles = StyleSheet.create({
    desText:{
      fontSize:16,
      color:'#99879D',
-     marginTop:10
+     marginTop:10,
+     marginLeft:10
    }
 })
 
@@ -86,7 +88,7 @@ export default function BoardScreen3() {
         <Text
          style={styles.title}
         >
-        Enhance your journey with true recommendations & skill mapping:
+         Enhance your journey with true recommendations & skill mapping:
         </Text>
     </View>
 
@@ -100,9 +102,9 @@ export default function BoardScreen3() {
          <Image source={Images.Avatar}/>
          <Text style={styles.desText}>Nec vox accusatoris ulla licet subditicii in his malorum quaerebatur acervis ut saltem specie tenus crimina praescriptis legum commit...ecie tenus crimina praescriptis legum commit...</Text>
        </View>
-       <View style={{width:'80%',alignItems:'center',flexDirection:'row'}}>
+       <View style={{width:'100%',alignItems:'center',flexDirection:'row'}}>
           <View>
-             <Text style={{fontSize:20,color:'#120E21'}}>Skills acquired</Text>
+             <Text style={{fontSize:16,fontWeight:'500',color:'#120E21'}}>Skills acquired</Text>
              <View style={styles.detailView}> 
              <TouchableHighlight
               style={{padding:10,borderColor:'#99879D',borderWidth:1,borderRadius:4}}
@@ -118,7 +120,7 @@ export default function BoardScreen3() {
            
           </View>
           <View style={{marginLeft:20}}>
-             <Text style={{fontSize:20,color:'#120E21'}}>In development</Text>
+             <Text style={{fontSize:16,fontWeight:'500',color:'#120E21'}}>In development</Text>
              <View style={styles.detailView}> 
             <TouchableHighlight
               style={{padding:10,borderColor:'#99879D',borderWidth:1,borderRadius:4}}

@@ -16,7 +16,7 @@ const Login = (props)=>{
        
             <View style={styles.loginInfoArea}>
                 <View style={styles.signupTitleView}>
-                    <Text style={styles.signupTitle}>Log-in</Text>
+                    <Text style={styles.signupTitle}>Sign In</Text>
                 </View>
             
                 <View style={styles.textInputBackground}>
@@ -52,7 +52,7 @@ const Login = (props)=>{
                  <TouchableOpacity 
                   onPress={()=>NavigationService.navigate(Screens.SignUp)}
                  >
-                   <Text style={[styles.memberText,{fontSize:16}]}>Sign-up</Text>
+                   <Text style={styles.memberText}>Sign Up</Text>
                  </TouchableOpacity>
                </View>
                </View> 

@@ -10,6 +10,18 @@ const styles=StyleSheet.create({
         flex:1,
         backgroundColor:'white',
     },
+    backView:{
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    backTitle:{
+        fontFamily:'RedHatDisplay-Regular',
+        fontWeight:'500',
+        fontSize:18,
+        lineHeight:24,
+        color:'#99879D',
+        marginLeft:10
+    },
     signupTitleView:{
       marginTop:Dimension.px35,
       justifyContent:'center',

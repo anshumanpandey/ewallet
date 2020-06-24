@@ -1,17 +1,18 @@
 import React from 'react';
 
-import {View,FlatList,TouchableOpacity,Text,Image} from 'react-native'
+import {View,FlatList,TouchableOpacity,Text,Image,ScrollView} from 'react-native'
 import {Icon} from 'native-base'
 import styles from './styles';
 import Images from '../../constants/image'
-import { ScrollView } from 'react-native-gesture-handler';
+
 
 
 const DetailPassport =(props)=> {
 
   return (
-     <ScrollView style={{padding:20}}>
-         <View style={styles.card}>
+     <ScrollView>
+         <View style={styles.container}>
+            <View style={styles.card}>
                 <View style={styles.certiView}>
                     <View>
                      <Text style={styles.certTitle}>Certified PMP Project Manager</Text>
@@ -34,7 +35,7 @@ const DetailPassport =(props)=> {
                </View>
              </View>
 
-             <View style={{flexDirection:'row'}}>
+         <View style={{flexDirection:'row'}}>
              <View style={styles.feedback}>
                 <Text style={{fontSize:20}}>2feedback</Text>
                 <View style={{flexDirection:'row',marginTop:10}}>
@@ -52,16 +53,15 @@ const DetailPassport =(props)=> {
                     </View>
                 </View>
              </View>
-             <View style={styles.sideBack}>
-                 <TouchableOpacity
+             <TouchableOpacity
                   onPress={()=>props.onTabClick(4)}
                  >
+             <View style={styles.sideBack}> 
                    <Image source={Images.Side}/>
-                 </TouchableOpacity>
-                
              </View>
+             </TouchableOpacity>
              </View>
-            
+        </View>
      </ScrollView>
   );
 }

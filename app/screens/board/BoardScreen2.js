@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
      resizeMode:'contain',
    },
    title:{
-     maxWidth:250,
+     paddingHorizontal:58,
      letterSpacing:-0.03,
      lineHeight:32,
      fontSize:24,

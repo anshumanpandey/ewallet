@@ -3,10 +3,12 @@ import {View,Text,Image,StyleSheet, StatusBar} from 'react-native'
 import {Icon} from 'native-base'
 import Images from '../constants/image'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import NavigationService from '../navigation/NavigationService';
+import Screens from '../constants/screens';
 
 
 
- const Header =() =>{
+ const Header =(props) =>{
   return (
     <View style={styles.container}>
         <StatusBar hidden={true}/>
@@ -18,8 +20,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
                 <Text style={styles.jobTitle}>Current Company</Text>
             </View>
         </View>
-        <TouchableOpacity>
-             <Image source={Images.Tool} style={{marginTop:10}}/>
+        <TouchableOpacity
+         onPress={()=>props.onTabClick(5)}
+        >
+           <Icon type='Entypo' name='home' style={{fontSize:25,color:'#8BA5FA'}}/> 
         </TouchableOpacity>
     </View>
   );
@@ -28,6 +32,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const styles = StyleSheet.create({
     container:{
         width:'100%',
+        marginTop:10,
         padding:20,
         justifyContent:'space-between',
         flexDirection:'row',

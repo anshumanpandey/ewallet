@@ -8,13 +8,14 @@ import Passport from '../passport/Passport'
 import FingerPrint from '../finger/FingerPrint'
 import DetailPassport from '../detail/DetailPassport'
 import FullFeedback from '../fullfeedback/FullFeedback'
+import EditProfile from '../editprofile/EditProfile'
 
 class Home extends Component {
    
   constructor(props){
     super(props)
     this.state ={
-        tab:2
+        tab:5
     }
   }
   onTabClick = (index) =>{
@@ -24,10 +25,15 @@ class Home extends Component {
     const{tab}=this.state
     return (
       <View style={styles.container}>
-          <Header/>
+         {
+           tab !==2&&(
+            <Header onTabClick={this.onTabClick}/>
+           )
+         }
+        
            <View style={styles.mainView}>
              {
-               tab ===2 &&(
+               tab ===5 &&(
                  <Profile onTabClick={this.onTabClick}/> 
                )
              }
@@ -40,6 +46,11 @@ class Home extends Component {
                tab ===0 &&(
                 <Passport onTabClick={this.onTabClick}/> 
               )
+             }
+             {
+               tab ===2 &&(
+                 <EditProfile/>
+               )
              }
              {
                tab ===3 && (

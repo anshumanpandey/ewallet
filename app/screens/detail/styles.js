@@ -1,10 +1,12 @@
 import {StyleSheet} from 'react-native'
-
+import Dimensions from '../../constants/dimensions'
 
 const styles = StyleSheet.create({
-
+    container:{
+        height:Dimensions.deviceHeight,
+        padding:20
+    },
      card:{
-         
           width:'100%',
           padding:15,
           backgroundColor:'#fff',
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
         borderColor:'black',
         borderWidth:1,
         borderRadius:5,
-        height:'100%'
+        height:'60%'
      },
      sideBack:{
         width:'10%',
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:5,
         justifyContent:'center',
-        height:'100%'
+        height:'60%'
      },
     certiView:{
           display:'flex',

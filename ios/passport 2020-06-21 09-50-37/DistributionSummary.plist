@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>passport.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>3B5E55FD2F0C6578B34A7019692D8FFFCA9F14C2</string>
+				<key>dateExpires</key>
+				<string>6/21/21</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>62GVCSF932.org.reactjs.native.example.passport</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>62GVCSF932</string>
+				<key>get-task-allow</key>
+				<true/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>62GVCSF932.org.reactjs.native.example.passport</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>passport.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>96ad5025-6cbe-44e6-ae91-0340643e29cf</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: *</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>62GVCSF932</string>
+				<key>name</key>
+				<string>Nicolas Fatout</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -15,6 +15,16 @@ const EditProfile = (props)=>{
         <View style={styles.loginContainer}>
        
             <View style={styles.loginInfoArea}>
+            <View style={styles.backView}>
+               <TouchableOpacity
+                style={styles.backView}
+                onPress={()=>NavigationService.goBack()}
+                >
+                    <Icon type="Ionicons" name="ios-arrow-round-back"/>
+                    <Text style={styles.backTitle}>Back</Text>
+               </TouchableOpacity>
+             
+           </View>
                 <View style={styles.signupTitleView}>
                     <Text style={styles.signupTitle}>EditProfile</Text>
                 </View>
@@ -67,7 +77,7 @@ const EditProfile = (props)=>{
                <View style={styles.buttonView}>
                 <TouchableOpacity
                  style={[styles.textInputBackground,{backgroundColor:'#8BA5FA'}]}
-                  onPress={()=>NavigationService.goBack()}
+                 onPress={()=>NavigationService.goBack()}
                   >
                    <Text style={styles.buttonText}>
                        Confirm
