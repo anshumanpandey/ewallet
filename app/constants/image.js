@@ -11,9 +11,9 @@ const Images ={
     Mark:require('../assets/images/mark.png'),
     Lamp:require('../assets/images/lamp.png'),
     Tool:require('../assets/images/tool.png'),
-    Star:require('../assets/images/star.png'),
-    Profile:require('../assets/images/profile.png'),
-    Print:require('../assets/images/print.png'),
+    Star:require('../assets/images/menu.png'),
+    Profile:require('../assets/images/person1.png'),
+    Print:require('../assets/images/finger1.png'),
     Personal:require('../assets/images/personal.png'),
     Side:require('../assets/images/side.png'),
     Left:require('../assets/images/leftarrow.png'),
@@ -23,6 +23,7 @@ const Images ={
     Icon4:require('../assets/images/icon4.png'),
     Icon5:require('../assets/images/icon5.png'),
     Icon6:require('../assets/images/icon6.png'),
+    Setting:require('../assets/images/setting.png')
 
 }
 

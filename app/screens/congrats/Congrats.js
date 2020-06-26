@@ -80,14 +80,14 @@ export default function Congrats() {
         >
           Congratulations Dustin! Your Passport is ready
         </Text>
-        <View style={{marginTop:20,width:'100%',justifyContent:'flex-end',flexDirection:'row',paddingHorizontal:20}}>
+        {/* <View style={{marginTop:20,width:'100%',justifyContent:'flex-end',flexDirection:'row',paddingHorizontal:20}}>
         <TouchableOpacity
          onPress={()=>NavigationService.navigate(Screens.Home)}
         >
-          <Text style={{color:'#fff'}}>Passer</Text>
+          <Text style={{color:'#fff'}}>Skip</Text>
         </TouchableOpacity>
        
-      </View>
+      </View> */}
     </View>
        
     </ImageBackground>

@@ -76,8 +76,8 @@ const EditProfile = (props)=>{
                 </View>
                <View style={styles.buttonView}>
                 <TouchableOpacity
-                 style={[styles.textInputBackground,{backgroundColor:'#8BA5FA'}]}
-                 onPress={()=>NavigationService.goBack()}
+                  style={[styles.textInputBackground,{backgroundColor:'#8BA5FA'}]}
+                  onPress={()=>props.onTabClick(5)}
                   >
                    <Text style={styles.buttonText}>
                        Confirm

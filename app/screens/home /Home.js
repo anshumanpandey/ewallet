@@ -49,7 +49,7 @@ class Home extends Component {
              }
              {
                tab ===2 &&(
-                 <EditProfile/>
+                 <EditProfile onTabClick={this.onTabClick}/>
                )
              }
              {

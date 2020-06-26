@@ -57,7 +57,7 @@ import Screens from '../../constants/screens'
             <View style={styles.buttonView}>
                 <TouchableOpacity
                  style={[styles.textInputBackground,{backgroundColor:'#8BA5FA'}]}
-                 onPress={()=>NavigationService.navigate(Screens.Congrats)}
+                 onPress={()=>NavigationService.navigate(Screens.Home)}
                   >
                    <Text style={styles.buttonText}>
                        Next

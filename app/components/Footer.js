@@ -9,17 +9,23 @@ import Images from '../constants/image'
         <TouchableOpacity
          onPress={()=>props.onTabClick(0)}
         >
-           <Image source={Images.Star}/>
+           <Image source={Images.Star}
+             style={{width:16,height:16}}
+             />
         </TouchableOpacity>
         <TouchableOpacity
          onPress={()=>props.onTabClick(1)}
         >
-            <Image source={Images.Print}/>
+            <Image source={Images.Print}
+             style={{width:25,height:25}}
+            />
         </TouchableOpacity>
          <TouchableOpacity
           onPress={()=>props.onTabClick(2)}
          >
-            <Image source={Images.Profile}/>
+            <Image source={Images.Profile}
+             style={{width:40,height:40}}
+            />
          </TouchableOpacity>
     </View>
   );

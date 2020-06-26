@@ -12,7 +12,8 @@ const Screens = {
     Home:'Home',
     Feedback:'Feedback',
     Login:'Login',
-    EditProfile:'EditProfile'
+    EditProfile:'EditProfile',
+    SignBoard:'SignBoard'
   }
   export default Screens
   

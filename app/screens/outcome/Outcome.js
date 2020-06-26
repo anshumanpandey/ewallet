@@ -19,7 +19,7 @@ import Screens from '../../constants/screens'
                     <Icon type="Ionicons" name="ios-arrow-round-back"/>
                     <Text style={styles.backTitle}>Back</Text>
                </TouchableOpacity>
-               <Text style={{fontSize:12,lineHeight:14,color:'#9F8EA3'}}>Passer</Text>
+               <Text style={{fontSize:12,lineHeight:14,color:'#9F8EA3'}}>Skip</Text>
            </View>
            <Text style={styles.desTitle}>Do you have any tangible outcome? It’s absolutely fine if you don’t!</Text>
             <View style={{marginTop:40}}>

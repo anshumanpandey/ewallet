@@ -23,7 +23,8 @@ import Screens from '../constants/screens';
         <TouchableOpacity
          onPress={()=>props.onTabClick(5)}
         >
-           <Icon type='Entypo' name='home' style={{fontSize:25,color:'#8BA5FA'}}/> 
+           {/* <Icon type='Entypo' name='home' style={{fontSize:25,color:'#8BA5FA'}}/>  */}
+           <Image source={Images.Setting} style={{width:20,height:20}}/>
         </TouchableOpacity>
     </View>
   );
