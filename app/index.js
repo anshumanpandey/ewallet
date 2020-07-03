@@ -22,6 +22,7 @@ import Feedback from './screens/feedback/Feedback.js';
 import EditProfile from './screens/editprofile/EditProfile.js';
 import { useGlobalState } from './state/GlobalState';
 import { Alert } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import "./helpers/AxiosBootstrap"
 
 const MainStack = createStackNavigator(
@@ -68,6 +69,7 @@ const RootStack = createDrawerNavigator(
 const AppMain = () => {
 
   const [error] = useGlobalState('error')
+  const [success] = useGlobalState('success')
 
   useEffect(() => {
     console.log('error', error)
@@ -75,6 +77,13 @@ const AppMain = () => {
       Alert.alert('Error', error.toString())
     }
   }, [error])
+
+  useEffect(() => {
+    console.log('success', error)
+    if (error) {
+      Toast.show(success, Toast.LONG)
+    }
+  }, [success])
 
   const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
   const Apps = createAppContainer(RootStack)

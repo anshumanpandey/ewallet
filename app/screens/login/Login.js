@@ -6,6 +6,7 @@ import styles from './styles'
 import NavigationService from '../../navigation/NavigationService'
 import Screens from '../../constants/screens'
 import ErrorLabel from '../../components/ErrorLabel';
+import GlobalStyles from '../../constants/globalStyles';
 
 
 const Login = (props) => {
@@ -71,7 +72,8 @@ const Login = (props) => {
 
                 <View style={styles.buttonView}>
                   <TouchableOpacity
-                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }]}
+                    disabled={loginReq.loading}
+                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }, loginReq.loading && GlobalStyles.disabledButton]}
                     onPress={handleSubmit}
                   >
                     <Text style={styles.buttonText}>
