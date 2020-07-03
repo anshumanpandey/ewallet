@@ -1,7 +1,7 @@
 
 const Screens = {
     OnBoardScreen:'OnBoardScreen',
-    SignUp:'SignUp',
+    SignBoard:'SignBoard',
     Login:'Login',
     Achievement:'Achievement',
     Description:'Description',

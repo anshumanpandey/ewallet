@@ -22,6 +22,7 @@ import Feedback from './screens/feedback/Feedback.js';
 import EditProfile from './screens/editprofile/EditProfile.js';
 import { useGlobalState } from './state/GlobalState';
 import { Alert } from 'react-native';
+import "./helpers/AxiosBootstrap"
 
 const MainStack = createStackNavigator(
   {

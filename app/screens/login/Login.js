@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, TextInput, ScrollView, Image, Modal, SafeAreaView, CheckBox } from 'react-native'
 import useAxios from 'axios-hooks'
+import { Formik } from 'formik';
 import styles from './styles'
 import NavigationService from '../../navigation/NavigationService'
 import Screens from '../../constants/screens'
-import "../../helpers/AxiosBootstrap"
+import ErrorLabel from '../../components/ErrorLabel';
 
 
 const Login = (props) => {
@@ -24,45 +25,69 @@ const Login = (props) => {
             <Text style={styles.signupTitle}>Sign In</Text>
           </View>
 
-          <View style={styles.textInputBackground}>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Email Address"
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            validate={(values) => {
+              const errors = {}
+              if (!values.email) errors.email = "Required"
+              if (!values.password) errors.password = "Required"
 
-            />
-
-          </View>
-          <View style={styles.textInputBackground}>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Password"
-              secureTextEntry={true}
-            />
-
-          </View>
-
-          <View style={styles.buttonView}>
-            <TouchableOpacity
-              style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }]}
-              onPress={() => {
-                doLogin({
-                  data: {}
+              return errors
+            }}
+            onSubmit={values => {
+              doLogin({
+                data: values
+              })
+                .then((r) => {
+                  console.log(r.data)
+                  //NavigationService.navigate(Screens.Home)
                 })
-                .then(() => {
-                  NavigationService.navigate(Screens.Home)
-                })
-              }}
-            >
-              <Text style={styles.buttonText}>
-                Confirm
+            }}
+          >
+            {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+              <>
+                <View style={styles.textInputBackground}>
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Email Address"
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                  />
+                </View>
+                {errors.email && touched.email && <ErrorLabel text={errors.email} />}
+
+                <View style={styles.textInputBackground}>
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    value={values.password}
+                  />
+                </View>
+                {errors.password && touched.password && <ErrorLabel text={errors.password} />}
+
+                <View style={styles.buttonView}>
+                  <TouchableOpacity
+                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }]}
+                    onPress={handleSubmit}
+                  >
+                    <Text style={styles.buttonText}>
+                      Confirm
                    </Text>
 
-            </TouchableOpacity>
-          </View>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
+          </Formik>
+
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
             <Text style={styles.memberText}>You have not an account ?</Text>
             <TouchableOpacity
-              onPress={() => NavigationService.navigate(Screens.SignUp)}
+              onPress={() => NavigationService.navigate(Screens.SignBoard)}
             >
               <Text style={styles.memberText}>Sign Up</Text>
             </TouchableOpacity>
