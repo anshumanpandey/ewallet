@@ -20,61 +20,22 @@ import Experience from './screens/experience/Experience'
 import Home from './screens/home /Home.js';
 import Feedback from './screens/feedback/Feedback.js';
 import EditProfile from './screens/editprofile/EditProfile.js';
-import { useGlobalState } from './state/GlobalState';
+import { useGlobalState, dispatchGlobalState, GLOBAL_STATE_ACTIONS } from './state/GlobalState';
 import { Alert } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import "./helpers/AxiosBootstrap"
-
-const MainStack = createStackNavigator(
-  {
-    OnBoardScreens: { screen: OnBoardScreens },
-    SignBoard: { screen: SignBoard },
-    Login: { screen: Login },
-    Achievement: { screen: Achievement },
-    Description: { screen: Description },
-    Outcome: { screen: Outcome },
-    Attach: { screen: Attach },
-    Experience: { screen: Experience },
-    // Congrats:{screen:Congrats},
-    Home: { screen: Home },
-    EditProfile: { screen: EditProfile },
-    Feedback: { screen: Feedback }
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => {
-      return {
-        headerShown: false
-      }
-    }
-  }
-)
-
-const RootStack = createDrawerNavigator(
-  {
-    MainStack: {
-      screen: MainStack,
-      // defaultNavigationOptions:{
-      //     drawerLockMode: 'locked-open',
-      // }
-
-    }
-  }
-  // {
-  //     drawerWidth: Dimensions.deviceWidth*0.5,
-  //     contentComponent: Menu
-  //   }
-)
-
 
 const AppMain = () => {
 
   const [error] = useGlobalState('error')
   const [success] = useGlobalState('success')
+  const [token] = useGlobalState('token')
 
   useEffect(() => {
     console.log('error', error)
     if (error) {
       Alert.alert('Error', error.toString())
+      dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.ERROR, state: null })
     }
   }, [error])
 
@@ -82,8 +43,49 @@ const AppMain = () => {
     console.log('success', error)
     if (error) {
       Toast.show(success, Toast.LONG)
+      dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.SUCCESS, state: null })
     }
   }, [success])
+
+  let screens = {
+    OnBoardScreens: { screen: OnBoardScreens },
+    Login: { screen: Login },
+    SignBoard: { screen: SignBoard },
+  };
+
+  if (token) {
+    screens = {}
+    screens.Home = { screen: Home },
+    screens.Achievement = { screen: Achievement },
+    screens.Description = { screen: Description },
+    screens.Outcome = { screen: Outcome },
+    screens.Attach = { screen: Attach },
+    screens.Experience = { screen: Experience },
+    screens.EditProfile = { screen: EditProfile },
+    screens.Feedback = { screen: Feedback }
+
+    screens.OnBoardScreens = { screen: OnBoardScreens }
+    screens.Login = { screen: Login }
+    screens.SignBoard = { screen: SignBoard }
+  }
+
+  const MainStack = createStackNavigator(screens,    
+    {
+      defaultNavigationOptions: ({ navigation }) => {
+        return {
+          headerShown: false
+        }
+      }
+    }
+  )
+  
+  const RootStack = createDrawerNavigator(
+    {
+      MainStack: {
+        screen: MainStack,
+      }
+    }
+  )
 
   const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
   const Apps = createAppContainer(RootStack)

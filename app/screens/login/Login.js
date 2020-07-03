@@ -7,6 +7,7 @@ import NavigationService from '../../navigation/NavigationService'
 import Screens from '../../constants/screens'
 import ErrorLabel from '../../components/ErrorLabel';
 import GlobalStyles from '../../constants/globalStyles';
+import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
 
 
 const Login = (props) => {
@@ -41,7 +42,9 @@ const Login = (props) => {
               })
                 .then((r) => {
                   console.log(r.data)
-                  //NavigationService.navigate(Screens.Home)
+                  dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.TOKEN, state: r.data.token})
+                  dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.PROFILE, state: r.data})
+                  NavigationService.navigate(Screens.Home)
                 })
             }}
           >
