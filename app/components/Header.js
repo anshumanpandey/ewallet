@@ -11,7 +11,6 @@ import { useGlobalState } from '../state/GlobalState';
 
 const Header = (props) => {
     const [profile] = useGlobalState('profile')
-    console.log(profile)
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
