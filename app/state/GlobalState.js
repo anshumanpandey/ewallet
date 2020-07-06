@@ -6,18 +6,21 @@ export const GLOBAL_STATE_ACTIONS = {
     SUCCESS: 'success',
     TOKEN: 'TOKEN',
     PROFILE: 'PROFILE',
-    LOGOUT: 'LOGOUT'
+    LOGOUT: 'LOGOUT',
+    ACHIVEMEN_SELECTED: 'ACHIVEMEN_SELECTED',
 }
 
 const initialState = {
     error: null,
     success: null,
     token: null,
-    profile: null
+    profile: null,
+    currentAchivemenSelected: null,
 };
 
 const reducer = (state, action) => {
     switch (action.type) {
+      case GLOBAL_STATE_ACTIONS.ACHIVEMEN_SELECTED: return { ...state, currentAchivemenSelected: action.state };
       case GLOBAL_STATE_ACTIONS.ERROR: return { ...state, ...{error: action.state} };
       case GLOBAL_STATE_ACTIONS.SUCCESS: return { ...state, ...{success: action.state} };
       case GLOBAL_STATE_ACTIONS.TOKEN: {
