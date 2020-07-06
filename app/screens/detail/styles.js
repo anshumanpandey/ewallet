@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
         borderRadius:5,
         height:'60%'
      },
+     emptyFeedback:{
+        height:'80%'
+     },
      sideBack:{
         width:'10%',
         padding:15,

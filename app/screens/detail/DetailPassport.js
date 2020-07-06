@@ -38,30 +38,29 @@ const DetailPassport = (props) => {
                 </View>
 
                 <View style={{ flexDirection: 'row' }}>
-                    <View style={styles.feedback}>
-                        <Text style={{ fontSize: 20 }}>2 feedback</Text>
-                        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                            <Image source={Images.Avatar} style={{ width: 40, height: 40 }} />
-                            <View style={{ marginLeft: 10 }}>
-                                <Text style={{ fontSize: 20 }}>Manager at Criteo</Text>
-                                <Text style={{ fontSize: 16 }}>Florian Guerin</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                            <Image source={Images.Avatar} style={{ width: 40, height: 40 }} />
-                            <View style={{ marginLeft: 10 }}>
-                                <Text style={{ fontSize: 20 }}>Manager at Criteo</Text>
-                                <Text style={{ fontSize: 16 }}>Florian Guerin</Text>
-                            </View>
-                        </View>
+                    <View style={[styles.feedback, achivement.Feedbacks.length == 0 && styles.emptyFeedback]}>
+                        <Text style={{ fontSize: 20 }}>{achivement.Feedbacks.length} feedback</Text>
+                        {achivement.Feedbacks.length !== 0 && (achivement.Feedbacks.map(f => {
+                            return (
+                                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                    <Image source={Images.Avatar} style={{ width: 40, height: 40 }} />
+                                    <View style={{ marginLeft: 10 }}>
+                                        <Text style={{ fontSize: 20 }}>{f.fullname}</Text>
+                                        <Text style={{ fontSize: 16 }}>{f.fullname}</Text>
+                                    </View>
+                                </View>
+                            );
+                        }))}
                     </View>
-                    <TouchableOpacity
-                        onPress={() => props.onTabClick(4)}
-                    >
-                        <View style={styles.sideBack}>
-                            <Image source={Images.Side} />
-                        </View>
-                    </TouchableOpacity>
+                    {achivement.Feedbacks.length !== 0 && (
+                        <TouchableOpacity
+                            onPress={() => props.onTabClick(4)}
+                        >
+                            <View style={styles.sideBack}>
+                                <Image source={Images.Side} />
+                            </View>
+                        </TouchableOpacity>
+                    )}
                 </View>
             </View>
         </ScrollView>
