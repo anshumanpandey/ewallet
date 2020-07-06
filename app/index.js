@@ -41,7 +41,7 @@ const AppMain = () => {
 
   useEffect(() => {
     console.log('success', error)
-    if (error) {
+    if (success) {
       Toast.show(success, Toast.LONG)
       dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.SUCCESS, state: null })
     }
