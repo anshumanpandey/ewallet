@@ -11,7 +11,7 @@
     "android-windows": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android",
     "clean-build": "cd android && gradlew clean && cd .. && npm run android-windows",
     "android-bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
-    "android-release": "cd android && gradlew assembleRelease",
+    "android-release": "cd android && ./gradlew assembleRelease",
     "android-debug": "npm run android-bundle && cd android && ./gradlew assembleDebug"
   },
   "dependencies": {
@@ -50,6 +50,7 @@
     "eslint": "^7.2.0",
     "jest": "^26.0.1",
     "metro-react-native-babel-preset": "^0.59.0",
+    "react-native-clean-project": "^3.3.0",
     "react-test-renderer": "16.11.0"
   },
   "jest": {

@@ -62,15 +62,17 @@ const Attach = () => {
                                             editable={false}
                                             style={styles.textInput}
                                             placeholder="Attach"
+                                            value={values.file?.fileName}
                                             autoCompleteType={'name'}
                                         />
                                     </View>
                                 </TouchableOpacity>
                                 {errors.file && touched.file && <ErrorLabel text={errors.file} />}
+                                {values.file.uri && <Image style={{ width: 200, height: 200, marginLeft: 'auto', marginRight: 'auto', marginTop: '3%'}} source={{ uri: values.file.uri }} />}
 
 
                             </View>
-                            <View style={{ marginTop: 100 }}>
+                            <View style={{ marginTop: 30 }}>
 
                                 <View style={styles.tipView}>
                                     <Image source={Images.Lamp} style={{ position: 'absolute', top: -30, left: 0 }} />

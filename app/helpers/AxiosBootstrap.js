@@ -4,7 +4,7 @@ import { getGlobalState, dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../st
 
 export const axiosInstance = Axios.create({
     //baseURL: 'http://10.0.2.2:5000/api',
-    baseURL: 'https://passport-backend.herokuapp.com/'
+    baseURL: 'https://passport-backend.herokuapp.com/api'
 })
 
 axiosInstance.interceptors.request.use(
