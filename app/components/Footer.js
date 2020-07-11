@@ -1,13 +1,14 @@
 import React from 'react';
 import {View,StyleSheet,Image,TouchableOpacity} from 'react-native'
 import Images from '../constants/image'
-
+import NavigationService from '../navigation/NavigationService';
+import Screens from '../constants/screens'
 
  const Footer =(props) =>{
   return (
     <View style={styles.container}>
         <TouchableOpacity
-         onPress={()=>props.onTabClick(0)}
+         onPress={()=>NavigationService.navigate(Screens.Achievement)}
         >
            <Image source={Images.Star}
              style={{width:16,height:16}}

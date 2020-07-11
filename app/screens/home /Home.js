@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View,StyleSheet} from 'react-native'
+import {View} from 'react-native'
 import Header from '../../components/Header'
 import styles from './styles'
 import Footer from '../../components/Footer'
