@@ -116,18 +116,6 @@ const EditProfile = (props) => {
                 <View style={styles.textInputBackground}>
                   <TextInput
                     style={styles.textInput}
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    value={values.password}
-                  />
-                </View>
-                {errors.password && touched.password && <ErrorLabel text={errors.password} />}
-
-                <View style={styles.textInputBackground}>
-                  <TextInput
-                    style={styles.textInput}
                     placeholder="Phone Number"
                     onChangeText={handleChange('phoneNumber')}
                     onBlur={handleBlur('phoneNumber')}
