@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import {View,StatusBar} from 'react-native'
 import Swiper from 'react-native-swiper'
 import Congrats from '../congrats/Congrats'
-import SignUp from '../signup/SignUp'
+import Login from '../login/Login'
 
 
 class SignBoard extends Component {
@@ -24,7 +23,7 @@ class SignBoard extends Component {
         showsPagination={false}
        >
           <Congrats/>
-          <SignUp/>
+          <Login/>
        </Swiper>
     )
   }

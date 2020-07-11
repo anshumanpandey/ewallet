@@ -92,7 +92,7 @@ const Login = (props) => {
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
             <Text style={styles.memberText}>You have not an account ?</Text>
             <TouchableOpacity
-              onPress={() => NavigationService.navigate(Screens.SignBoard)}
+              onPress={() => NavigationService.navigate(Screens.Register)}
             >
               <Text style={styles.memberText}>Sign Up</Text>
             </TouchableOpacity>

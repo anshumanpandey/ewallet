@@ -8,6 +8,7 @@ import { createStore, applyMiddleware } from 'redux'
 import reducers from './redux/reducer'
 
 import NavigationService from './navigation/NavigationService.js'
+import Register from './screens/signup/SignUp'
 import OnBoardScreens from './screens/board/index.js'
 import SignBoard from './screens/signboard/index.js';
 import Login from './screens/login/Login'
@@ -51,6 +52,7 @@ const AppMain = () => {
     OnBoardScreens: { screen: OnBoardScreens },
     Login: { screen: Login },
     SignBoard: { screen: SignBoard },
+    Register: { screen: Register },
   };
 
   if (token) {

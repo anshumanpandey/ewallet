@@ -6,6 +6,7 @@ import BoardScreen2 from './BoardScreen2'
 import BoardScreen3 from './BoardScreen3'
 import BoardScreen4 from './BoardScreen4'
 import BoardScreen5 from './BoardScreen5'
+import LoginScreen from '../login/Login'
 
 class OnBoardScreens extends Component {
     
@@ -17,6 +18,7 @@ class OnBoardScreens extends Component {
          <BoardScreen3/>
          <BoardScreen4/>
          <BoardScreen5/>
+         <LoginScreen/>
        </Swiper>
     )
   }

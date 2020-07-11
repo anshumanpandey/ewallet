@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react'
-import { AsyncStorage } from 'react-native'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../redux/action.js'
 
-import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, TextInput, ScrollView, Image, Modal, SafeAreaView, CheckBox, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, ImageBackground, TextInput, ScrollView, Image, Modal, SafeAreaView, CheckBox, Alert } from 'react-native'
 import { Formik } from 'formik';
 import styles from './styles'
 import NavigationService from '../../navigation/NavigationService'
 import Screens from '../../constants/screens'
 import ErrorLabel from '../../components/ErrorLabel.js';
 import useAxios from 'axios-hooks'
-import Toast from 'react-native-simple-toast';
 import GlobalStyles from '../../constants/globalStyles.js';
 import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState.js';
 
 const SignUp = (props) => {
   const [registerReq, doRegister] = useAxios({
     url: '/register',
+    method: 'POST'
+  }, { manual: true })
+
+  const [loginReq, doLogin] = useAxios({
+    url: '/login',
     method: 'POST'
   }, { manual: true })
 
@@ -43,7 +46,7 @@ const SignUp = (props) => {
               if (!values.lastName) errors.lastName = "Required"
               if (!values.email) errors.email = "Required"
               if (!values.password) errors.password = "Required"
-              if (!values.phoneNumber) errors.phoneNumber = "Required" 
+              if (!values.phoneNumber) errors.phoneNumber = "Required"
 
               const splittedValues = values.positionAt.split(',')
               if (!values.positionAt) {
@@ -64,10 +67,12 @@ const SignUp = (props) => {
               doRegister({
                 data: { ...values, companyTitle: splittedValues[0], companyName: splittedValues[1] }
               })
+                .then(() => doLogin({ data: {  email: values.email, password: values.password } }))
                 .then((r) => {
                   console.log(r.data)
-                  dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.SUCCESS, state: 'User created'})
-                  NavigationService.navigate(Screens.Login)
+                  dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.TOKEN, state: r.data.token })
+                  dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.PROFILE, state: r.data })
+                  NavigationService.navigate(Screens.Achievement)
                 })
             }}
           >

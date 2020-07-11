@@ -2,6 +2,7 @@
 const Screens = {
     OnBoardScreen:'OnBoardScreen',
     SignBoard:'SignBoard',
+    Register:'Register',
     Login:'Login',
     Achievement:'Achievement',
     Description:'Description',
@@ -13,7 +14,6 @@ const Screens = {
     Feedback:'Feedback',
     Login:'Login',
     EditProfile:'EditProfile',
-    SignBoard:'SignBoard'
   }
   export default Screens
   

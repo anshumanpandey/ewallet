@@ -77,7 +77,7 @@ export default function BoardScreen4() {
     <StatusBar hidden={true}/>  
       <View style={{marginTop:20,width:'100%',justifyContent:'flex-end',flexDirection:'row',paddingHorizontal:20}}>
       <TouchableOpacity
-        onPress={()=>NavigationService.navigate(Screens.SignBoard)}
+        onPress={()=>NavigationService.navigate(Screens.Login)}
       >
           <Text style={{color:'#fff'}}>Skip</Text>
         </TouchableOpacity>
