@@ -17,7 +17,7 @@ const Experience = () => {
     const [sendAttempNo, setSendAttempNo] = useState(0);
 
     const [createReq, doCreate] = useAxios({
-        url: '/feedback',
+        url: '/achivement',
         method: 'POST'
     }, { manual: true })
 
@@ -85,7 +85,6 @@ const Experience = () => {
                             .then((r) => {
                                 console.log(r.data)
                             })
-                        return
                         NavigationService.navigate(Screens.Home)
                     }}
                 >

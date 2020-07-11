@@ -32,8 +32,8 @@ const reducer = (state, action) => {
         return { ...state, ...{profile: action.state} };
       }
       case GLOBAL_STATE_ACTIONS.LOGOUT: {
-        AsyncStorage.removeItem('token', action.state)
-        AsyncStorage.removeItem('profile', action.state)
+        AsyncStorage.removeItem('token')
+        AsyncStorage.removeItem('profile')
         return { ...state, ...{profile: null, token: null} };
       }
       default: return state;
