@@ -1,15 +1,12 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, TextInput, ScrollView, Image, Modal, SafeAreaView, CheckBox } from 'react-native'
+import React from 'react'
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import { Icon } from 'native-base'
 import styles from './styles'
-import NavigationService from '../../navigation/NavigationService'
-import Screens from '../../constants/screens'
 import { useGlobalState, dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState'
 import { Formik } from 'formik';
 import ErrorLabel from '../../components/ErrorLabel'
 import useAxios from 'axios-hooks'
 import GlobalStyles from '../../constants/globalStyles'
-
 
 const EditProfile = (props) => {
 
@@ -29,10 +26,15 @@ const EditProfile = (props) => {
           <View style={styles.backView}>
             <TouchableOpacity
               style={styles.backView}
-              onPress={() => NavigationService.goBack()}
+              onPress={() => {
+                props.onTabClick(5)
+              }}
             >
               <Icon type="Ionicons" name="ios-arrow-round-back" />
-              <Text style={styles.backTitle}>Back</Text>
+              <Text
+                style={styles.backTitle}>
+                  Back
+                </Text>
             </TouchableOpacity>
 
           </View>

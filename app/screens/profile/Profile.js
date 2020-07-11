@@ -1,7 +1,6 @@
 import React from 'react';
 import {View,FlatList,TouchableOpacity,Text,Image} from 'react-native'
 
-import {Icon} from 'native-base'
 import {Data} from './data'
 import styles from './styles'
 import NavigationService from '../../navigation/NavigationService';
