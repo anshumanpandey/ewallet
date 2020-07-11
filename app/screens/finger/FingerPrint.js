@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {View,FlatList,TouchableOpacity,Text,Image} from 'react-native'
+import useAxios from 'axios-hooks'
 import {Data} from './data'
-import {Icon} from 'native-base'
 import styles from './styles';
 import Images from '../../constants/image'
 
@@ -40,20 +40,54 @@ const ItemPassCard = (item) =>{
 
 const FingerPrint =()=> {
 
-  return (
-     <View>
-        <FlatList
-         horizontal={false}
-         data={Data}
-         style={{paddingHorizontal:15,height:'100%'}}
-         numColumns={1}
-         keyExtractor={item=>item.id}
-         renderItem={({item})=>
-          <ItemPassCard {...item}/>
+   const [parsedData, setParsedData] = useState([]);
+
+   const [{ loading, data }] = useAxios({
+      url: '/achivement',
+   })
+
+   useEffect(() => {
+      if (!Array.isArray(data)) return
+      setParsedData(data.map(i => {
+         console.log(i)
+         return {
+            id: i.id,
+            date: i.year,
+            companyName: i.company,
+            ...i
          }
-        />
-     </View>
-  );
+      }))
+   }, [loading]);
+
+   let body = (
+      <Text style={styles.bodyText}>Loading...</Text>
+   );
+
+   if (!loading && parsedData.length == 0) {
+      body = (
+         <Text style={styles.bodyText}>No achievements created</Text>
+      );
+   }
+
+   if (!loading && parsedData.length != 0) {
+      body = (
+         <View>
+            <FlatList
+             horizontal={false}
+             data={parsedData}
+             style={{paddingHorizontal:15,height:'100%'}}
+             numColumns={1}
+             keyExtractor={item=>item.id}
+             renderItem={({item})=>
+              <ItemPassCard {...item}/>
+             }
+            />
+         </View>
+      );
+   }
+
+
+  return body;
 }
 
 export default FingerPrint;
