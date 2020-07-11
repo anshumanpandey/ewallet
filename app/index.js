@@ -17,7 +17,7 @@ import Description from './screens/description/Description'
 import Outcome from './screens/outcome/Outcome'
 import Attach from './screens/attach/Attach'
 import Experience from './screens/experience/Experience'
-// import Congrats from './screens/congrats/Congrats.js';
+import Congrats from './screens/congrats/Congrats.js';
 import Home from './screens/home /Home.js';
 import Feedback from './screens/feedback/Feedback.js';
 import EditProfile from './screens/editprofile/EditProfile.js';
@@ -65,6 +65,7 @@ const AppMain = () => {
     screens.Experience = { screen: Experience },
     screens.EditProfile = { screen: EditProfile },
     screens.Feedback = { screen: Feedback }
+    screens.Congrats = { screen: Congrats }
 
     screens.OnBoardScreens = { screen: OnBoardScreens }
     screens.Login = { screen: Login }

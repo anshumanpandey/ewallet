@@ -26,14 +26,13 @@ const styles = StyleSheet.create({
      resizeMode:'contain',
    },
    title:{
-    
      letterSpacing:-0.03,
      lineHeight:32,
      fontSize:24,
      textAlign:'center',
      marginTop:Dimensions.px20,
      color:'#fff',
-     fontFamily:'RedHatDisplay-Bold'
+     fontFamily:'RedHatDisplay-Bold',
    },
    desContainer:{
       marginTop:Dimensions.px60
@@ -80,14 +79,14 @@ export default function Congrats() {
         >
           Congratulations Dustin! Your Passport is ready
         </Text>
-        {/* <View style={{marginTop:20,width:'100%',justifyContent:'flex-end',flexDirection:'row',paddingHorizontal:20}}>
+        <View style={{marginTop:20,width:'100%',alignItems:'center',flexDirection:'row'}}>
         <TouchableOpacity
          onPress={()=>NavigationService.navigate(Screens.Home)}
         >
           <Text style={{color:'#fff'}}>Skip</Text>
         </TouchableOpacity>
        
-      </View> */}
+      </View>
     </View>
        
     </ImageBackground>

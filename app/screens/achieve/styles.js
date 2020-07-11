@@ -15,6 +15,7 @@ const styles=StyleSheet.create({
       profileView:{
           width:'100%',
           marginTop:Dimension.px30,
+          marginBottom:Dimension.px30,
           alignItems:'center',
           justifyContent:'center'
 

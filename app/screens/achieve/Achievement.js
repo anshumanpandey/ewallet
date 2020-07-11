@@ -20,7 +20,6 @@ const Achievement = () => {
       <StatusBar hidden={true} />
       <View style={styles.achieveView}>
         <View style={styles.profileView}>
-          <Image source={Images.Avatar} style={styles.profileImage} />
           <Text style={styles.profileTitle}>Welcome {profile.firstName}!</Text>
         </View>
         <Text style={styles.profileTitle}>Let’s start your onboarding by adding one achievement:</Text>
@@ -76,7 +75,7 @@ const Achievement = () => {
               <View style={styles.textInputBackground}>
                 <TextInput
                   style={styles.textInput}
-                  placeholder="Company/organism"
+                  placeholder="Company/Organisation"
                   autoCompleteType={'name'}
                   onChangeText={handleChange('company')}
                   onBlur={handleBlur('company')}

@@ -84,8 +84,8 @@ const Experience = () => {
                         })
                             .then((r) => {
                                 console.log(r.data)
+                                NavigationService.navigate(Screens.Congrats)
                             })
-                        NavigationService.navigate(Screens.Home)
                     }}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
