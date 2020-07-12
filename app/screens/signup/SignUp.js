@@ -64,10 +64,13 @@ const SignUp = (props) => {
             onSubmit={values => {
               const splittedValues = values.positionAt.split(',')
 
+              const email = values.email.toLowerCase()
+              const password = values.password.toLowerCase()
+
               doRegister({
-                data: { ...values, companyTitle: splittedValues[0], companyName: splittedValues[1] }
+                data: { ...values, email, password, companyTitle: splittedValues[0], companyName: splittedValues[1] }
               })
-                .then(() => doLogin({ data: {  email: values.email, password: values.password } }))
+                .then(() => doLogin({ data: {  email, password } }))
                 .then((r) => {
                   console.log(r.data)
                   dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.TOKEN, state: r.data.token })
