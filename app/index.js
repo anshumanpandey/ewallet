@@ -66,10 +66,6 @@ const AppMain = () => {
     screens.EditProfile = { screen: EditProfile },
     screens.Feedback = { screen: Feedback }
     screens.Congrats = { screen: Congrats }
-
-    screens.OnBoardScreens = { screen: OnBoardScreens }
-    screens.Login = { screen: Login }
-    screens.SignBoard = { screen: SignBoard }
   }
 
   const MainStack = createStackNavigator(screens,    

@@ -12,7 +12,7 @@ class OnBoardScreens extends Component {
     
   render() {
     return (
-       <Swiper>
+       <Swiper loop={false}>
          <BoardScreen1/>
          <BoardScreen2/>
          <BoardScreen3/>
