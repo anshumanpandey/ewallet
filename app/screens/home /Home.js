@@ -9,6 +9,7 @@ import FingerPrint from '../finger/FingerPrint'
 import DetailPassport from '../detail/DetailPassport'
 import FullFeedback from '../fullfeedback/FullFeedback'
 import EditProfile from '../editprofile/EditProfile'
+import Settings from '../settings/Settings'
 
 class Home extends Component {
    
@@ -32,6 +33,11 @@ class Home extends Component {
          }
         
            <View style={styles.mainView}>
+              {
+               tab ===6 &&(
+                 <Settings onTabClick={this.onTabClick}/> 
+               )
+             }
              {
                tab ===5 &&(
                  <Profile onTabClick={this.onTabClick}/> 
@@ -39,7 +45,7 @@ class Home extends Component {
              }
              {
                tab ===1 &&(
-                <FingerPrint/> 
+                <FingerPrint onTabClick={this.onTabClick}/> 
               )
              }
               {

@@ -22,12 +22,19 @@ const Header = (props) => {
                     <Text style={styles.jobTitle}>{profile?.companyName}</Text>
                 </View>
             </View>
-            <TouchableOpacity
-                onPress={() => props.onTabClick(5)}
-            >
-                {/* <Icon type='Entypo' name='home' style={{fontSize:25,color:'#8BA5FA'}}/>  */}
-                <Image source={Images.Setting} style={{ width: 20, height: 20 }} />
-            </TouchableOpacity>
+
+            <View style={styles.menu}>
+                <TouchableOpacity
+                    onPress={() => props.onTabClick(5)}
+                >
+                    <Icon type='AntDesign' name='home' style={{ fontSize: 25, color: '#8BA5FA' }} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => props.onTabClick(6)}
+                >
+                    <Image source={Images.Setting} style={{ width: 20, height: 20 }} />
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -53,6 +60,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         lineHeight: 19,
         color: '#99879D'
+    },
+    menu: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '20%',
+        alignItems: 'center',
     }
 })
 
