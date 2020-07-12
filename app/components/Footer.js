@@ -8,7 +8,7 @@ import Screens from '../constants/screens'
   return (
     <View style={styles.container}>
         <TouchableOpacity
-         onPress={()=>NavigationService.navigate(Screens.Achievement)}
+         onPress={()=>props.onTabClick(7)}
         >
            <Image source={Images.Star}
              style={{width:16,height:16}}

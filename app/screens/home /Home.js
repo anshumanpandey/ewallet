@@ -10,6 +10,7 @@ import DetailPassport from '../detail/DetailPassport'
 import FullFeedback from '../fullfeedback/FullFeedback'
 import EditProfile from '../editprofile/EditProfile'
 import Settings from '../settings/Settings'
+import Achievement from '../achieve/Achievement'
 
 class Home extends Component {
    
@@ -27,12 +28,17 @@ class Home extends Component {
     return (
       <View style={styles.container}>
          {
-           tab !==2&&(
+           (tab !==2 && tab !==7)&&(
             <Header onTabClick={this.onTabClick}/>
            )
          }
         
            <View style={styles.mainView}>
+           {
+               tab ===7 &&(
+                 <Achievement onTabClick={this.onTabClick}/> 
+               )
+             }
               {
                tab ===6 &&(
                  <Settings onTabClick={this.onTabClick}/> 
