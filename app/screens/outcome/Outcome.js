@@ -23,7 +23,7 @@ const Outcome = () => {
                         <Icon type="Ionicons" name="ios-arrow-round-back" />
                         <Text style={styles.backTitle}>Back</Text>
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Skip</Text>
+                    <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
                 </View>
                 <Text style={styles.desTitle}>Do you have any tangible outcome? It’s absolutely fine if you don’t!</Text>
                 <Formik

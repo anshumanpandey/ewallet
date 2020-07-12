@@ -83,7 +83,7 @@ export default function Congrats() {
         <TouchableOpacity
          onPress={()=>NavigationService.navigate(Screens.Home)}
         >
-          <Text style={{color:'#fff'}}>Skip</Text>
+          <Text style={{color:'#fff'}}>Passer</Text>
         </TouchableOpacity>
        
       </View>

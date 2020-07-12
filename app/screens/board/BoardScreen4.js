@@ -79,7 +79,7 @@ export default function BoardScreen4() {
       <TouchableOpacity
         onPress={()=>NavigationService.navigate(Screens.Login)}
       >
-          <Text style={{color:'#fff'}}>Skip</Text>
+          <Text style={{color:'#fff'}}>Passer</Text>
         </TouchableOpacity>
       </View>
     <View
