@@ -3,9 +3,8 @@ import React from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native'
 import { Data } from './data'
 import Images from '../../constants/image'
-import NavigationService from '../../navigation/NavigationService';
 import { useGlobalState } from '../../state/GlobalState';
-
+import moment from 'moment'
 
 const ItemFeedback = ({ item, onTabClick }) => {
 
@@ -63,6 +62,7 @@ const ItemFeedback = ({ item, onTabClick }) => {
 
 const FullFeedback = (props) => {
   const [achivement] = useGlobalState("currentAchivemenSelected")
+  console.log(achivement)
 
   return (
     <View>
@@ -71,11 +71,11 @@ const FullFeedback = (props) => {
         data={achivement.Feedbacks.map(i => {
           return {
             id: i.id,
-            career: 'Manager at Criteo',
+            career: `${achivement.collegueRole} at ${achivement.companyName}`,
             name: i.fullname,
             skillsWithExperience: i.skillsWithExperience,
             skillsWithImproving: i.skillsWithImproving,
-            date: '2020',
+            date: moment(i.createdAt).year(),
             ownership: i.description,
             engagement: i.engagementDescription
 

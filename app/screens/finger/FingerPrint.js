@@ -66,7 +66,7 @@ const FingerPrint = (props) => {
       <Text style={styles.bodyText}>Loading...</Text>
    );
 
-   if (!loading && parsedData.length == 0) {
+   if (!loading && data.length == 0) {
       body = (
          <Text style={styles.bodyText}>No achievements created</Text>
       );
