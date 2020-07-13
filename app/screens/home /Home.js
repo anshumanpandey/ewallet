@@ -20,11 +20,28 @@ class Home extends Component {
         tab:5
     }
   }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener('didFocus', () => {
+      console.log(navigation.state)
+      const { params } = this.props.navigation.state;
+      if (params && params.tabIdx) {
+        this.setState({tab: params.tabIdx})
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    // Remove the event listener
+    this.focusListener.remove();
+  }
   onTabClick = (index) =>{
      this.setState({tab:index})
   }
   render() {
     const{tab}=this.state
+
     return (
       <View style={styles.container}>
          {
