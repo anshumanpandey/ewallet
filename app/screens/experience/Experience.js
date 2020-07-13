@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, TextInput, ScrollView, Image, Modal, SafeAreaView, CheckBox, StatusBar } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, StatusBar } from 'react-native'
 import { Icon } from 'native-base'
 import { Formik } from 'formik';
 import useAxios from 'axios-hooks'
@@ -11,6 +11,7 @@ import ErrorLabel from '../../components/ErrorLabel'
 import { dispatchAchivementFormState, ACHIVEMENT_STATE_ACTIONS, getAchivementFromState, useAchivementFromState } from '../../state/AchivementFormState'
 import GlobalStyles from '../../constants/globalStyles';
 import moment from 'moment';
+import * as Progress from 'react-native-progress';
 
 const Experience = () => {
     const [currentFormState, setCurrentFormState] = useState();
@@ -28,6 +29,18 @@ const Experience = () => {
     return (
         <ScrollView style={styles.container}>
             <StatusBar hidden={true} />
+            {createReq.loading && (
+                <View style={{ backgroundColor: 'rgba(255,255,255,0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 2 }}>
+                    <Progress.Circle
+                        indeterminate={true}
+                        textStyle={{ color: "#EEF4FD" }}
+                        color={"#EEF4FD"}
+                        borderWidth={4}
+                        size={150}
+                        indeterminate={true}
+                    />
+                </View>
+            )}
             <View style={styles.achieveView}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <TouchableOpacity
@@ -62,9 +75,9 @@ const Experience = () => {
                         const data = new FormData();
 
                         data.append('awardFile', {
-                            uri: jsonData['file'].uri, 
+                            uri: jsonData['file'].uri,
                             name: jsonData['file'].fileName,
-                            type: jsonData['file'].type, 
+                            type: jsonData['file'].type,
                         })
 
                         delete jsonData.file;

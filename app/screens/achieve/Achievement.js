@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, TextInput, S
 import { Formik } from 'formik';
 import moment from 'moment';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import Images from '../../constants/image'
 import styles from './styles'
 import NavigationService from '../../navigation/NavigationService'
 import Screens from '../../constants/screens'
