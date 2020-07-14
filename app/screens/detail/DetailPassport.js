@@ -12,7 +12,7 @@ const DetailPassport = (props) => {
     const [achivement] = useGlobalState("currentAchivemenSelected")
 
     return (
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ paddingBottom: '40%' }}>
             <View style={styles.container}>
                 <View style={styles.card}>
                     <View style={styles.certiView}>
@@ -37,7 +37,7 @@ const DetailPassport = (props) => {
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'row', display: 'flex' }}>
                     <View style={[styles.feedback, achivement.Feedbacks.length == 0 && styles.emptyFeedback]}>
                         <Text style={{ fontSize: 20 }}>{achivement.Feedbacks.length} feedback</Text>
                         {achivement.Feedbacks.length !== 0 && achivement.Feedbacks.some(i => i.skillsWithExperience.length !== 0) && (
@@ -50,12 +50,14 @@ const DetailPassport = (props) => {
                                             if (found) {
                                                 skillsArr = [
                                                     ...skillsArr.filter(i => i.skill != found.skill),
-                                                    { ...found, amount: found + 1 }
+                                                    { ...found, amount: found.amount + 1 }
                                                 ]
+
                                             } else {
-                                                skillsArr = [{ skill: s, amount: 1 }]
+                                                skillsArr.push({ skill: s, amount: 1 })
                                             }
                                         })
+
                                         return skillsArr
                                     }, [])
                                     .map(f => {
@@ -82,10 +84,10 @@ const DetailPassport = (props) => {
                                             if (found) {
                                                 skillsArr = [
                                                     ...skillsArr.filter(i => i.skill != found.skill),
-                                                    { ...found, amount: found + 1 }
+                                                    { ...found, amount: found.amount + 1 }
                                                 ]
                                             } else {
-                                                skillsArr = [{ skill: s, amount: 1 }]
+                                                skillsArr.push({ skill: s, amount: 1 })
                                             }
                                         })
                                         return skillsArr
@@ -109,8 +111,8 @@ const DetailPassport = (props) => {
                                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                     <Image source={Images.Avatar} style={{ width: 40, height: 40 }} />
                                     <View style={{ marginLeft: 10 }}>
-                                        <Text style={{ fontSize: 20 }}>{f.fullname}</Text>
-                                        <Text style={{ fontSize: 16 }}>{f.fullname}</Text>
+                                        <Text style={{ fontSize: 20 }}>{f.collegueName}</Text>
+                                        <Text style={{ fontSize: 16 }}>{achivement.companyName}</Text>
                                     </View>
                                 </View>
                             );

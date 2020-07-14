@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         borderColor:'black',
         borderWidth:1,
         borderRadius:5,
-        height:'60%'
+        minHeight:'60%'
      },
      emptyFeedback:{
         height:'80%'
@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:5,
         justifyContent:'center',
-        height:'60%'
+        minHeight:'60%',
+        flex: 1
      },
     certiView:{
           display:'flex',

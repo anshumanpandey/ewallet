@@ -31,23 +31,23 @@ const ItemFeedback = ({ item, onTabClick }) => {
           </TouchableOpacity>
 
         </View>
-        <View>
-          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20 }}>
+        <View style={{ width: '90%'}}>
+          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
             {
               item.skillsWithExperience.map(skill => (
-                <View style={{ padding: 5, borderRadius: 4, borderColor: 'black', borderWidth: 1, marginLeft: 5 }}>
-                  <Text style={{ fontSize: 9, lineHeight: 16, color: '#3DC35B' }}>{skill}</Text>
+                <View style={{ padding: 5, borderRadius: 4, borderColor: 'black', borderWidth: 1, marginLeft: 5, marginBottom: '2%' }}>
+                  <Text style={{ fontSize: 13, lineHeight: 16, color: '#3DC35B' }}>{skill}</Text>
                 </View>
               ))
             }
 
           </View>
           <Text style={{ marginLeft: 5, marginTop: 20, fontSize: 12, maxWidth: 300 }}>{item.ownership}</Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
             {
               item.skillsWithImproving.map(skill => (
-                <View style={{ padding: 5, borderRadius: 4, borderColor: 'black', borderWidth: 1, marginLeft: 5 }}>
-                  <Text style={{ fontSize: 9, lineHeight: 16, color: '#83A0F4' }}>{skill}</Text>
+                <View style={{ padding: 5, borderRadius: 4, borderColor: 'black', borderWidth: 1, marginLeft: 5, marginBottom: '2%' }}>
+                  <Text style={{ fontSize: 13, lineHeight: 16, color: '#83A0F4' }}>{skill}</Text>
                 </View>
               ))
             }
@@ -62,26 +62,25 @@ const ItemFeedback = ({ item, onTabClick }) => {
 
 const FullFeedback = (props) => {
   const [achivement] = useGlobalState("currentAchivemenSelected")
-  console.log(achivement)
 
   return (
     <View>
       <FlatList
+        contentContainerStyle={{ paddingBottom: '10%'}}
         horizontal={false}
         data={achivement.Feedbacks.map(i => {
           return {
             id: i.id,
-            career: `${achivement.collegueRole} at ${achivement.companyName}`,
+            career: `${i.collegueRole} at ${achivement.companyName}`,
             name: i.fullname,
             skillsWithExperience: i.skillsWithExperience,
             skillsWithImproving: i.skillsWithImproving,
             date: moment(i.createdAt).year(),
             ownership: i.description,
             engagement: i.engagementDescription
-
           };
         })}
-        style={{ padding: 15, height: '100%' }}
+        style={{ padding: 15 }}
         numColumns={1}
         keyExtractor={item => item.id}
         renderItem={({ item }) =>
