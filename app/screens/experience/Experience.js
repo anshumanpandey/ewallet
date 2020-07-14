@@ -12,6 +12,8 @@ import { dispatchAchivementFormState, ACHIVEMENT_STATE_ACTIONS, getAchivementFro
 import GlobalStyles from '../../constants/globalStyles';
 import moment from 'moment';
 import * as Progress from 'react-native-progress';
+import DropDownPicker from 'react-native-dropdown-picker';
+import Dimension from '../../constants/dimensions.js'
 
 const Experience = () => {
     const [currentFormState, setCurrentFormState] = useState();
@@ -45,7 +47,7 @@ const Experience = () => {
             <>
                 <Text style={styles.desTitle}>Have you been working with someone on this? Would you like a feedback from your manager, a client, a colleague?</Text>
                 <Formik
-                    initialValues={{ collegueName: '', colleguePhonenumber: '', collegueRole: '', achivementId: '' }}
+                    initialValues={{ collegueName: '', colleguePhonenumber: '', collegueRole: '', achivementId: null }}
                     validate={(values) => {
                         const errors = {}
                         if (!values.achivementId) errors.achivementId = "Required"
@@ -70,24 +72,16 @@ const Experience = () => {
                     {({ handleChange, handleBlur, handleSubmit, setFieldValue, values, errors, touched }) => (
                         <>
                             <View style={{ marginTop: 40 }}>
-                                <Picker
-                                    mode="dropdown"
-                                    style={styles.textInputBackground}
-                                    placeholder="Select a position"
-                                    placeholderStyle={{ color: "#bfc6ea" }}
-                                    placeholderIconColor="#007aff"
-                                    selectedValue={values.achivementId}
-                                    onValueChange={(v) => {
-                                        if (v !== 'a') {
-                                            setFieldValue("achivementId", v)
-                                        }
-                                    }}
-                                >
-                                    <Picker.Item color="gray" label="Select an achivement" value="a" />
-                                    {achivementReq.data.map(i => {
-                                        return (<Picker.Item label={i.title} value={i.id} />);
-                                    })}
-                                </Picker>
+                                <DropDownPicker
+                                    items={achivementReq.data.length ? achivementReq.data.map(i => ({ label: i.title, value: i.id })): []}
+                                    defaultValue={values.achivementId}
+                                    containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, }}
+                                    style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
+                                    itemStyle={{ justifyContent: 'flex-start' }}
+                                    dropDownStyle={{ backgroundColor: '#fafafa' }}
+                                    onChangeItem={item => setFieldValue("achivementId", item.value)}
+                                />
+
                                 {errors.achivementId && touched.achivementId && <ErrorLabel text={errors.achivementId} />}
 
                                 <View style={styles.textInputBackground}>
@@ -113,24 +107,19 @@ const Experience = () => {
                                 </View>
                                 {errors.colleguePhonenumber && touched.colleguePhonenumber && <ErrorLabel text={errors.colleguePhonenumber} />}
 
-                                <Picker
-                                    mode="dropdown"
-                                    style={styles.textInputBackground}
-                                    placeholder="Select a position"
-                                    placeholderStyle={{ color: "#bfc6ea" }}
-                                    placeholderIconColor="#007aff"
-                                    selectedValue={values.collegueRole}
-                                    onValueChange={(v) => {
-                                        if (v !== 'a') {
-                                            setFieldValue("collegueRole", v)
-                                        }
-                                    }}
-                                >
-                                    <Picker.Item color="gray" label="Select a position" value="a" />
-                                    <Picker.Item label="Colleague" value="Colleague" />
-                                    <Picker.Item label="Client" value="Client" />
-                                    <Picker.Item label="Manager" value="Manager" />
-                                </Picker>
+                                <DropDownPicker
+                                    items={[
+                                        { label: 'Colleague', value: 'Colleague' },
+                                        { label: 'Client', value: 'Client' },
+                                        { label: 'Manager', value: 'Manager' },
+                                    ]}
+                                    defaultValue={values.collegueRole}
+                                    containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, }}
+                                    style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
+                                    itemStyle={{ justifyContent: 'flex-start' }}
+                                    dropDownStyle={{ backgroundColor: '#fafafa' }}
+                                    onChangeItem={item => setFieldValue("collegueRole", item.value)}
+                                />
 
                                 {errors.collegueRole && touched.collegueRole && <ErrorLabel text={errors.collegueRole} />}
 
