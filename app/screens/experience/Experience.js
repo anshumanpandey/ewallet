@@ -79,6 +79,7 @@ const Experience = () => {
                                     style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
                                     itemStyle={{ justifyContent: 'flex-start' }}
                                     dropDownStyle={{ backgroundColor: '#fafafa' }}
+                                    placeholderStyle={{ color: 'gray'}}
                                     onChangeItem={item => setFieldValue("achivementId", item.value)}
                                 />
 
@@ -118,6 +119,7 @@ const Experience = () => {
                                     style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
                                     itemStyle={{ justifyContent: 'flex-start' }}
                                     dropDownStyle={{ backgroundColor: '#fafafa' }}
+                                    placeholderStyle={{ color: 'gray'}}
                                     onChangeItem={item => setFieldValue("collegueRole", item.value)}
                                 />
 
