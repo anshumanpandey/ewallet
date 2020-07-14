@@ -64,10 +64,10 @@ const DetailPassport = (props) => {
                                         return (
                                             <>
                                                 <View style={{ marginRight: '1%',padding: '1%', marginTop: 10, borderWidth: 1, borderColor: '#99879D', borderRadius: 4 }}>
-                                                    <Text style={{ fontSize: 12, color: '#3DC35B' }}>{f.skill}</Text>
+                                                    <Text style={{ fontSize: 13, color: '#3DC35B' }}>{f.skill}</Text>
                                                 </View>
                                                 <View style={{ padding: '1%', marginTop: 10, borderWidth: 1, borderColor: '#99879D', borderRadius: 4 }}>
-                                                    <Text style={{ fontSize: 12, color: '#3DC35B' }}>{f.amount}</Text>
+                                                    <Text style={{ fontSize: 13, color: '#3DC35B' }}>{f.amount}</Text>
                                                 </View>
                                             </>
                                         );
@@ -96,10 +96,10 @@ const DetailPassport = (props) => {
                                         return (
                                             <>
                                                 <View style={{ marginRight: '1%', padding: '1%', marginTop: 10, borderWidth: 1, borderColor: '#99879D', borderRadius: 4 }}>
-                                                    <Text style={{ fontSize: 12, color: '#83A0F4' }}>{f.skill}</Text>
+                                                    <Text style={{ fontSize: 13, color: '#83A0F4' }}>{f.skill}</Text>
                                                 </View>
                                                 <View style={{ padding: '1%', marginTop: 10, borderWidth: 1, borderColor: '#99879D', borderRadius: 4 }}>
-                                                    <Text style={{ fontSize: 12, color: '#83A0F4' }}>{f.amount}</Text>
+                                                    <Text style={{ fontSize: 13, color: '#83A0F4' }}>{f.amount}</Text>
                                                 </View>
                                             </>
                                         );
