@@ -92,6 +92,10 @@ const styles=StyleSheet.create({
         fontSize:13
 
     },
+    bodyText: {
+        textAlign: 'center',
+        fontSize: 22
+    }
    
       } )
       export default styles

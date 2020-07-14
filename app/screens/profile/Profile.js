@@ -3,6 +3,7 @@ import {View,FlatList,TouchableOpacity,Text,Image} from 'react-native'
 
 import {Data} from './data'
 import styles from './styles'
+import screens from '../../constants/screens'
 import NavigationService from '../../navigation/NavigationService';
 import Share from 'react-native-share';
 
@@ -22,6 +23,10 @@ const ItemCard = ({item,onTabClick}) =>{
       }
       else if(path ==='Feedback'){
         NavigationService.navigate(path)
+
+      }
+      else if(path ==='Recommend'){
+        NavigationService.navigate(screens.Experience)
 
       }
       else if (path === 'Share'){
