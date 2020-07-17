@@ -13,7 +13,7 @@ import FilePickerManager from 'react-native-file-picker';
 import moment from 'moment';
 import GlobalStyles from '../../constants/globalStyles';
 import * as Progress from 'react-native-progress';
-
+import DocumentPicker from 'react-native-document-picker';
 
 const Attach = () => {
     const [currentFormState, setCurrentFormState] = useState();
@@ -101,18 +101,18 @@ const Attach = () => {
                         <>
                             <View style={{ marginTop: 40 }}>
                                 <TouchableOpacity onPress={() => {
-                                    FilePickerManager.showFilePicker(null, (response) => {
-                                        console.log('Response = ', response);
-
-                                        if (response.didCancel) {
-                                            console.log('User cancelled file picker');
-                                        }
-                                        else if (response.error) {
-                                            console.log('FilePickerManager Error: ', response.error);
-                                        }
-                                        else {
-                                            setFieldValue('file', response)
-                                        }
+                                    DocumentPicker.pick({
+                                        type: [DocumentPicker.types.images],
+                                    })
+                                    .then(response => {
+                                        setFieldValue('file', response)
+                                    })
+                                    .catch(err => {
+                                        if (DocumentPicker.isCancel(err)) {
+                                            // User cancelled the picker, exit any dialogs or menus and move on
+                                          } else {
+                                            throw err;
+                                          }
                                     })
                                 }}>
                                     <View style={styles.textInputBackground}>
