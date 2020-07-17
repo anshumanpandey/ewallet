@@ -68,7 +68,7 @@ const Achievement = () => {
 
               <TouchableOpacity onPress={() => setShow(true)}>
                 <View style={styles.textInputBackground}>
-                  <Text>{values.date ? `${moment(values.date).format('MM')}/${moment(values.date).format('YYYY')}` : "Month/year"}</Text>
+                  <Text style={{ color: values.date ? 'black' : 'gray'}}>{values.date ? `${moment(values.date).format('MM')}/${moment(values.date).format('YYYY')}` : "Month/year"}</Text>
                 </View>
               </TouchableOpacity>
               {errors.date && touched.date && <ErrorLabel text={errors.date} />}
