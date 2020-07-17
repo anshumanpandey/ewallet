@@ -25,7 +25,7 @@ const Achievement = (props) => {
   const [profile] = useGlobalState('profile')
   const [show, setShow] = useState(false);
   const [month, setMonth] = useState('Jan');
-  const [year, setYear] = useState('1990');
+  const [year, setYear] = useState(moment().year().toString());
   const formRef = useRef()
 
   return (
@@ -141,7 +141,7 @@ const Achievement = (props) => {
               />
               <SmoothPicker
                 startMargin={-10}
-                data={Array(50).fill(moment().year()).map((i, idx) => i - idx).reverse()}
+                data={Array(40).fill(moment().year()).map((i, idx) => i - idx).reverse()}
                 selectOnPress
                 keyExtractor={item => `${item}-list`}
                 onSelected={({ item, index }) => {

@@ -40,7 +40,7 @@ const Attach = () => {
                         <Icon type="Ionicons" name="ios-arrow-round-back" />
                         <Text style={styles.backTitle}>Back</Text>
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
+                    <Text onPress={() => NavigationService.navigate(Screens.Outcome)} style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
                 </View>
                 {createReq.loading && (
                     <View style={{ backgroundColor: 'rgba(255,255,255,0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 2 }}>
@@ -57,12 +57,6 @@ const Attach = () => {
                 <Text style={styles.desTitle}>Did you receive a diploma, accreditation or any proof of any form?</Text>
                 <Formik
                     initialValues={{ file: '' }}
-                    validate={(values) => {
-                        const errors = {}
-                        if (!values.file) errors.file = "Required"
-
-                        return errors
-                    }}
                     onSubmit={values => {
                         dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.STEP_FOUR, state: values })
                         const jsonData = {
@@ -73,13 +67,16 @@ const Attach = () => {
                         }
                         const data = new FormData();
 
-                        data.append('awardFile', {
-                            uri: jsonData['file'].uri,
-                            name: jsonData['file'].fileName,
-                            type: jsonData['file'].type,
-                        })
+                        if (jsonData['file']) {
+                            data.append('awardFile', {
+                                uri: jsonData['file'].uri,
+                                name: jsonData['file'].fileName,
+                                type: jsonData['file'].type,
+                            })
+    
+                            delete jsonData.file;
+                        }
 
-                        delete jsonData.file;
                         delete jsonData.date;
 
                         Object.keys(jsonData).forEach(i => {
@@ -119,14 +116,7 @@ const Attach = () => {
                                     })
                                 }}>
                                     <View style={styles.textInputBackground}>
-                                        <TextInput
-                                            placeholderTextColor="gray"
-                                            editable={false}
-                                            style={styles.textInput}
-                                            placeholder="Attach"
-                                            value={values.file?.fileName}
-                                            autoCompleteType={'name'}
-                                        />
+                                        <Text style={{ color: values.date ? 'black' : 'gray' }}>{values.file ? values.file?.fileName : "Attach"}</Text>
                                     </View>
                                 </TouchableOpacity>
                                 {errors.file && touched.file && <ErrorLabel text={errors.file} />}
