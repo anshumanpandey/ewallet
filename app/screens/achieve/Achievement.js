@@ -15,7 +15,7 @@ const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep
 const Item = React.memo(({ opacity, selected, vertical, fontSize, item }) => {
   return (
     <View style={{ height: 40 }}>
-      <Text style={{ color: selected ? '#8BA5FA' : 'black', borderColor: 'gray', paddingHorizontal: '15%', paddingVertical: '2%', textAlign: 'center', borderTopWidth: 1, fontSize: 22 }}>{item}</Text>
+      <Text style={{ color: selected ? '#8BA5FA' : 'black', borderColor: 'gray', paddingHorizontal: '15%', paddingVertical: '2%', textAlign: 'center', borderTopWidth: 1, borderColor: 'rgba(0,0,0,0.2)',fontSize: 22 }}>{item}</Text>
     </View>
   );
 });
