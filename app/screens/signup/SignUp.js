@@ -28,9 +28,6 @@ const SignUp = (props) => {
     <ScrollView style={styles.container}>
       <View style={styles.loginContainer}>
         <View style={styles.loginInfoArea}>
-          <View style={styles.signupTitleView}>
-            <Text style={styles.signupTitle}>Sign Up</Text>
-          </View>
           <Formik
             initialValues={{
               firstName: '',
@@ -70,7 +67,7 @@ const SignUp = (props) => {
               doRegister({
                 data: { ...values, email, password, companyTitle: splittedValues[0], companyName: splittedValues[1] }
               })
-                .then(() => doLogin({ data: {  email, password } }))
+                .then(() => doLogin({ data: { email, password } }))
                 .then((r) => {
                   console.log(r.data)
                   dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.TOKEN, state: r.data.token })
@@ -81,6 +78,10 @@ const SignUp = (props) => {
           >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
               <>
+              <View style={{ borderWidth: 0, padding: '3%', borderColor: 'rgba(0,0,0,0.2)', borderRadius: 8 }}>
+                <View style={styles.signupTitleView}>
+                  <Text style={styles.signupTitle}>Sign Up</Text>
+                </View>
                 <View style={styles.textInputBackground}>
                   <TextInput
                     style={styles.textInput}
@@ -107,7 +108,7 @@ const SignUp = (props) => {
                 <View style={styles.textInputBackground}>
                   <TextInput
                     style={styles.textInput}
-                    placeholder="Email Address"
+                    placeholder="Email"
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     value={values.email}
@@ -149,19 +150,18 @@ const SignUp = (props) => {
                   />
                 </View>
                 {errors.positionAt && touched.positionAt && <ErrorLabel text={errors.positionAt} />}
+              </View>
 
-                <View style={styles.buttonView}>
-                  <TouchableOpacity
-                    disabled={registerReq.loading}
-                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }, registerReq.loading && GlobalStyles.disabledButton]}
-                    onPress={handleSubmit}
-                  >
-                    <Text style={styles.buttonText}>
-                      Confirm
-                   </Text>
+              <View style={styles.buttonView}>
+                <TouchableOpacity
+                  disabled={registerReq.loading}
+                  style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }, registerReq.loading && GlobalStyles.disabledButton]}
+                  onPress={handleSubmit}
+                >
+                  <Text style={styles.buttonText}>Confirm</Text>
 
-                  </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
+              </View>
               </>
             )}
           </Formik>
