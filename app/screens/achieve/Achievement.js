@@ -15,7 +15,7 @@ const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep
 const Item = React.memo(({ opacity, selected, vertical, fontSize, item }) => {
   return (
     <View style={{ height: 40 }}>
-      <Text style={{ color: selected ? '#8BA5FA' : 'black', borderColor: 'gray', paddingHorizontal: '15%', paddingVertical: '2%', textAlign: 'center', borderTopWidth: 1, borderColor: 'rgba(0,0,0,0.2)',fontSize: 22 }}>{item}</Text>
+      <Text style={{ color: selected ? '#8BA5FA' : 'black', borderColor: 'gray', paddingHorizontal: '15%', paddingVertical: '2%', textAlign: 'center', borderTopWidth: 1, borderColor: 'rgba(0,0,0,0.2)', fontSize: 22 }}>{item}</Text>
     </View>
   );
 });
@@ -28,7 +28,7 @@ const Achievement = () => {
   const formRef = useRef()
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView keyboardShouldPersistTaps={"handled"} style={styles.container}>
       <StatusBar hidden={true} />
       <View style={styles.achieveView}>
         <View style={styles.profileView}>
@@ -67,13 +67,7 @@ const Achievement = () => {
 
               <TouchableOpacity onPress={() => setShow(true)}>
                 <View style={styles.textInputBackground}>
-                  <TextInput
-                    editable={false}
-                    style={styles.textInput}
-                    placeholder="Month/year"
-                    autoCompleteType={'name'}
-                    value={values.date ? `${moment(values.date).format('MM')}/${moment(values.date).format('YYYY')}` : null}
-                  />
+                  <Text>{values.date ? `${moment(values.date).format('MM')}/${moment(values.date).format('YYYY')}` : "Month/year"}</Text>
                 </View>
               </TouchableOpacity>
               {errors.date && touched.date && <ErrorLabel text={errors.date} />}
@@ -110,7 +104,7 @@ const Achievement = () => {
           <View style={{ alignItems: 'center', backgroundColor: 'white', justifyContent: 'center', height: '15%', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
             <Text style={{ alignSelf: 'center', color: '#8BA5FA', textAlign: 'center', fontSize: 22 }}>Month/year</Text>
           </View>
-          <View style={{ height: 100, justifyContent: 'center', alignItems: 'center', paddingTop: -150,flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
+          <View style={{ height: 100, justifyContent: 'center', alignItems: 'center', paddingTop: -150, flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
             <SmoothPicker
               startMargin={-10}
               selectOnPress
