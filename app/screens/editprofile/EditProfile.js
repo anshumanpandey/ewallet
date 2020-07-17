@@ -27,7 +27,11 @@ const EditProfile = (props) => {
             <TouchableOpacity
               style={styles.backView}
               onPress={() => {
-                props.onTabClick(5)
+                if (props.onTabClick) { 
+                  props.onTabClick(5)
+                } else {
+                  props.navigation.goBack()
+                }
               }}
             >
               <Icon type="Ionicons" name="ios-arrow-round-back" />

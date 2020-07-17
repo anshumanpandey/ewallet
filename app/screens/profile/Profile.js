@@ -19,8 +19,7 @@ const ItemCard = ({item,onTabClick}) =>{
         NavigationService.navigate(path)
       }
       else if(path === 'Achievement'){
-        NavigationService.navigate(path)
-
+        onTabClick(7)
       }
       else if(path ==='Feedback'){
         NavigationService.navigate(path)
