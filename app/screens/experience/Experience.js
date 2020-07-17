@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, StatusBar, Item, Picker } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, StatusBar, SafeAreaView, Picker } from 'react-native'
 import { Icon } from 'native-base'
 import { Formik } from 'formik';
 import useAxios from 'axios-hooks'
@@ -157,6 +157,8 @@ const Experience = () => {
     }
 
     return (
+    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
+
         <ScrollView style={styles.container}>
             <StatusBar hidden={true} />
             {createReq.loading && (
@@ -185,6 +187,7 @@ const Experience = () => {
                 {body}
             </View>
         </ScrollView>
+        </SafeAreaView>
     );
 }
 

@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {StyleSheet,View,Text,TouchableOpacity,ImageBackground,TextInput,ScrollView,Image,Modal,SafeAreaView,CheckBox, StatusBar} from 'react-native'
+import {View,Text,TouchableOpacity,ImageBackground,TextInput,ScrollView,Image,Modal,SafeAreaView,CheckBox, StatusBar} from 'react-native'
 import {Icon} from 'native-base'
 import Images from '../../constants/image'
 import styles from './styles'
@@ -8,6 +8,8 @@ import Screens from '../../constants/screens'
 
  const Feedback =()=> {
   return (
+    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
+
     <ScrollView style={styles.container}>
         <StatusBar hidden={true}/>
        <View style={styles.achieveView}>
@@ -43,6 +45,7 @@ import Screens from '../../constants/screens'
             </View>
        </View>
     </ScrollView>
+    </SafeAreaView>
   );
 }
 
