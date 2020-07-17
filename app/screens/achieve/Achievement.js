@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, TextInput, ScrollView, Image, Modal, SafeAreaView, CheckBox, StatusBar } from 'react-native'
+import React, { useState, useRef } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, TextInput, ScrollView, Image, SafeAreaView, CheckBox, StatusBar } from 'react-native'
 import { Formik } from 'formik';
 import moment from 'moment';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import Modal from 'react-native-modal';
+import SmoothPicker from "react-native-smooth-picker";
 import styles from './styles'
 import NavigationService from '../../navigation/NavigationService'
 import Screens from '../../constants/screens'
@@ -10,9 +11,21 @@ import { useGlobalState } from '../../state/GlobalState'
 import ErrorLabel from '../../components/ErrorLabel';
 import { dispatchAchivementFormState, ACHIVEMENT_STATE_ACTIONS } from '../../state/AchivementFormState';
 
+const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", " Oct", " Nov", "Dec"]
+const Item = React.memo(({ opacity, selected, vertical, fontSize, item }) => {
+  return (
+    <View style={{ height: 40 }}>
+      <Text style={{ color: selected ? '#8BA5FA' : 'black', borderColor: 'gray', paddingHorizontal: '15%', paddingVertical: '2%', textAlign: 'center', borderTopWidth: 1, fontSize: 22 }}>{item}</Text>
+    </View>
+  );
+});
+
 const Achievement = () => {
   const [profile] = useGlobalState('profile')
   const [show, setShow] = useState(false);
+  const [month, setMonth] = useState('Jan');
+  const [year, setYear] = useState('1990');
+  const formRef = useRef()
 
   return (
     <ScrollView style={styles.container}>
@@ -23,7 +36,8 @@ const Achievement = () => {
         </View>
         <Text style={styles.profileTitle}>Let’s start your onboarding by adding one achievement:</Text>
         <Formik
-          initialValues={{ title: '', date: '', company: '' }}
+          innerRef={(r) => formRef.current = r}
+          initialValues={{ title: '', date: '', month: '', year: '', company: '' }}
           validate={(values) => {
             const errors = {}
             if (!values.title) errors.title = "Required"
@@ -37,7 +51,7 @@ const Achievement = () => {
             NavigationService.navigate(Screens.Description)
           }}
         >
-          {({ handleChange, handleBlur, handleSubmit, setFieldValue,values, errors, touched }) => (
+          {({ handleChange, handleBlur, handleSubmit, setFieldValue, values, errors, touched }) => (
             <>
               <View style={styles.textInputBackground}>
                 <TextInput
@@ -53,19 +67,12 @@ const Achievement = () => {
 
               <TouchableOpacity onPress={() => setShow(true)}>
                 <View style={styles.textInputBackground}>
-                  {show && <DateTimePicker
-                    value={new Date()}
-                    onChange={(e, d) => {
-                      setShow(false)
-                      setFieldValue('date',d)
-                    }}
-                  />}
                   <TextInput
                     editable={false}
                     style={styles.textInput}
                     placeholder="Month/year"
                     autoCompleteType={'name'}
-                    value={values.date ? `${moment(values.date).format('MM')}/${moment(values.date).format('YYYY')}`: null}
+                    value={values.date ? `${moment(values.date).format('MM')}/${moment(values.date).format('YYYY')}` : null}
                   />
                 </View>
               </TouchableOpacity>
@@ -98,6 +105,52 @@ const Achievement = () => {
           )}
         </Formik>
       </View>
+      <Modal onBackdropPress={() => setShow(false)} isVisible={show}>
+        <View style={{ height: '50%', backgroundColor: '#8BA5FA', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
+          <View style={{ alignItems: 'center', backgroundColor: 'white', justifyContent: 'center', height: '15%', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
+            <Text style={{ alignSelf: 'center', color: '#8BA5FA', textAlign: 'center', fontSize: 22 }}>Month/year</Text>
+          </View>
+          <View style={{ height: 100, justifyContent: 'center', alignItems: 'center', paddingTop: -150,flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
+            <SmoothPicker
+              startMargin={-10}
+              selectOnPress
+              keyExtractor={item => `${item}-list`}
+              data={monthArray}
+              contentOffset={0}
+              onSelected={({ item, index }) => {
+                console.log(item)
+                setMonth(item)
+              }}
+              renderItem={({ item, index }) => (
+                <Item item={item} selected={month == item} />
+              )}
+            />
+            <SmoothPicker
+              startMargin={-10}
+              data={Array(50).fill(1990).map((i, idx) => i + idx)}
+              selectOnPress
+              keyExtractor={item => `${item}-list`}
+              onSelected={({ item, index }) => {
+                console.log(item)
+                setYear(item)
+              }}
+              renderItem={({ item, index }) => (
+                <Item item={item} selected={year == item} />
+              )}
+            />
+          </View>
+          <View style={{ height: '15%' }}>
+            <TouchableOpacity onPress={() => {
+              formRef.current?.setFieldValue("date", moment(`${month}-${year}`, "MMM-YYYY"))
+              setShow(false)
+            }}>
+              <View style={{ alignItems: 'center', backgroundColor: '#8BA5FA', justifyContent: 'center', height: '100%', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
+                <Text style={{ alignSelf: 'center', color: 'white', textAlign: 'center', fontSize: 22 }}>Done</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 }
