@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, ScrollView, SafeAreaView} from 'react-native'
 import { Icon } from 'native-base'
 import styles from './styles'
 import { useGlobalState, dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState'
@@ -18,6 +18,7 @@ const EditProfile = (props) => {
   }, { manual: true })
 
   return (
+    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
 
     <ScrollView style={styles.container}>
       <View style={styles.loginContainer}>
@@ -169,8 +170,7 @@ const EditProfile = (props) => {
 
       </View>
     </ScrollView>
-
-
+    </SafeAreaView>
   )
 }
 
