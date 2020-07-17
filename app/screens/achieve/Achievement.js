@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, TextInput, ScrollView, Image, SafeAreaView, CheckBox, StatusBar } from 'react-native'
 import { Formik } from 'formik';
+import { Icon } from 'native-base'
 import moment from 'moment';
 import Modal from 'react-native-modal';
 import SmoothPicker from "react-native-smooth-picker";
@@ -20,7 +21,7 @@ const Item = React.memo(({ opacity, selected, vertical, fontSize, item }) => {
   );
 });
 
-const Achievement = () => {
+const Achievement = (props) => {
   const [profile] = useGlobalState('profile')
   const [show, setShow] = useState(false);
   const [month, setMonth] = useState('Jan');
@@ -28,10 +29,27 @@ const Achievement = () => {
   const formRef = useRef()
 
   return (
-    <SafeAreaView style={{ backgroundColor: 'white'}}>
+    <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
       <ScrollView keyboardShouldPersistTaps={"handled"} style={styles.container}>
         <StatusBar hidden={true} />
         <View style={styles.achieveView}>
+        <View style={styles.backView}>
+
+          <TouchableOpacity
+            style={styles.backView}
+            onPress={() => {
+              if (props.onTabClick) {
+                props.onTabClick(5)
+              } else {
+                props.navigation.goBack()
+              }
+            }}
+          >
+            <Icon type="Ionicons" name="ios-arrow-round-back" />
+            <Text style={styles.backTitle}> Back</Text>
+          </TouchableOpacity>
+          </View>
+
           <View style={styles.profileView}>
             <Text style={styles.profileTitle}>Welcome {profile.firstName}!</Text>
           </View>

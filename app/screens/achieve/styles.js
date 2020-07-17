@@ -5,7 +5,10 @@ const styles=StyleSheet.create({
     container:{
         backgroundColor:'white'
       },
-
+      backView:{
+        flexDirection:'row',
+        alignItems:'center'
+        },
       achieveView:{
         width:Dimension.pro100,
         flex:1,
