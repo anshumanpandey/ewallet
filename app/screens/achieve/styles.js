@@ -30,7 +30,7 @@ const styles=StyleSheet.create({
           fontSize:24,
           lineHeight:32,
           color:'#646464',
-          marginTop:20,
+          marginTop:0,
           textAlign:'center'
       },
       textInputBackground:{

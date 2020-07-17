@@ -28,7 +28,7 @@ const Achievement = () => {
   const formRef = useRef()
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: 'white'}}>
       <ScrollView keyboardShouldPersistTaps={"handled"} style={styles.container}>
         <StatusBar hidden={true} />
         <View style={styles.achieveView}>
