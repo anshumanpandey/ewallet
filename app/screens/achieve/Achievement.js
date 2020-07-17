@@ -141,7 +141,7 @@ const Achievement = (props) => {
               />
               <SmoothPicker
                 startMargin={-10}
-                data={Array(50).fill(1990).map((i, idx) => i + idx)}
+                data={Array(50).fill(moment().year()).map((i, idx) => i - idx).reverse()}
                 selectOnPress
                 keyExtractor={item => `${item}-list`}
                 onSelected={({ item, index }) => {
