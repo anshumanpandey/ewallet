@@ -35,8 +35,8 @@ export const Data=[
          iconType:`${Images.Icon5}`,
          iconName:'share',
          title:'Share your profile',
-         path:'Share'
- 
+         path:'Share',
+         disabled: true 
      },
      {
          id:5,

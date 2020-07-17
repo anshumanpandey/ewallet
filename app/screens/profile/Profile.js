@@ -6,6 +6,7 @@ import styles from './styles'
 import screens from '../../constants/screens'
 import NavigationService from '../../navigation/NavigationService';
 import Share from 'react-native-share';
+import GlobalStyles from '../../constants/globalStyles';
 
 const ItemCard = ({item,onTabClick}) =>{
 
@@ -51,14 +52,15 @@ const ItemCard = ({item,onTabClick}) =>{
     }
      return(
          <TouchableOpacity
+          disabled={item.disabled}
           onPress={
             ()=>onSwitch(item.path)
           }
          >
-           <View style={styles.card}>
+           <View style={[styles.card, item.disabled && GlobalStyles.disabledButton]}>
              <View style={{alignItems:'center',justifyContent:'center'}}>
-                <Image source={item.iconType} style={{width:40,height:40}}/>
-                <Text style={{textAlign:'center',marginTop:15,paddingHorizontal:30,fontSize:12}}>{item.title}</Text>
+                <Image source={item.iconType} style={{width:40,height:40, opacity: item.disabled ? 0.5: 1}}/>
+                <Text style={{textAlign:'center',marginTop:15,paddingHorizontal:30,fontSize:12, color: item.disabled ? 'gray' : 'black'}}>{item.title}</Text>
              </View>
            </View>
          </TouchableOpacity>
