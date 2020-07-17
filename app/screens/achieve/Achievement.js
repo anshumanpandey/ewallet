@@ -112,7 +112,6 @@ const Achievement = () => {
               selectOnPress
               keyExtractor={item => `${item}-list`}
               data={monthArray}
-              contentOffset={0}
               onSelected={({ item, index }) => {
                 console.log(item)
                 setMonth(item)
