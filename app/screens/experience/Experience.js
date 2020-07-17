@@ -87,6 +87,7 @@ const Experience = () => {
 
                                 <View style={styles.textInputBackground}>
                                     <TextInput
+                                        placeholderTextColor="gray"
                                         style={styles.textInput}
                                         placeholder="Full Name"
                                         autoCompleteType={'name'}
@@ -98,6 +99,7 @@ const Experience = () => {
                                 {errors.collegueName && touched.collegueName && <ErrorLabel text={errors.collegueName} />}
                                 <View style={styles.textInputBackground}>
                                     <TextInput
+                                        placeholderTextColor="gray"
                                         style={styles.textInput}
                                         placeholder="Email"
                                         autoCompleteType={'name'}

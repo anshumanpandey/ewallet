@@ -55,6 +55,7 @@ const Achievement = () => {
             <>
               <View style={styles.textInputBackground}>
                 <TextInput
+                  placeholderTextColor="gray"
                   style={styles.textInput}
                   placeholder="Title"
                   autoCompleteType={'name'}
@@ -74,6 +75,7 @@ const Achievement = () => {
 
               <View style={styles.textInputBackground}>
                 <TextInput
+                  placeholderTextColor="gray"
                   style={styles.textInput}
                   placeholder="Company/Organisation"
                   autoCompleteType={'name'}

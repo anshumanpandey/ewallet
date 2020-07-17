@@ -84,6 +84,7 @@ const SignUp = (props) => {
                 </View>
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="First Name"
                     autoCompleteType={'name'}
@@ -96,6 +97,7 @@ const SignUp = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Last Name"
                     onChangeText={handleChange('lastName')}
@@ -107,6 +109,7 @@ const SignUp = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Email"
                     onChangeText={handleChange('email')}
@@ -118,6 +121,7 @@ const SignUp = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Password"
                     secureTextEntry={true}
@@ -130,6 +134,7 @@ const SignUp = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Phone Number"
                     keyboardType="numeric"
@@ -142,6 +147,7 @@ const SignUp = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Designation, Company Name"
                     onChangeText={handleChange('positionAt')}

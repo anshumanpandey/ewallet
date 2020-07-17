@@ -120,6 +120,7 @@ const Attach = () => {
                                 }}>
                                     <View style={styles.textInputBackground}>
                                         <TextInput
+                                            placeholderTextColor="gray"
                                             editable={false}
                                             style={styles.textInput}
                                             placeholder="Attach"

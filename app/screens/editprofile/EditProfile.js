@@ -82,6 +82,7 @@ const EditProfile = (props) => {
               <>
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="First Name"
                     autoCompleteType={'name'}
@@ -94,6 +95,7 @@ const EditProfile = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Last Name"
                     autoCompleteType={'name'}
@@ -106,6 +108,7 @@ const EditProfile = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Email Address"
                     onChangeText={handleChange('email')}
@@ -117,6 +120,7 @@ const EditProfile = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Phone Number"
                     onChangeText={handleChange('phoneNumber')}
@@ -128,6 +132,7 @@ const EditProfile = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Designation, Company Name"
                     onChangeText={handleChange('positionAt')}

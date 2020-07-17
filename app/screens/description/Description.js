@@ -46,6 +46,7 @@ const Description = () => {
                         <>
                             <View style={styles.desContainer}>
                                 <TextInput
+                                    placeholderTextColor="gray"
                                     style={{ width: '100%', height: 250, padding: 5 }}
                                     textAlignVertical="top"
                                     multiline={true}

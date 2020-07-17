@@ -46,6 +46,7 @@ const Outcome = () => {
                             <View style={{ marginTop: 40 }}>
                                 <View style={styles.textInputBackground}>
                                     <TextInput
+                                        placeholderTextColor="gray"
                                         style={styles.textInput}
                                         placeholder="Title"
                                         autoCompleteType={'name'}
@@ -57,6 +58,7 @@ const Outcome = () => {
                                 {errors.titleObteined && touched.titleObteined && <ErrorLabel text={errors.titleObteined} />}
                                 <View style={styles.textInputBackground}>
                                     <TextInput
+                                        placeholderTextColor="gray"
                                         style={styles.textInput}
                                         placeholder="Result"
                                         autoCompleteType={'name'}
@@ -69,6 +71,7 @@ const Outcome = () => {
 
                                 <View style={styles.textInputBackground}>
                                     <TextInput
+                                        placeholderTextColor="gray"
                                         style={styles.textInput}
                                         placeholder="Value"
                                         autoCompleteType={'name'}

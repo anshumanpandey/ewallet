@@ -25,6 +25,7 @@ import Screens from '../../constants/screens'
            <View style={styles.desContainer}>
                <Text style={styles.title}>Description</Text>
                <TextInput
+                placeholderTextColor="gray"
                 style={{width:'100%',height:250,padding:5}}
                 textAlignVertical="top"
                 multiline={true}

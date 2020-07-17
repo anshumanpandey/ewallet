@@ -52,6 +52,7 @@ const Login = (props) => {
               <>
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Email Address"
                     onChangeText={handleChange('email')}
@@ -63,6 +64,7 @@ const Login = (props) => {
 
                 <View style={styles.textInputBackground}>
                   <TextInput
+                    placeholderTextColor="gray"
                     style={styles.textInput}
                     placeholder="Password"
                     secureTextEntry={true}
