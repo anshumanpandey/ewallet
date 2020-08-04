@@ -85,7 +85,8 @@ const AppMain = () => {
       MainStack: {
         screen: MainStack,
       }
-    }
+    },
+    { drawerLockMode: 'locked-closed'}
   )
 
   const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
