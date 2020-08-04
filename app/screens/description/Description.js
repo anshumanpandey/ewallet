@@ -24,7 +24,7 @@ const Description = () => {
                     </TouchableOpacity>
 
                 </View>
-                <Text style={styles.desTitle}>Describe shortly your achievement with 30 words (max):</Text>
+                <Text style={styles.desTitle}>Summarize your achievement in 30 words</Text>
                 <Formik
                     initialValues={{ description: '', }}
                     validate={(values) => {
@@ -64,7 +64,7 @@ const Description = () => {
                                     <Image source={Images.Lamp} style={{ position: 'absolute', top: -30, left: 0 }} />
                                     <Text style={{ color: "#99879D", fontSize: 16 }}>Tips</Text>
                                 </View>
-                                <Text style={styles.context}>Give some context, sum-up the challenge, how did you acommplish that, share your learnings, tell everyone the outcome...</Text>
+                                <Text style={styles.context}>Give some context, sum-up the challenge, how did you accomplish that, share your learnings, tell everyone the outcome...</Text>
                             </View>
                             <View style={styles.buttonView}>
                                 <TouchableOpacity
