@@ -19,7 +19,27 @@ const styles =StyleSheet.create({
     container:{
         height:Dimension.deviceHeight,
         
-    }
+    },
+    buttonView: {
+        width: '100%',
+    },
+    buttonText: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        margin: 10,
+        color: '#ffffff',
+        backgroundColor: 'transparent',
+
+    },
+    textInputBackground: {
+        height: Dimension.px50,
+        backgroundColor: '#EEF4FD',
+        borderRadius: 8,
+        justifyContent: 'center',
+        marginTop: Dimension.px20,
+        paddingHorizontal: 10
+    },
   
 })
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View} from 'react-native'
+import { View } from 'react-native'
 import Header from '../../components/Header'
 import styles from './styles'
 import Footer from '../../components/Footer'
@@ -11,13 +11,14 @@ import FullFeedback from '../fullfeedback/FullFeedback'
 import EditProfile from '../editprofile/EditProfile'
 import Settings from '../settings/Settings'
 import Achievement from '../achieve/Achievement'
+import { ScrollView } from 'react-native-gesture-handler'
 
 class Home extends Component {
-   
-  constructor(props){
+
+  constructor(props) {
     super(props)
-    this.state ={
-        tab:5
+    this.state = {
+      tab: 5
     }
   }
 
@@ -27,7 +28,7 @@ class Home extends Component {
       console.log(navigation.state)
       const { params } = this.props.navigation.state;
       if (params && params.tabIdx) {
-        this.setState({tab: params.tabIdx})
+        this.setState({ tab: params.tabIdx })
       }
     });
   }
@@ -36,64 +37,66 @@ class Home extends Component {
     // Remove the event listener
     this.focusListener.remove();
   }
-  onTabClick = (index) =>{
-     this.setState({tab:index})
+  onTabClick = (index) => {
+    this.setState({ tab: index })
   }
   render() {
-    const{tab}=this.state
+    const { tab } = this.state
 
     return (
-      <View style={styles.container}>
-         {
-           (tab !==2 && tab !==7 && tab !== 1)&&(
-            <Header onTabClick={this.onTabClick}/>
-           )
-         }
-        
-           <View style={styles.mainView}>
-           {
-               tab ===7 &&(
-                 <Achievement title={"Let’s add a new achievement"} onTabClick={this.onTabClick}/> 
-               )
-             }
-              {
-               tab ===6 &&(
-                 <Settings onTabClick={this.onTabClick}/> 
-               )
-             }
-             {
-               tab ===5 &&(
-                 <Profile onTabClick={this.onTabClick}/> 
-               )
-             }
-             {
-               tab ===1 &&(
-                <FingerPrint onTabClick={this.onTabClick}/> 
+      <>
+        <ScrollView contentContainerStyle={styles.container}>
+          {
+            (tab !== 2 && tab !== 7 && tab !== 1) && (
+              <Header onTabClick={this.onTabClick} />
+            )
+          }
+
+          <View style={styles.mainView}>
+            {
+              tab === 7 && (
+                <Achievement title={"Let’s add a new achievement"} onTabClick={this.onTabClick} />
               )
-             }
-              {
-               tab ===0 &&(
-                <Passport onTabClick={this.onTabClick}/> 
+            }
+            {
+              tab === 6 && (
+                <Settings onTabClick={this.onTabClick} />
               )
-             }
-             {
-               tab ===2 &&(
-                 <EditProfile onTabClick={this.onTabClick}/>
-               )
-             }
-             {
-               tab ===3 && (
-                 <DetailPassport onTabClick={this.onTabClick}/>
-               )
-             }
-             {
-               tab ===4 &&(
-                  <FullFeedback onTabClick={this.onTabClick}/>
-               )
-             }
-           </View>
-           <Footer onTabClick={this.onTabClick}/>
-      </View>
+            }
+            {
+              tab === 5 && (
+                <Profile onTabClick={this.onTabClick} />
+              )
+            }
+            {
+              tab === 1 && (
+                <FingerPrint onTabClick={this.onTabClick} />
+              )
+            }
+            {
+              tab === 0 && (
+                <Passport onTabClick={this.onTabClick} />
+              )
+            }
+            {
+              tab === 2 && (
+                <EditProfile onTabClick={this.onTabClick} />
+              )
+            }
+            {
+              tab === 3 && (
+                <DetailPassport onTabClick={this.onTabClick} />
+              )
+            }
+            {
+              tab === 4 && (
+                <FullFeedback onTabClick={this.onTabClick} />
+              )
+            }
+          </View>
+        </ScrollView>
+        <Footer onTabClick={this.onTabClick} />
+      </>
     )
   }
 }
