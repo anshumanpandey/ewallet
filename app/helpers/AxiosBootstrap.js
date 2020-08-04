@@ -22,7 +22,6 @@ axiosInstance.interceptors.request.use(
 );
 axiosInstance.interceptors.response.use(
   config => {
-    // config.data = JSON.parse(decrypt(config.data))
     return config;
   },
   (error) => {
@@ -46,7 +45,7 @@ axiosInstance.interceptors.response.use(
     } else {
       // Something happened in setting up the request that triggered an Error
       console.log('Something happened in setting up the request that triggered an Error');
-      console.log(error.message);
+      console.log(error);
       console.log('error.message');
     }
     throw error;

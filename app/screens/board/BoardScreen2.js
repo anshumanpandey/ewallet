@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
      fontFamily:'RedHatDisplay-Bold'
    },
    desContainer:{
-      marginTop:Dimensions.px60,
+      marginTop:Dimensions.px45,
       backgroundColor:'#fff',
       width:'90%',
       borderRadius:10,
