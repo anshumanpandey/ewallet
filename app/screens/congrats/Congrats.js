@@ -7,6 +7,7 @@ import Images from '../../constants/image'
 import Dimensions from '../../constants/dimensions'
 import NavigationService from '../../navigation/NavigationService';
 import Screens from '../../constants/screens'
+import { useGlobalState } from '../../state/GlobalState';
 
 const styles = StyleSheet.create({
    wrapper:{
@@ -51,12 +52,7 @@ const styles = StyleSheet.create({
 })
 
 export default function Congrats() {
-  const data=[
-    "Build your life,not a resume.",
-    "Enhanced your achievements.",
-    "Leverage your network feedback",
-    "Keep progressing."
-  ]
+  const [profile] = useGlobalState('profile')
   return (
     <ImageBackground
          source={Images.BoardBackground}
@@ -77,7 +73,7 @@ export default function Congrats() {
         <Text
          style={styles.title}
         >
-          Congratulations Dustin! Your Passport is ready
+          Congratulations {profile.firstName}! Your Passport is ready
         </Text>
         <View style={{marginTop:20,width:'100%',alignItems:'center',flexDirection:'row'}}>
         <TouchableOpacity
