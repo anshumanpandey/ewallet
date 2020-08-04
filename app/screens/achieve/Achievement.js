@@ -48,20 +48,22 @@ const Achievement = (props) => {
               <Icon type="Ionicons" name="ios-arrow-round-back" />
               <Text style={styles.backTitle}> Back</Text>
             </TouchableOpacity>
-          <TouchableOpacity
-              style={styles.backView}
-              onPress={() => {
-                NavigationService.navigate(Screens.Description)
-              }}
-            >
-              <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
-            </TouchableOpacity>
+            {props.passer == true && (
+              <TouchableOpacity
+                style={styles.backView}
+                onPress={() => {
+                  NavigationService.navigate(Screens.Home, { tabIdx: 5 })
+                }}
+              >
+                <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           <View style={styles.profileView}>
             <Text style={styles.profileTitle}>Welcome {profile.firstName}!</Text>
           </View>
-          {props.title && <Text style={styles.profileTitle}>{props.title}</Text> }
+          {props.title && <Text style={styles.profileTitle}>{props.title}</Text>}
           {!props.title && <Text style={styles.profileTitle}>Let’s start your onboarding by adding one achievement:</Text>}
           <Formik
             innerRef={(r) => formRef.current = r}
