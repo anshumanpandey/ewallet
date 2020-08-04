@@ -23,18 +23,20 @@ const Header = (props) => {
                 </View>
             </View>
 
-            <View style={styles.menu}>
-                <TouchableOpacity
-                    onPress={() => props.onTabClick(5)}
-                >
-                    <Icon type='AntDesign' name='home' style={{ fontSize: 25, color: '#8BA5FA' }} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => props.onTabClick(6)}
-                >
-                    <Image source={Images.Setting} style={{ width: 20, height: 20 }} />
-                </TouchableOpacity>
-            </View>
+            {props.hideIcons != true && (
+                <View style={styles.menu}>
+                    <TouchableOpacity
+                        onPress={() => props.onTabClick(5)}
+                    >
+                        <Icon type='AntDesign' name='home' style={{ fontSize: 25, color: '#8BA5FA' }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => props.onTabClick(6)}
+                    >
+                        <Image source={Images.Setting} style={{ width: 20, height: 20 }} />
+                    </TouchableOpacity>
+                </View>
+            )}
         </View>
     );
 }

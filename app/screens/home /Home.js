@@ -45,7 +45,7 @@ class Home extends Component {
     return (
       <View style={styles.container}>
          {
-           (tab !==2 && tab !==7)&&(
+           (tab !==2 && tab !==7 && tab !== 1)&&(
             <Header onTabClick={this.onTabClick}/>
            )
          }

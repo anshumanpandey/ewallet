@@ -6,6 +6,7 @@ import { Data } from './data'
 import styles from './styles';
 import Images from '../../constants/image'
 import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
+import Header from '../../components/Header';
 
 const ItemPassCard = (item) => {
    return (
@@ -29,13 +30,6 @@ const ItemPassCard = (item) => {
                   </View>
                </View>
             </View>
-            <TouchableOpacity>
-               <View style={styles.detailView}>
-
-                  <Text style={styles.detailTitle}>Personalize your Passport</Text>
-                  <Image source={Images.Personal} />
-               </View>
-            </TouchableOpacity>
          </View>
       </TouchableOpacity>
    )
@@ -82,7 +76,7 @@ const FingerPrint = (props) => {
                numColumns={1}
                keyExtractor={item => item.id}
                renderItem={({ item }) =>
-                  <ItemPassCard {...item} {...props}/>
+                  <ItemPassCard {...item} {...props} />
                }
             />
          </View>
@@ -90,7 +84,12 @@ const FingerPrint = (props) => {
    }
 
 
-   return body;
+   return (
+      <>
+         <Header hideIcons={true} />
+         {body}
+      </>
+   );
 }
 
 export default FingerPrint;
