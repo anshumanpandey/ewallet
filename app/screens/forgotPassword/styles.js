@@ -81,6 +81,7 @@ const styles=StyleSheet.create({
 
     buttonView:{
        width:'100%',
+       marginTop:20
     },
     linearGradient: {
         height:Dimension.px50,

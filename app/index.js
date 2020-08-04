@@ -25,6 +25,7 @@ import { useGlobalState, dispatchGlobalState, GLOBAL_STATE_ACTIONS } from './sta
 import { Alert } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import "./helpers/AxiosBootstrap"
+import ForgotPasswordScreen from './screens/forgotPassword/ForgotPasswordScreen';
 
 const AppMain = () => {
 
@@ -51,6 +52,7 @@ const AppMain = () => {
   let screens = {
     OnBoardScreens: { screen: OnBoardScreens },
     Login: { screen: Login },
+    ForgotPassword: { screen: ForgotPasswordScreen },
     SignBoard: { screen: SignBoard },
     Register: { screen: Register },
   };

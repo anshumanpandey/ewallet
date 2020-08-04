@@ -42,8 +42,8 @@ const Login = (props) => {
               })
                 .then((r) => {
                   console.log(r.data)
-                  dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.TOKEN, state: r.data.token})
-                  dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.PROFILE, state: r.data})
+                  dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.TOKEN, state: r.data.token })
+                  dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.PROFILE, state: r.data })
                   NavigationService.navigate(Screens.Home)
                 })
             }}
@@ -91,12 +91,21 @@ const Login = (props) => {
             )}
           </Formik>
 
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-            <Text style={styles.memberText}>You have not an account ?</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: '5%' }}>
             <TouchableOpacity
+              onPress={() => NavigationService.navigate("ForgotPassword")}
+            >
+              <Text style={[styles.memberText, {textAlign: 'center' }]}>Forgot password? </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: '30%' }}>
+            <Text style={styles.memberText}>Don’t have an account yet ?</Text>
+            <TouchableOpacity
+              style={[styles.textInputBackground, { backgroundColor: '#8BA5FA', width: '50%' }, loginReq.loading && GlobalStyles.disabledButton]}
               onPress={() => NavigationService.navigate(Screens.Register)}
             >
-              <Text style={styles.memberText}>Sign Up</Text>
+              <Text style={[styles.memberText, { color: 'white', textAlign: 'center' }]}>Sign Up</Text>
             </TouchableOpacity>
           </View>
         </View>
