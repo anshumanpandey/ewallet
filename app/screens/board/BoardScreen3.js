@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
      fontFamily:'RedHatDisplay-Bold'
    },
    desContainer:{
+     flex: 0.8,
       marginTop:Dimensions.px60,
       width:Dimensions.deviceWidth-30,
       backgroundColor:'#fff',
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     color:'#120E21'
    },
    desText:{
+     width: '90%',
      fontSize:16,
      color:'#99879D',
      marginTop:10,
@@ -100,9 +102,9 @@ export default function BoardScreen3() {
        </View>
        <View style={{flexDirection:'row',width:'85%',alignItems:'center'}}>
          <Image source={Images.Avatar}/>
-         <Text style={styles.desText}>Nec vox accusatoris ulla licet subditicii in his malorum quaerebatur acervis ut saltem specie tenus crimina praescriptis legum commit...ecie tenus crimina praescriptis legum commit...</Text>
+         <Text numberOfLines={4} style={styles.desText}>Nec vox accusatoris ulla licet subditicii in his malorum quaerebatur acervis ut saltem specie tenus crimina praescriptis legum commit...ecie tenus crimina praescriptis legum commit...</Text>
        </View>
-       <View style={{width:'100%',alignItems:'center',flexDirection:'row'}}>
+       <View style={{width:'100%',alignItems:'center',flexDirection:'row', flex: 1}}>
           <View>
              <Text style={{fontSize:16,fontWeight:'500',color:'#120E21'}}>Skills acquired</Text>
              <View style={styles.detailView}> 
