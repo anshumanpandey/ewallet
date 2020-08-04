@@ -33,21 +33,29 @@ const Achievement = (props) => {
       <ScrollView keyboardShouldPersistTaps={"handled"} style={styles.container}>
         <StatusBar hidden={true} />
         <View style={styles.achieveView}>
-        <View style={styles.backView}>
+          <View style={styles.backView}>
 
+            <TouchableOpacity
+              style={styles.backView}
+              onPress={() => {
+                if (props.onTabClick) {
+                  props.onTabClick(5)
+                } else {
+                  props.navigation.goBack()
+                }
+              }}
+            >
+              <Icon type="Ionicons" name="ios-arrow-round-back" />
+              <Text style={styles.backTitle}> Back</Text>
+            </TouchableOpacity>
           <TouchableOpacity
-            style={styles.backView}
-            onPress={() => {
-              if (props.onTabClick) {
-                props.onTabClick(5)
-              } else {
-                props.navigation.goBack()
-              }
-            }}
-          >
-            <Icon type="Ionicons" name="ios-arrow-round-back" />
-            <Text style={styles.backTitle}> Back</Text>
-          </TouchableOpacity>
+              style={styles.backView}
+              onPress={() => {
+                NavigationService.navigate(Screens.Description)
+              }}
+            >
+              <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.profileView}>
