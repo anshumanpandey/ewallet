@@ -45,27 +45,15 @@ const SignUp = (props) => {
               if (!values.password) errors.password = "Required"
               if (!values.phoneNumber) errors.phoneNumber = "Required"
 
-              const splittedValues = values.positionAt.split(',')
-              if (!values.positionAt) {
-                errors.positionAt = "Required"
-              } else if (!values.positionAt.includes(',')) {
-                errors.positionAt = "Invalid value. Specify like: Position, Company Name"
-              } else if (splittedValues.length != 2) {
-                errors.positionAt = "Invalid value. Specify like: Position, Company Name"
-              } else if (splittedValues[0].trim() == '' || splittedValues[1].trim() == "") {
-                errors.positionAt = "Invalid value. Specify like: Position, Company Name"
-              }
-
               return errors
             }}
             onSubmit={values => {
-              const splittedValues = values.positionAt.split(',')
 
               const email = values.email.toLowerCase()
               const password = values.password.toLowerCase()
 
               doRegister({
-                data: { ...values, email, password, companyTitle: splittedValues[0], companyName: splittedValues[1] }
+                data: { ...values, email, password }
               })
                 .then(() => doLogin({ data: { email, password } }))
                 .then((r) => {
@@ -144,18 +132,6 @@ const SignUp = (props) => {
                   />
                 </View>
                 {errors.phoneNumber && touched.phoneNumber && <ErrorLabel text={errors.phoneNumber} />}
-
-                <View style={styles.textInputBackground}>
-                  <TextInput
-                    placeholderTextColor="gray"
-                    style={styles.textInput}
-                    placeholder="Designation, Company Name"
-                    onChangeText={handleChange('positionAt')}
-                    onBlur={handleBlur('positionAt')}
-                    value={values.positionAt}
-                  />
-                </View>
-                {errors.positionAt && touched.positionAt && <ErrorLabel text={errors.positionAt} />}
               </View>
 
               <View style={styles.buttonView}>
