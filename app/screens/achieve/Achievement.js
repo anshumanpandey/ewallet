@@ -61,7 +61,8 @@ const Achievement = (props) => {
           <View style={styles.profileView}>
             <Text style={styles.profileTitle}>Welcome {profile.firstName}!</Text>
           </View>
-          <Text style={styles.profileTitle}>Let’s start your onboarding by adding one achievement:</Text>
+          {props.title && <Text style={styles.profileTitle}>{props.title}</Text> }
+          {!props.title && <Text style={styles.profileTitle}>Let’s start your onboarding by adding one achievement:</Text>}
           <Formik
             innerRef={(r) => formRef.current = r}
             initialValues={{ title: '', date: '', month: '', year: '', company: '' }}

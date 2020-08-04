@@ -53,7 +53,7 @@ class Home extends Component {
            <View style={styles.mainView}>
            {
                tab ===7 &&(
-                 <Achievement onTabClick={this.onTabClick}/> 
+                 <Achievement title={"Let’s add a new achievement"} onTabClick={this.onTabClick}/> 
                )
              }
               {
