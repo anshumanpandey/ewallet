@@ -8,6 +8,7 @@ import Screens from '../constants/screens'
   return (
     <View style={styles.container}>
         <TouchableOpacity
+        style={{ width: '30%', alignItems: 'center'}}
          onPress={()=>props.onTabClick(7)}
         >
            <Image source={Images.Star}
@@ -15,6 +16,7 @@ import Screens from '../constants/screens'
              />
         </TouchableOpacity>
         <TouchableOpacity
+          style={{ width: '30%', alignItems: 'center'}}
          onPress={()=>props.onTabClick(1)}
         >
             <Image source={Images.Print}
@@ -22,6 +24,7 @@ import Screens from '../constants/screens'
             />
         </TouchableOpacity>
          <TouchableOpacity
+          style={{ width: '30%', alignItems: 'center'}}
           onPress={()=>props.onTabClick(5)}
          >
             <Image source={Images.Profile}
