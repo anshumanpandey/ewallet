@@ -30,11 +30,6 @@ const Header = (props) => {
                     >
                         <Icon type='AntDesign' name='home' style={{ fontSize: 25, color: '#8BA5FA' }} />
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => props.onTabClick(6)}
-                    >
-                        <Image source={Images.Setting} style={{ width: 20, height: 20 }} />
-                    </TouchableOpacity>
                 </View>
             )}
         </View>

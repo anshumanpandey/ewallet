@@ -9,7 +9,6 @@ import FingerPrint from '../finger/FingerPrint'
 import DetailPassport from '../detail/DetailPassport'
 import FullFeedback from '../fullfeedback/FullFeedback'
 import EditProfile from '../editprofile/EditProfile'
-import Settings from '../settings/Settings'
 import Achievement from '../achieve/Achievement'
 import { ScrollView } from 'react-native-gesture-handler'
 
@@ -56,11 +55,6 @@ class Home extends Component {
             {
               tab === 7 && (
                 <Achievement title={"Let’s add a new achievement"} onTabClick={this.onTabClick} />
-              )
-            }
-            {
-              tab === 6 && (
-                <Settings onTabClick={this.onTabClick} />
               )
             }
             {
