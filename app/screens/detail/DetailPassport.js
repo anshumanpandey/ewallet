@@ -5,6 +5,7 @@ import { Icon } from 'native-base'
 import styles from './styles';
 import Images from '../../constants/image'
 import { useGlobalState } from '../../state/GlobalState';
+import NavigationService from '../../navigation/NavigationService';
 
 
 
@@ -41,7 +42,7 @@ const DetailPassport = (props) => {
                     <View style={[styles.feedback, achivement.Feedbacks.length == 0 && styles.emptyFeedback]}>
                         <Text style={{ fontSize: 20 }}>{achivement.Feedbacks.length} feedback</Text>
                         {achivement.Feedbacks.length !== 0 && achivement.Feedbacks.some(i => i.skillsWithExperience.length !== 0) && (
-                            <View style={{ display: 'flex', flexDirection: 'row',flexWrap: 'wrap'}}>
+                            <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                                 {(achivement.Feedbacks
                                     .reduce((skillsArr, next) => {
                                         next.skillsWithExperience.forEach(s => {
@@ -63,7 +64,7 @@ const DetailPassport = (props) => {
                                     .map(f => {
                                         return (
                                             <>
-                                                <View style={{ marginRight: '1%',padding: '1%', marginTop: 10, borderWidth: 1, borderColor: '#99879D', borderRadius: 4 }}>
+                                                <View style={{ marginRight: '1%', padding: '1%', marginTop: 10, borderWidth: 1, borderColor: '#99879D', borderRadius: 4 }}>
                                                     <Text style={{ fontSize: 13, color: '#3DC35B' }}>{f.skill}</Text>
                                                 </View>
                                                 <View style={{ padding: '1%', marginTop: 10, borderWidth: 1, borderColor: '#99879D', borderRadius: 4 }}>
@@ -75,7 +76,7 @@ const DetailPassport = (props) => {
                             </View>
                         )}
                         {achivement.Feedbacks.length !== 0 && achivement.Feedbacks.some(i => i.skillsWithImproving.length !== 0) && (
-                            <View style={{ display: 'flex', flexDirection: 'row',flexWrap: 'wrap'}}>
+                            <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                                 {(achivement.Feedbacks
                                     .reduce((skillsArr, next) => {
                                         next.skillsWithImproving.forEach(s => {
@@ -117,6 +118,16 @@ const DetailPassport = (props) => {
                                 </View>
                             );
                         }))}
+                        {achivement.Feedbacks.length == 0 && (
+                            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: '30%' }}>
+                                <TouchableOpacity
+                                    style={[{ height: Dimension.px50, backgroundColor: '#EEF4FD', borderRadius: 8, justifyContent: 'center', marginTop: Dimension.px20, paddingHorizontal: 10, backgroundColor: '#8BA5FA', width: '50%' }]}
+                                    onPress={() => NavigationService.navigate("Achievement")}
+                                >
+                                    <Text style={[styles.memberText, { color: 'white', textAlign: 'center' }]}>Ask for a recommendation</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
                     </View>
                     {achivement.Feedbacks.length !== 0 && (
                         <TouchableOpacity
