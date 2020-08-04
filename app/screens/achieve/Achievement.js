@@ -41,7 +41,7 @@ const Achievement = (props) => {
                 if (props.onTabClick) {
                   props.onTabClick(5)
                 } else {
-                  props.navigation.goBack()
+                  NavigationService.navigate(Screens.Home)
                 }
               }}
             >
