@@ -18,9 +18,9 @@ export const Data=[
      },
      {
          id:2,
-         iconType:`${Images.Icon6}`,
+         iconType:`${Images.Icon2}`,
          iconName:'fingerprint',
-         title:'Customize your Passport',
+         title:'Manage your achievements',
          path:'FingerPrint'
      },
      {
