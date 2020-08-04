@@ -35,9 +35,6 @@ const Outcome = () => {
                     initialValues={{ titleObteined: '', resultObteined: '', valueObteined: '', }}
                     validate={(values) => {
                         const errors = {}
-                        if (!values.titleObteined) errors.titleObteined = "Required"
-                        if (!values.resultObteined) errors.resultObteined = "Required"
-                        if (!values.valueObteined) errors.valueObteined = "Required"
 
                         return errors
                     }}
