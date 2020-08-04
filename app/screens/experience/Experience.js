@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, StatusBar, SafeAreaView, Picker } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, StatusBar, SafeAreaView, Picker, Alert } from 'react-native'
 import { Icon } from 'native-base'
 import { Formik } from 'formik';
 import useAxios from 'axios-hooks'
@@ -65,6 +65,7 @@ const Experience = () => {
                         })
                             .then((r) => {
                                 console.log(r.data)
+                                Alert.alert("", "Your request has been sent")
                                 NavigationService.navigate(Screens.Home)
                             })
                     }}
@@ -129,7 +130,7 @@ const Experience = () => {
 
 
                             </View>
-                            <View style={{ marginTop: 40 }}>
+                            <View style={{ marginTop: 40, zIndex: -10 }}>
 
                                 <View style={styles.tipView}>
                                     <Image source={Images.Lamp} style={{ position: 'absolute', top: -30, left: 0 }} />
