@@ -22,7 +22,7 @@ import Screens from '../constants/screens'
             />
         </TouchableOpacity>
          <TouchableOpacity
-          onPress={()=>props.onTabClick(2)}
+          onPress={()=>props.onTabClick(5)}
          >
             <Image source={Images.Profile}
              style={{width:40,height:40}}
