@@ -7,7 +7,8 @@ const styles=StyleSheet.create({
       },
       backView:{
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+        justifyContent: 'space-between'
         },
       achieveView:{
         width:Dimension.pro100,
