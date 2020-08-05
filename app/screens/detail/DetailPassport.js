@@ -19,7 +19,7 @@ const DetailPassport = (props) => {
                     <View style={styles.certiView}>
                         <View>
                             <Text style={styles.certTitle}>{achivement.title}</Text>
-                            <Text>{achivement.titleObteined}</Text>
+                            {achivement.titleObteined !== "" && <Text>{achivement.titleObteined}</Text>}
                             <Text>{achivement.year}</Text>
                         </View>
                         <Image source={Images.Hat} />
@@ -28,15 +28,12 @@ const DetailPassport = (props) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                         <View>
                             <Text style={{ fontSize: 20, lineHeight: 26, color: '#120E21' }}>Additional</Text>
-                            <View style={{ padding: 10, backgroundColor: '#FBEAFF', borderRadius: 4 }}>
-                                <Text>{achivement.titleObteined}</Text>
-                            </View>
+                            <Image style={{ width: 150, height: 150}} source={{ uri: achivement.awardFilename }} />
                         </View>
                         <View>
                             <Text style={{ fontSize: 20, textAlign: 'right' }}>{achivement.valueObteined}</Text>
                             <Text>{achivement.resultObteined}</Text>
                         </View>
-                        <Image style={{ width: 150, height: 150}} source={{ uri: achivement.awardFilename }} />
                     </View>
                 </View>
 
