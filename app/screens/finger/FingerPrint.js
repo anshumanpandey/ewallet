@@ -77,7 +77,7 @@ const FingerPrint = (props) => {
                numColumns={1}
                keyExtractor={item => item.id}
                renderItem={({ item }) =>
-                  <ItemPassCard {...item} {...props} />
+                  <ItemPassCard {...item } passportId={currentPassport || data[0].id} {...props} />
                }
             />
          </View>

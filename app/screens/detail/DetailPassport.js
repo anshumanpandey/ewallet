@@ -37,6 +37,11 @@ const DetailPassport = (props) => {
                     </View>
                 </View>
 
+                <TouchableOpacity onPress={() => NavigationService.navigate("Achievement", { passportId: achivement.PassportId })} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'space-between',alignItems: 'center',borderWidth: 1, borderColor: 'rgba(0,0,0,0.5)', padding:15, borderRadius: 5,marginTop: '5%'}}>
+                    <Text style={{ fontSize: 24, width: '60%' }}>Add new Achievement</Text>
+                    <Icon style={{ fontSize: 40 }} type="AntDesign" name="plus" />
+                </TouchableOpacity>
+
                 <View style={{ flexDirection: 'row', display: 'flex' }}>
                     <View style={[styles.feedback, achivement.Feedbacks.length == 0 && styles.emptyFeedback]}>
                         <Text style={{ fontSize: 20 }}>{achivement.Feedbacks.length} feedback</Text>

@@ -93,6 +93,7 @@ const Achievement = (props) => {
                   <>
                     <DropDownPicker
                       items={data.length ? data.map(i => ({ label: i.name, value: i.id })) : []}
+                      defaultValue={props.navigation.getParam("passportId", undefined)}
                       containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
                       style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
                       itemStyle={{ justifyContent: 'flex-start' }}
