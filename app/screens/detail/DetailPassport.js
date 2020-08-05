@@ -19,6 +19,7 @@ const DetailPassport = (props) => {
                     <View style={styles.certiView}>
                         <View>
                             <Text style={styles.certTitle}>{achivement.title}</Text>
+                            <Text>{achivement.titleObteined}</Text>
                             <Text>{achivement.year}</Text>
                         </View>
                         <Image source={Images.Hat} />
@@ -35,6 +36,7 @@ const DetailPassport = (props) => {
                             <Text style={{ fontSize: 20, textAlign: 'right' }}>{achivement.valueObteined}</Text>
                             <Text>{achivement.resultObteined}</Text>
                         </View>
+                        <Image style={{ width: 150, height: 150}} source={{ uri: achivement.awardFilename }} />
                     </View>
                 </View>
 
