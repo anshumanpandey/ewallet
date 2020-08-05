@@ -105,7 +105,7 @@ const Login = (props) => {
               style={[styles.textInputBackground, { backgroundColor: '#8BA5FA', width: '50%' }, loginReq.loading && GlobalStyles.disabledButton]}
               onPress={() => NavigationService.navigate(Screens.Register)}
             >
-              <Text style={[styles.memberText, { color: 'white', textAlign: 'center' }]}>Sign Up</Text>
+              <Text style={[styles.memberText, { color: 'white', textAlign: 'center' }]}>Register</Text>
             </TouchableOpacity>
           </View>
         </View>

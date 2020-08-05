@@ -68,7 +68,7 @@ const SignUp = (props) => {
               <>
               <View style={{ borderWidth: 0, padding: '0%', borderColor: 'rgba(0,0,0,0.2)', borderRadius: 8 }}>
                 <View style={styles.signupTitleView}>
-                  <Text style={styles.signupTitle}>Sign Up</Text>
+                  <Text style={styles.signupTitle}>Register</Text>
                 </View>
                 <View style={styles.textInputBackground}>
                   <TextInput
