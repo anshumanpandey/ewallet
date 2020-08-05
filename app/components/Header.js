@@ -32,6 +32,7 @@ const Header = (props) => {
                     </TouchableOpacity>
                 </View>
             )}
+            {props.customButton && props.customButton()}
         </View>
     );
 }

@@ -9,7 +9,7 @@ import Screens from '../constants/screens'
     <View style={styles.container}>
         <TouchableOpacity
         style={{ width: '30%', alignItems: 'center'}}
-         onPress={()=>props.onTabClick(7)}
+         onPress={()=> NavigationService.navigate("CreatePassport")}
         >
            <Image source={Images.Star}
              style={{width:16,height:16}}

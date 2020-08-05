@@ -26,6 +26,7 @@ import { Alert } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import "./helpers/AxiosBootstrap"
 import ForgotPasswordScreen from './screens/forgotPassword/ForgotPasswordScreen';
+import CreatePassport from './screens/createPassport/CreatePassport';
 
 const AppMain = () => {
 
@@ -68,6 +69,7 @@ const AppMain = () => {
     screens.EditProfile = { screen: EditProfile },
     screens.Feedback = { screen: Feedback }
     screens.Congrats = { screen: Congrats }
+    screens.CreatePassport = { screen: CreatePassport }
   }
 
   const MainStack = createStackNavigator(screens,    

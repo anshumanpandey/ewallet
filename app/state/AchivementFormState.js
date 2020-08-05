@@ -12,6 +12,7 @@ const initialState = {
     title: null,
     month: null,
     year: null,
+    passportId: null,
     company: null,
     description: null,
     titleObteined: null,

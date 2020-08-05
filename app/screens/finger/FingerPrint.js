@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { View, FlatList, TouchableOpacity, Text, Image } from 'react-native'
 import useAxios from 'axios-hooks'
-import { Data } from './data'
+import DropDownPicker from 'react-native-dropdown-picker';
 import styles from './styles';
 import Images from '../../constants/image'
 import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
@@ -37,24 +37,11 @@ const ItemPassCard = (item) => {
 
 const FingerPrint = (props) => {
 
-   const [parsedData, setParsedData] = useState([]);
+   const [currentPassport, setCurrentPassport] = useState(null);
 
    const [{ loading, data }] = useAxios({
-      url: '/achivement',
+      url: '/passport',
    })
-
-   useEffect(() => {
-      if (!Array.isArray(data)) return
-      setParsedData(data.map(i => {
-         console.log(i)
-         return {
-            id: i.id,
-            date: i.year,
-            companyName: i.company,
-            ...i
-         }
-      }))
-   }, [loading]);
 
    let body = (
       <Text style={styles.bodyText}>Loading...</Text>
@@ -62,16 +49,29 @@ const FingerPrint = (props) => {
 
    if (!loading && data.length == 0) {
       body = (
-         <Text style={styles.bodyText}>No achievements created</Text>
+         <Text style={styles.bodyText}>No passport created</Text>
       );
    }
 
-   if (!loading && parsedData.length != 0) {
+   if (!loading && data.length != 0) {
       body = (
          <View>
+            <DropDownPicker
+               items={data.length ? data.map(i => ({ label: i.name, value: i.id })) : []}
+               defaultValue={data[0].id}
+               containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
+               style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
+               itemStyle={{ justifyContent: 'flex-start' }}
+               dropDownStyle={{ backgroundColor: '#fafafa' }}
+               placeholderStyle={{ color: 'gray' }}
+               onChangeItem={item => setCurrentPassport(item.value)}
+            />
             <FlatList
+               ListEmptyComponent={
+                  <Text style={{ textAlign: 'center', marginTop: '10%' }}>No achivements create for this passport</Text>
+               }
                horizontal={false}
-               data={parsedData}
+               data={currentPassport ? data.find(e => currentPassport == e.id).Achivements : data[0].Achivements}
                style={{ paddingHorizontal: 15, height: '100%' }}
                numColumns={1}
                keyExtractor={item => item.id}
@@ -86,7 +86,22 @@ const FingerPrint = (props) => {
 
    return (
       <>
-         <Header hideIcons={true} />
+         <Header
+            hideIcons={true}
+            customButton={() => {
+               return (
+                  <>
+                     <View>
+                        <TouchableOpacity
+                           style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' } ]}
+                        >
+                           <Text style={styles.buttonText}>New passport</Text>
+                        </TouchableOpacity>
+                     </View>
+                  </>
+               );
+            }}
+         />
          {body}
       </>
    );

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, TextInput, ScrollView, Image, SafeAreaView, CheckBox, StatusBar } from 'react-native'
 import { Formik } from 'formik';
-import { Icon } from 'native-base'
+import { Icon, Spinner } from 'native-base'
 import moment from 'moment';
 import Modal from 'react-native-modal';
 import SmoothPicker from "react-native-smooth-picker";
@@ -11,6 +11,10 @@ import Screens from '../../constants/screens'
 import { useGlobalState } from '../../state/GlobalState'
 import ErrorLabel from '../../components/ErrorLabel';
 import { dispatchAchivementFormState, ACHIVEMENT_STATE_ACTIONS } from '../../state/AchivementFormState';
+import useAxios from 'axios-hooks'
+import DropDownPicker from 'react-native-dropdown-picker';
+import * as Progress from 'react-native-progress';
+import GlobalStyles from '../../constants/globalStyles';
 
 const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", " Oct", " Nov", "Dec"]
 const Item = React.memo(({ opacity, selected, vertical, fontSize, item }) => {
@@ -27,6 +31,10 @@ const Achievement = (props) => {
   const [month, setMonth] = useState('Jan');
   const [year, setYear] = useState(moment().year().toString());
   const formRef = useRef()
+
+  const [{ loading, data }] = useAxios({
+    url: '/passport',
+  })
 
   return (
     <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
@@ -59,20 +67,15 @@ const Achievement = (props) => {
               </TouchableOpacity>
             )}
           </View>
-
-          <View style={styles.profileView}>
-            <Text style={styles.profileTitle}>Welcome {profile.firstName}!</Text>
-          </View>
-          {props.title && <Text style={styles.profileTitle}>{props.title}</Text>}
-          {!props.title && <Text style={styles.profileTitle}>Let’s start your onboarding by adding one achievement:</Text>}
           <Formik
             innerRef={(r) => formRef.current = r}
-            initialValues={{ title: '', date: '', month: '', year: '', company: '' }}
+            initialValues={{ title: '', date: '', month: '', year: '', company: '', passportId: null }}
             validate={(values) => {
               const errors = {}
               if (!values.title) errors.title = "Required"
               if (!values.company) errors.company = "Required"
               if (!values.date) errors.date = "Required"
+              if (!values.passportId) errors.passportId = "Required"
 
               return errors
             }}
@@ -83,6 +86,42 @@ const Achievement = (props) => {
           >
             {({ handleChange, handleBlur, handleSubmit, setFieldValue, values, errors, touched }) => (
               <>
+                {loading && (
+                  <Spinner />
+                )}
+                {!loading && data && data.length != 0 && (
+                  <>
+                    <DropDownPicker
+                      items={data.length ? data.map(i => ({ label: i.name, value: i.id })) : []}
+                      containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
+                      style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
+                      itemStyle={{ justifyContent: 'flex-start' }}
+                      dropDownStyle={{ backgroundColor: '#fafafa' }}
+                      placeholderStyle={{ color: 'gray' }}
+                      onChangeItem={item => setFieldValue("passportId", item.value)}
+                    />
+                    {errors.passportId && <ErrorLabel text={errors.passportId} />}
+                  </>
+                )}
+
+                {!loading && data && data.length == 0 && (
+                  <>
+                    <View style={[styles.buttonView, { marginTop: 0, width: '60%', marginLeft: 'auto', marginRight: 'auto' }]}>
+                      <TouchableOpacity
+                        style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }]}
+                        onPress={() => NavigationService.navigate("CreatePassport")}
+                      >
+                        <Text style={styles.buttonText}>Create New Passport</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </>
+                )}
+
+                <View style={styles.profileView}>
+                  <Text style={styles.profileTitle}>Welcome {profile.firstName}!</Text>
+                </View>
+                {props.title && <Text style={styles.profileTitle}>{props.title}</Text>}
+                {!props.title && <Text style={styles.profileTitle}>Let’s start your onboarding by adding one achievement:</Text>}
                 <View style={styles.textInputBackground}>
                   <TextInput
                     placeholderTextColor="gray"
@@ -118,7 +157,8 @@ const Achievement = (props) => {
 
                 <View style={styles.buttonView}>
                   <TouchableOpacity
-                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }]}
+                    disabled={loading}
+                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }, loading && GlobalStyles.disabledButton]}
                     onPress={handleSubmit}
                   >
                     <Text style={styles.buttonText}>
