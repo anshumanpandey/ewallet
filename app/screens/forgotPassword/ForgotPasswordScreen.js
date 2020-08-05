@@ -14,13 +14,8 @@ import GlobalStyles from '../../constants/globalStyles.js';
 import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState.js';
 
 const ForgotPasswordScreen = (props) => {
-  const [registerReq, doRegister] = useAxios({
-    url: '/register',
-    method: 'POST'
-  }, { manual: true })
-
-  const [loginReq, doLogin] = useAxios({
-    url: '/login',
+  const [forgotPasswordReq, forgotPassword] = useAxios({
+    url: '/forgot',
     method: 'POST'
   }, { manual: true })
 
@@ -36,7 +31,14 @@ const ForgotPasswordScreen = (props) => {
 
               return errors
             }}
-            onSubmit={values => {
+            onSubmit={(values, { setFieldValue }) => {
+              const data = values
+              forgotPassword({ data })
+              .then(() => {
+                Alert.alert("", "Your new password has been send")
+                NavigationService.navigate("Login")
+                setFieldValue("email", "")
+              })
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
@@ -67,8 +69,8 @@ const ForgotPasswordScreen = (props) => {
 
                 <View style={[styles.buttonView, {marginTop: '15%'}]}>
                   <TouchableOpacity
-                    disabled={registerReq.loading}
-                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }, registerReq.loading && GlobalStyles.disabledButton]}
+                    disabled={forgotPasswordReq.loading}
+                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }, forgotPasswordReq.loading && GlobalStyles.disabledButton]}
                     onPress={handleSubmit}
                   >
                     <Text style={styles.buttonText}>Confirm</Text>

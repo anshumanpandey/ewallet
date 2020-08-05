@@ -3,8 +3,8 @@ import Axios from 'axios'
 import { getGlobalState, dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../state/GlobalState';
 
 export const axiosInstance = Axios.create({
-    //baseURL: 'http://10.0.2.2:5000/api',
-    baseURL: 'https://passport-backend.herokuapp.com/api'
+    baseURL: 'http://192.168.0.5:5000/api',
+    //baseURL: 'https://passport-backend.herokuapp.com/api'
 })
 
 axiosInstance.interceptors.request.use(
