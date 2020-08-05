@@ -8,6 +8,7 @@ import ErrorLabel from '../../components/ErrorLabel'
 import useAxios from 'axios-hooks'
 import GlobalStyles from '../../constants/globalStyles'
 import NavigationService from '../../navigation/NavigationService'
+import Screens from '../../constants/screens'
 
 const CreatePassport = (props) => {
   const [createPassportReq, createPassport] = useAxios({
@@ -39,7 +40,16 @@ const CreatePassport = (props) => {
                   Back
                 </Text>
             </TouchableOpacity>
-
+            {props.navigation.getParam("passer", false) == true && (
+              <TouchableOpacity
+                style={[styles.backView, { marginLeft: 'auto'}]}
+                onPress={() => {
+                  NavigationService.navigate(Screens.Home, { tabIdx: 5 })
+                }}
+              >
+                <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
+              </TouchableOpacity>
+            )}
           </View>
           <View style={styles.signupTitleView}>
             <Text style={styles.signupTitle}>{props.navigation.getParam("title", "Create Passport")}</Text>

@@ -11,13 +11,12 @@ import { useGlobalState } from '../state/GlobalState';
 
 const Header = (props) => {
     const [profile] = useGlobalState('profile')
-    console.log(profile.profilePic)
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
             <View style={styles.profileView}>
                 <TouchableOpacity onPress={() => NavigationService.navigate("ProfilePic")}>
-                    <Image style={{ height: 60, width: 60, borderRadius: 60/2 }} source={{ uri: profile.profilePic }} />
+                    {profile?.profilePic && <Image style={{ height: 60, width: 60, borderRadius: 60/2 }} source={{ uri: profile.profilePic }} />}
                 </TouchableOpacity>
                 <View style={{ marginLeft: 10 }}>
                     <Text style={styles.title}>{profile?.firstName} {profile?.lastName}</Text>

@@ -53,6 +53,11 @@ const ProfilePic = () => {
                 <Text style={styles.desTitle}>Profile Picture</Text>
                 <Formik
                     initialValues={{ file: '' }}
+                    validate={( values ) => {
+                        const errors = {}
+                        if (!values.file) errors.file = 'Required'
+                        return errors
+                    }}
                     onSubmit={values => {
                         const data = new FormData();
 
