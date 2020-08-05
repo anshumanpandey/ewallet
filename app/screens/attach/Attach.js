@@ -70,7 +70,7 @@ const Attach = () => {
                         if (jsonData['file']) {
                             data.append('awardFile', {
                                 uri: jsonData['file'].uri,
-                                name: jsonData['file'].fileName,
+                                name: jsonData['file'].name,
                                 type: jsonData['file'].type,
                             })
     
@@ -116,7 +116,7 @@ const Attach = () => {
                                     })
                                 }}>
                                     <View style={styles.textInputBackground}>
-                                        <Text style={{ color: values.date ? 'black' : 'gray' }}>{values.file ? values.file?.fileName : "Attach"}</Text>
+                                        <Text style={{ color: values.date ? 'black' : 'gray' }}>{values.file ? values.file?.name : "Attach"}</Text>
                                     </View>
                                 </TouchableOpacity>
                                 {errors.file && touched.file && <ErrorLabel text={errors.file} />}
