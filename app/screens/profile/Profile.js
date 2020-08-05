@@ -7,6 +7,7 @@ import screens from '../../constants/screens'
 import NavigationService from '../../navigation/NavigationService';
 import Share from 'react-native-share';
 import GlobalStyles from '../../constants/globalStyles';
+import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
 
 const ItemCard = ({ item, onTabClick }) => {
 

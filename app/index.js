@@ -28,6 +28,7 @@ import "./helpers/AxiosBootstrap"
 import ForgotPasswordScreen from './screens/forgotPassword/ForgotPasswordScreen';
 import CreatePassport from './screens/createPassport/CreatePassport';
 import PassportListing from './screens/passportListing/PassportListing';
+import ProfilePic from './screens/profilePic/ProfilePic';
 
 const AppMain = () => {
 
@@ -72,6 +73,7 @@ const AppMain = () => {
     screens.Congrats = { screen: Congrats }
     screens.CreatePassport = { screen: CreatePassport }
     screens.PassportListing = { screen: PassportListing }
+    screens.ProfilePic = { screen: ProfilePic }
   }
 
   const MainStack = createStackNavigator(screens,    
