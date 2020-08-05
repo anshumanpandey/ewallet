@@ -7,6 +7,7 @@ import styles from './styles';
 import Images from '../../constants/image'
 import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
 import Header from '../../components/Header';
+import NavigationService from '../../navigation/NavigationService';
 
 const ItemPassCard = (item) => {
    return (
@@ -94,8 +95,9 @@ const FingerPrint = (props) => {
                      <View>
                         <TouchableOpacity
                            style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' } ]}
+                           onPress={() => NavigationService.navigate("PassportListing")}
                         >
-                           <Text style={styles.buttonText}>New passport</Text>
+                           <Text style={styles.buttonText}>Passports</Text>
                         </TouchableOpacity>
                      </View>
                   </>

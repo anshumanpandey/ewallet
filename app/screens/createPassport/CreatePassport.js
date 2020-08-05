@@ -42,10 +42,10 @@ const CreatePassport = (props) => {
 
           </View>
           <View style={styles.signupTitleView}>
-            <Text style={styles.signupTitle}>Create Passport</Text>
+            <Text style={styles.signupTitle}>{props.navigation.getParam("title", "Create Passport")}</Text>
           </View>
           <Formik
-            initialValues={{ name: ''}}
+            initialValues={{ id: props.navigation.getParam("id", undefined), name: props.navigation.getParam("name", "")}}
             validate={(values) => {
               const errors = {}
               if (!values.name) errors.name = "Required"
@@ -56,7 +56,7 @@ const CreatePassport = (props) => {
               const data = values
               createPassport({ data })
               .then(() => {
-                NavigationService.navigate("Home", { tabIdx: 1 })
+                NavigationService.navigate("PassportListing")
               })
             }}
           >
