@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { View, FlatList, TouchableOpacity, Text, Image, ScrollView } from 'react-native'
 import { Icon } from 'native-base'
@@ -6,11 +6,11 @@ import styles from './styles';
 import Images from '../../constants/image'
 import { useGlobalState } from '../../state/GlobalState';
 import NavigationService from '../../navigation/NavigationService';
-
-
+import ImageView from "react-native-image-viewing";
 
 const DetailPassport = (props) => {
     const [achivement] = useGlobalState("currentAchivemenSelected")
+    const [visible, setIsVisible] = useState(false);
 
     return (
         <ScrollView contentContainerStyle={{ paddingBottom: '40%' }}>
@@ -19,7 +19,6 @@ const DetailPassport = (props) => {
                     <View style={styles.certiView}>
                         <View>
                             <Text style={styles.certTitle}>{achivement.title}</Text>
-                            {achivement.titleObteined !== "" && <Text>{achivement.titleObteined}</Text>}
                             <Text>{achivement.year}</Text>
                         </View>
                         <Image source={Images.Hat} />
@@ -28,16 +27,24 @@ const DetailPassport = (props) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                         <View>
                             <Text style={{ fontSize: 20, lineHeight: 26, color: '#120E21' }}>Additional</Text>
-                            <Image style={{ width: 150, height: 150}} source={{ uri: achivement.awardFilename }} />
+                            <TouchableOpacity onPress={() => setIsVisible(true)}>
+                                <Text style={{ padding: 10, backgroundColor: '#FBEAFF', borderRadius: 6  }}>Certification</Text>
+                            </TouchableOpacity>
+                            <ImageView
+                                images={[{ uri: achivement.awardFilename }]}
+                                imageIndex={0}
+                                visible={visible}
+                                onRequestClose={() => setIsVisible(false)}
+                            />
                         </View>
                         <View>
-                            <Text style={{ fontSize: 20, textAlign: 'right' }}>{achivement.valueObteined}</Text>
-                            <Text>{achivement.resultObteined}</Text>
+                            <Text style={{ textAlign: 'right' }}>{achivement.resultObteined}{achivement.valueObteined}</Text>
+                            {achivement.titleObteined !== "" && <Text>{achivement.titleObteined}</Text>}
                         </View>
                     </View>
                 </View>
 
-                <TouchableOpacity onPress={() => NavigationService.navigate("Achievement", { passportId: achivement.PassportId })} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'space-between',alignItems: 'center',borderWidth: 1, borderColor: 'rgba(0,0,0,0.5)', padding:15, borderRadius: 5,marginTop: '5%'}}>
+                <TouchableOpacity onPress={() => NavigationService.navigate("Achievement", { passportId: achivement.PassportId })} style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderWidth: 1, borderColor: 'rgba(0,0,0,0.5)', padding: 15, borderRadius: 5, marginTop: '5%' }}>
                     <Text style={{ fontSize: 24, width: '60%' }}>Add new Achievement</Text>
                     <Icon style={{ fontSize: 40 }} type="AntDesign" name="plus" />
                 </TouchableOpacity>
