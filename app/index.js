@@ -18,7 +18,7 @@ import Outcome from './screens/outcome/Outcome'
 import Attach from './screens/attach/Attach'
 import Experience from './screens/experience/Experience'
 import Congrats from './screens/congrats/Congrats.js';
-import Home from './screens/home /Home.js';
+import Home from './screens/home/Home.js';
 import Feedback from './screens/feedback/Feedback.js';
 import EditProfile from './screens/editprofile/EditProfile.js';
 import { useGlobalState, dispatchGlobalState, GLOBAL_STATE_ACTIONS } from './state/GlobalState';
