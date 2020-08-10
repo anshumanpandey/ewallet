@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import Header from '../../components/Header'
-import styles from './styles'
+import styles from './stylesheets'
 import Footer from '../../components/Footer'
 import Profile from '../profile/Profile'
 import Passport from '../passport/Passport'
