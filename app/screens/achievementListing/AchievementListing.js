@@ -14,10 +14,16 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer';
 
 const AchievementListing = (props) => {
+  const [selectedSchievement, setSelectedSchievement] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [{ loading, data }, refetch] = useAxios({
     url: '/achivement',
   })
+
+  const [unlinkReq, doUnlink] = useAxios({
+    url: '/achivement/unlink',
+    method: 'POST'
+ }, { manual: true })
 
   useEffect(() => {
     refetch()
@@ -50,10 +56,11 @@ const AchievementListing = (props) => {
                       <Text style={{ color: 'rgba(0,0,0,0.3)' }}>Associated to {item.Passports.length} Passports</Text>
                     </View>
                   </View>
-                  <TouchableOpacity onPress={() => {
-                    props.onTabClick(13, { item })
+                  <TouchableOpacity disabled={item.Passports.length == 0} onPress={() => {
+                    setShowModal(true)
+                    setSelectedSchievement(item)
                   }} style={[styles.detailView, { width: '15%', justifyContent: 'center', alignItems: 'center', padding: 0 }]}>
-                    <Text>View</Text>
+                    <Text style={{ opacity: item.Passports.length == 0 ? 0.5: 1 }}>View</Text>
                   </TouchableOpacity>
                 </View>
               );
@@ -73,28 +80,38 @@ const AchievementListing = (props) => {
           }}
           onSubmit={values => {
             createPassport({ data: { name: values.title } })
-            .then(() => setShowModal(false))
+              .then(() => setShowModal(false))
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <Modal onBackdropPress={() => setShowModal(false)} isVisible={showModal}>
               <View style={{ height: '50%', backgroundColor: '#8BA5FA', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
                 <View style={{ alignItems: 'center', backgroundColor: 'white', justifyContent: 'center', height: '15%', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
-                  <Text style={{ alignSelf: 'center', color: '#8BA5FA', textAlign: 'center', fontSize: 22 }}>Title</Text>
+                  <Text style={{ alignSelf: 'center', color: '#8BA5FA', textAlign: 'center', fontSize: 22 }}>Passport(s) associated</Text>
                 </View>
                 <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: "column", flex: 1, backgroundColor: 'white' }}>
-                  <View style={[styles.textInputBackground, { width: '90%', backgroundColor: "rgba(119, 194, 241, 0.1)" }]}>
-                    <TextInput
-                      placeholderTextColor="gray"
-                      style={styles.textInput}
-                      placeholder="Title"
-                      autoCompleteType={'name'}
-                      onChangeText={handleChange('title')}
-                      onBlur={handleBlur('title')}
-                      value={values.title}
-                    />
-                  </View>
-                  {errors.title && touched.title && <ErrorLabel text={errors.title} />}
+                  <FlatList
+                    contentContainerStyle={{ width: '100%' }}
+                    style={{ width: '90%' }}
+                    data={selectedSchievement.Passports}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => {
+                      return (
+                        <View style={{ flexDirection: 'row'}}>
+                          <View style={{ width: '90%', padding: '5%', backgroundColor: "rgba(119, 194, 241, 0.1)" }}>
+                            <Text style={{ width: '90%', color: "#99879D" }}>{item.name}</Text>
+                          </View>
+                          <TouchableOpacity onPress={() => {
+                            const data = { achivementId: selectedSchievement.id, passportId: item.id }
+                            doUnlink({ data })
+                            .then(() => refetch())
+                          }} style={{ backgroundColor: '#FF0F0F', width: '10%', justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={{ color: 'white', fontSize: 18, borderRadius: 5}}>-</Text>
+                          </TouchableOpacity>
+                        </View>
+                      );
+                    }}
+                  />
                 </View>
                 <View style={{ height: '15%' }}>
                   <TouchableOpacity onPress={handleSubmit}>
