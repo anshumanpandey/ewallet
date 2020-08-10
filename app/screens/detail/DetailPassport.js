@@ -19,7 +19,8 @@ const DetailPassport = (props) => {
                     <View style={styles.certiView}>
                         <View>
                             <Text style={styles.certTitle}>{achivement.title}</Text>
-                            <Text>{achivement.year}</Text>
+                            <Text>{achivement.company}</Text>
+                            <Text>{achivement.month}/{achivement.year}</Text>
                         </View>
                         <Image source={Images.Hat} />
                     </View>
