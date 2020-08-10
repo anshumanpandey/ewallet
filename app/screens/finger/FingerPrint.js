@@ -106,14 +106,14 @@ const FingerPrint = (props) => {
          />
          {body}
          <Modal onBackdropPress={() => setShow(false)} isVisible={show}>
-            <View style={{ height: '50%', backgroundColor: '#8BA5FA', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
-               <View style={{ alignItems: 'center', backgroundColor: 'white', justifyContent: 'center', height: '15%', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
+            <View style={{ height: '30%', backgroundColor: '#8BA5FA', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
+               <View style={{ alignItems: 'center', backgroundColor: 'white', justifyContent: 'center', height: '25%', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
                   <Text style={{ alignSelf: 'center', color: '#8BA5FA', textAlign: 'center', fontSize: 22 }}>Select</Text>
                </View>
-               <View style={{ height: 100, justifyContent: 'center', alignItems: 'center', paddingTop: -150, flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
+               <View style={{ height: 70, justifyContent: 'center', alignItems: 'center', paddingTop: -100, flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
                   <DropDownPicker
                      items={data && data.length !== 0 ? data.map(i => ({ label: i.name, value: i.id, ...i })) : []}
-                     containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
+                     containerStyle={{ height: Dimension.px50, borderRadius: 8, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
                      style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
                      itemStyle={{ justifyContent: 'flex-start' }}
                      dropDownStyle={{ backgroundColor: '#fafafa' }}
@@ -121,7 +121,7 @@ const FingerPrint = (props) => {
                      onChangeItem={item => setCurrentPassport(item)}
                   />
                </View>
-               <View style={{ height: '15%' }}>
+               <View style={{ height: '25%' }}>
                   <TouchableOpacity onPress={() => setShow(false)}>
                      <View style={{ alignItems: 'center', backgroundColor: '#8BA5FA', justifyContent: 'center', height: '100%', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
                         <Text style={{ alignSelf: 'center', color: 'white', textAlign: 'center', fontSize: 22 }}>Done</Text>
