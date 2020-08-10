@@ -20,8 +20,8 @@ const Header = (props) => {
                 </TouchableOpacity>
                 <View style={{ marginLeft: 10 }}>
                     <Text style={styles.title}>{profile?.firstName} {profile?.lastName}</Text>
-                    <Text style={styles.jobTitle}>{profile?.companyTitle}</Text>
-                    <Text style={styles.jobTitle}>{profile?.companyName}</Text>
+                    {profile?.companyTitle && <Text style={styles.jobTitle}>{profile?.companyTitle}</Text>}
+                    {profile?.companyName && <Text style={styles.jobTitle}>{profile?.companyName}</Text>}
                 </View>
             </View>
 
@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
     },
     profileView: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     title: {
         fontSize: 25,

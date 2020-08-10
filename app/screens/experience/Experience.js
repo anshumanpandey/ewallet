@@ -74,6 +74,7 @@ const Experience = () => {
                         <>
                             <View style={{ marginTop: 40 }}>
                                 <DropDownPicker
+                                    placeholder="Select Achievement"
                                     items={achivementReq.data.length ? achivementReq.data.map(i => ({ label: i.title, value: i.id })): []}
                                     defaultValue={values.achivementId}
                                     containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, }}
@@ -117,6 +118,7 @@ const Experience = () => {
                                         { label: 'Client', value: 'Client' },
                                         { label: 'Manager', value: 'Manager' },
                                     ]}
+                                    placeholder="Select Relationship"
                                     defaultValue={values.collegueRole}
                                     containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, }}
                                     style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}

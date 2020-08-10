@@ -75,7 +75,7 @@ const ProfilePic = () => {
                         })
                             .then((r) => {
                                 console.log(r.data)
-                                //NavigationService.navigate(Screens.Congrats)
+                                NavigationService.navigate(Screens.Home)
                             })
                     }}
                 >
