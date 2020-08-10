@@ -7,6 +7,7 @@ export const ACHIVEMENT_STATE_ACTIONS = {
     STEP_THREE: 'STEP_THREE',
     STEP_FOUR: 'STEP_FOUR',
     STEP_FIVE: 'STEP_FIVE',
+    STEP_SIX: 'STEP_SIX',
 }
 
 const initialState = {
@@ -33,6 +34,7 @@ const reducer = (state, action) => {
         case ACHIVEMENT_STATE_ACTIONS.STEP_THREE: return { ...state, ...action.state };
         case ACHIVEMENT_STATE_ACTIONS.STEP_FOUR: return { ...state, ...action.state };
         case ACHIVEMENT_STATE_ACTIONS.STEP_FIVE: return { ...state, ...action.state };
+        case ACHIVEMENT_STATE_ACTIONS.STEP_SIX: return { ...state, ...action.state };
         default: return state;
     }
 };

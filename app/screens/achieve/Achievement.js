@@ -32,10 +32,6 @@ const Achievement = (props) => {
   const [year, setYear] = useState(moment().year().toString());
   const formRef = useRef()
 
-  const [{ loading, data }] = useAxios({
-    url: '/passport',
-  })
-
   return (
     <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
       <ScrollView keyboardShouldPersistTaps={"handled"} style={styles.container}>
@@ -69,61 +65,23 @@ const Achievement = (props) => {
           </View>
           <Formik
             innerRef={(r) => formRef.current = r}
-            initialValues={{ title: '', date: '', month: '', year: '', company: '', passportId: null }}
+            initialValues={{ title: '', date: '', month: '', year: '', company: ''}}
             validate={(values) => {
               const errors = {}
               if (!values.title) errors.title = "Required"
               if (!values.company) errors.company = "Required"
               if (!values.date) errors.date = "Required"
 
-              if (props?.navigation?.getParam("hidePicker", false) !== true) {
-                if (!values.passportId) errors.passportId = "Required"
-              }
 
               return errors
             }}
             onSubmit={values => {
-              if (props?.navigation?.getParam("hidePicker", false) == true) {
-                delete values.passportId
-              }
               dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.STEP_ONE, state: values })
               NavigationService.navigate(Screens.Description)
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, setFieldValue, values, errors, touched }) => (
               <>
-                {props?.navigation?.getParam("hidePicker", false) !== true && loading && (
-                  <Spinner />
-                )}
-                {props?.navigation?.getParam("hidePicker", false) !== true && !loading && data && data.length != 0 && (
-                  <>
-                    <DropDownPicker
-                      items={data.length ? data.map(i => ({ label: i.name, value: i.id })) : []}
-                      defaultValue={props?.navigation?.getParam("passportId", undefined)}
-                      containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
-                      style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
-                      itemStyle={{ justifyContent: 'flex-start' }}
-                      dropDownStyle={{ backgroundColor: '#fafafa' }}
-                      placeholderStyle={{ color: 'gray' }}
-                      onChangeItem={item => setFieldValue("passportId", item.value)}
-                    />
-                    {errors.passportId && <ErrorLabel text={errors.passportId} />}
-                  </>
-                )}
-
-                {!loading && data && data.length == 0 && (
-                  <>
-                    <View style={[styles.buttonView, { marginTop: 0, width: '60%', marginLeft: 'auto', marginRight: 'auto' }]}>
-                      <TouchableOpacity
-                        style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }]}
-                        onPress={() => NavigationService.navigate("CreatePassport")}
-                      >
-                        <Text style={styles.buttonText}>Create New Passport</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </>
-                )}
-
                 <View style={styles.profileView}>
                   <Text style={styles.profileTitle}>Welcome {profile.firstName}!</Text>
                 </View>
@@ -164,8 +122,7 @@ const Achievement = (props) => {
 
                 <View style={styles.buttonView}>
                   <TouchableOpacity
-                    disabled={loading}
-                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }, loading && GlobalStyles.disabledButton]}
+                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }]}
                     onPress={handleSubmit}
                   >
                     <Text style={styles.buttonText}>

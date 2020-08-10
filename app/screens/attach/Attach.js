@@ -59,6 +59,8 @@ const Attach = () => {
                     initialValues={{ file: '' }}
                     onSubmit={values => {
                         dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.STEP_FOUR, state: values })
+                        NavigationService.navigate("SinglePassportLink")
+                        return
                         const jsonData = {
                             ...currentFormState,
                             month: moment(currentFormState.date).format("MM"),
