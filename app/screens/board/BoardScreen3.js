@@ -106,28 +106,28 @@ export default function BoardScreen3() {
        </View>
        <View style={{width:'100%',alignItems:'center',flexDirection:'row', flex: 1}}>
           <View>
-             <Text style={{fontSize:16,fontWeight:'500',color:'#120E21'}}>Skills acquired</Text>
+             <Text style={{fontSize:16,fontWeight:'500', fontSize: 14, paddingBottom: '3%', borderRadius: 4,color:'rgba(18, 14, 33, 0.54);'}}>Skills acquired</Text>
              <View style={styles.detailView}> 
              <TouchableHighlight
-              style={{padding:10,borderColor:'#99879D',borderWidth:1,borderRadius:4}}
+              style={{padding:5, paddingHorizontal: 20,borderColor:'#99879D',borderWidth:1,borderRadius:4}}
             >
-                <Text style={{color:'#3DC35B'}}>OWNERSHIP</Text>
+                <Text style={{ fontSize: 10,color:'#3DC35B'}}>OWNERSHIP</Text>
             </TouchableHighlight>
             <TouchableHighlight
-              style={{padding:10,borderColor:'#99879D',borderWidth:1,borderRadius:4,marginLeft:10}}
+              style={{padding:5, paddingHorizontal: 20,borderColor:'#99879D',borderWidth:1,borderRadius:4,marginLeft:10}}
             >
-                <Text style={{color:'#3DC35B'}}>DRIVE</Text>
+                <Text style={{ fontSize: 10,color:'#3DC35B'}}>DRIVE</Text>
             </TouchableHighlight>
              </View>
            
           </View>
           <View style={{marginLeft:20}}>
-             <Text style={{fontSize:16,fontWeight:'500',color:'#120E21'}}>In development</Text>
+             <Text style={{fontSize:16,fontWeight:'500', fontSize: 14, paddingBottom: '3%', borderRadius: 4,color:'rgba(18, 14, 33, 0.54);'}}>In development</Text>
              <View style={styles.detailView}> 
             <TouchableHighlight
-              style={{padding:10,borderColor:'#99879D',borderWidth:1,borderRadius:4}}
+              style={{padding:5, paddingHorizontal: 20,borderColor:'#99879D',borderWidth:1,borderRadius:4}}
             >
-              <Text style={{color:'#83A0F4'}}>EXECUTION</Text>
+              <Text style={{ fontSize: 10,color:'#83A0F4'}}>EXECUTION</Text>
             </TouchableHighlight>
              </View>
            

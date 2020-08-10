@@ -51,9 +51,9 @@ const styles = StyleSheet.create({
 export default function BoardScreen1() {
   const data=[
     "Build your life,not a resume.",
-    "Enhanced your achievements.",
-    "Leverage your network feedback",
-    "Keep progressing."
+    "Create different profiles.",
+    "Enhance your achievements",
+    "Share."
   ]
   return (
     <ImageBackground

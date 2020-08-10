@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
      fontFamily:'RedHatDisplay-Bold'
    },
    desContainer:{
-      marginTop:Dimensions.px45,
+      marginTop:Dimensions.px25,
       backgroundColor:'#fff',
       width:'90%',
       borderRadius:10,
@@ -87,21 +87,19 @@ export default function BoardScreen2() {
     <View
      style={styles.viewContainer}
     >
-        <Text
-         style={styles.title}
-        >
-         Build your life around your meaningful achievements:
+        <Text style={styles.title}>
+         Enrich your Passports with meaningful achievements:
         </Text>
     </View>
 
-    <View 
-     style={styles.desContainer}
-    >
+    <View style={styles.desContainer}>
       <View style={styles.detailView}>
          <Text style={styles.detailText}>Certified PMP Project Manager</Text>
          <Image source={Images.Hat}/>     
        </View>
-       <Text style={styles.desText}>The PMP is the gold standard of project management certification. Recognized by organizations worldwide. Meet the demands of projects and employers across the globe.</Text>
+       <Text style={styles.desText}>
+        The PMP is the gold standard of project management certification. Recognized by organizations worldwide. Meet the demands of projects and employers across the globe.
+       </Text>
        <View style={[styles.detailView,{marginTop:10}]}>
           <View>
              <Text style={{fontSize:20,color:'#120E21'}}>Additionnal</Text>
