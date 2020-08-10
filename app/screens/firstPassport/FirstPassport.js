@@ -82,7 +82,7 @@ const FirstPassport = (props) => {
               createPassport({ data: { name: values.title } })
                 .then((r) => {
                   console.log(r.data)
-                  dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.STEP_ZERO, state: {passportId: r.data.id} })
+                  dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.STEP_ZERO, state: {passportId: r.data.id, firstTime: props?.navigation?.getParam("firstTime") || false} })
                   NavigationService.navigate(Screens.Achievement, { title: "You can now create your first achievement or do it later:", hidePicker: true })
                 })
             }}

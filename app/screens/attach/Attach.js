@@ -58,45 +58,47 @@ const Attach = () => {
                 <Formik
                     initialValues={{ file: '' }}
                     onSubmit={values => {
-                        dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.STEP_FOUR, state: values })
-                        NavigationService.navigate("SinglePassportLink")
-                        return
-                        const jsonData = {
-                            ...currentFormState,
-                            month: moment(currentFormState.date).format("MM"),
-                            year: moment(currentFormState.date).format("YYYY"),
-                            ...values
-                        }
-                        const data = new FormData();
-
-                        if (jsonData['file']) {
-                            data.append('awardFile', {
-                                uri: jsonData['file'].uri,
-                                name: jsonData['file'].name,
-                                type: jsonData['file'].type,
-                            })
-    
-                            delete jsonData.file;
-                        }
-
-                        delete jsonData.date;
-
-                        Object.keys(jsonData).forEach(i => {
-                            console.log(i)
-                            data.append(i, jsonData[i])
-                        })
-
-
-                        doCreate({
-                            data,
-                            headers: {
-                                "content-type": "multipart/form-data"
+                        if (currentFormState.firstTime == false) {
+                            dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.STEP_FOUR, state: values })
+                            NavigationService.navigate("SinglePassportLink")
+                        } else {
+                            const jsonData = {
+                                ...currentFormState,
+                                month: moment(currentFormState.date).format("MM"),
+                                year: moment(currentFormState.date).format("YYYY"),
+                                ...values
                             }
-                        })
-                            .then((r) => {
-                                console.log(r.data)
-                                NavigationService.navigate(Screens.Congrats)
+                            const data = new FormData();
+
+                            if (jsonData['file']) {
+                                data.append('awardFile', {
+                                    uri: jsonData['file'].uri,
+                                    name: jsonData['file'].name,
+                                    type: jsonData['file'].type,
+                                })
+
+                                delete jsonData.file;
+                            }
+
+                            delete jsonData.date;
+
+                            Object.keys(jsonData).forEach(i => {
+                                console.log(i)
+                                data.append(i, jsonData[i])
                             })
+
+
+                            doCreate({
+                                data,
+                                headers: {
+                                    "content-type": "multipart/form-data"
+                                }
+                            })
+                                .then((r) => {
+                                    console.log(r.data)
+                                    NavigationService.navigate(Screens.Congrats)
+                                })
+                        }
                     }}
                 >
                     {({ setFieldValue, handleBlur, handleSubmit, values, errors, touched }) => (
@@ -106,16 +108,16 @@ const Attach = () => {
                                     DocumentPicker.pick({
                                         type: [DocumentPicker.types.images],
                                     })
-                                    .then(response => {
-                                        setFieldValue('file', response)
-                                    })
-                                    .catch(err => {
-                                        if (DocumentPicker.isCancel(err)) {
-                                            // User cancelled the picker, exit any dialogs or menus and move on
-                                          } else {
-                                            throw err;
-                                          }
-                                    })
+                                        .then(response => {
+                                            setFieldValue('file', response)
+                                        })
+                                        .catch(err => {
+                                            if (DocumentPicker.isCancel(err)) {
+                                                // User cancelled the picker, exit any dialogs or menus and move on
+                                            } else {
+                                                throw err;
+                                            }
+                                        })
                                 }}>
                                     <View style={styles.textInputBackground}>
                                         <Text style={{ color: values.date ? 'black' : 'gray' }}>{values.file ? values.file?.name : "Attach"}</Text>

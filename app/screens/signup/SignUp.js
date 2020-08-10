@@ -60,7 +60,7 @@ const SignUp = (props) => {
                   console.log(r.data)
                   dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.TOKEN, state: r.data.token })
                   dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.PROFILE, state: r.data })
-                  NavigationService.navigate('FirstPassport', { passer: true })
+                  NavigationService.navigate('FirstPassport', { passer: true, firstTime: true })
                 })
             }}
           >

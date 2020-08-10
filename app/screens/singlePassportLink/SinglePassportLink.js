@@ -111,6 +111,7 @@ const SinglePassportLink = (props) => {
                 .then((r) => {
                   console.log(r.data)
                   NavigationService.navigate(Screens.Congrats)
+                  dispatchAchivementFormState(ACHIVEMENT_STATE_ACTIONS.RESET)
                 })
             }}
           >

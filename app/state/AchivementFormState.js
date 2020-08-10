@@ -8,6 +8,7 @@ export const ACHIVEMENT_STATE_ACTIONS = {
     STEP_FOUR: 'STEP_FOUR',
     STEP_FIVE: 'STEP_FIVE',
     STEP_SIX: 'STEP_SIX',
+    RESET: 'RESET',
 }
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
     collegueName: null,
     colleguePhonenumber: null,
     collegueRole: null,
+    firstTime: false,
 };
 
 const reducer = (state, action) => {
@@ -35,6 +37,7 @@ const reducer = (state, action) => {
         case ACHIVEMENT_STATE_ACTIONS.STEP_FOUR: return { ...state, ...action.state };
         case ACHIVEMENT_STATE_ACTIONS.STEP_FIVE: return { ...state, ...action.state };
         case ACHIVEMENT_STATE_ACTIONS.STEP_SIX: return { ...state, ...action.state };
+        case ACHIVEMENT_STATE_ACTIONS.RESET: return { ...initialState };
         default: return state;
     }
 };
