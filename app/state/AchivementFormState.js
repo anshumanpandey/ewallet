@@ -1,6 +1,7 @@
 import { createStore } from 'react-hooks-global-state';
 
 export const ACHIVEMENT_STATE_ACTIONS = {
+    STEP_ZERO: 'STEP_ZERO',
     STEP_ONE: 'STEP_ONE',
     STEP_TWO: 'STEP_TWO',
     STEP_THREE: 'STEP_THREE',
@@ -26,6 +27,7 @@ const initialState = {
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case ACHIVEMENT_STATE_ACTIONS.STEP_ZERO: return { ...state, ...action.state };
         case ACHIVEMENT_STATE_ACTIONS.STEP_ONE: return { ...state, ...action.state };
         case ACHIVEMENT_STATE_ACTIONS.STEP_TWO: return { ...state, ...action.state };
         case ACHIVEMENT_STATE_ACTIONS.STEP_THREE: return { ...state, ...action.state };

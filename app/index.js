@@ -30,6 +30,7 @@ import CreatePassport from './screens/createPassport/CreatePassport';
 import PassportListing from './screens/passportListing/PassportListing';
 import ProfilePic from './screens/profilePic/ProfilePic';
 import PassportDetails from './screens/passportDetails/PassportDetails';
+import FirstPassport from './screens/firstPassport/FirstPassport';
 
 const AppMain = () => {
 
@@ -76,6 +77,7 @@ const AppMain = () => {
     screens.PassportListing = { screen: PassportListing }
     screens.PassportDetails = { screen: PassportDetails }
     screens.ProfilePic = { screen: ProfilePic }
+    screens.FirstPassport = { screen: FirstPassport }
   }
 
   const MainStack = createStackNavigator(screens,    

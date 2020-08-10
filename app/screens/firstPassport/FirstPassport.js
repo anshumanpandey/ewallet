@@ -15,6 +15,7 @@ import useAxios from 'axios-hooks'
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as Progress from 'react-native-progress';
 import GlobalStyles from '../../constants/globalStyles';
+import Images from '../../constants/image';
 
 const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", " Oct", " Nov", "Dec"]
 const Item = React.memo(({ opacity, selected, vertical, fontSize, item }) => {
@@ -25,16 +26,17 @@ const Item = React.memo(({ opacity, selected, vertical, fontSize, item }) => {
   );
 });
 
-const Achievement = (props) => {
+const FirstPassport = (props) => {
   const [profile] = useGlobalState('profile')
   const [show, setShow] = useState(false);
   const [month, setMonth] = useState('Jan');
   const [year, setYear] = useState(moment().year().toString());
   const formRef = useRef()
 
-  const [{ loading, data }] = useAxios({
-    url: '/passport',
-  })
+  const [createPassportReq, createPassport] = useAxios({
+    url: '/passport/create',
+    method: 'POST'
+  }, { manual: true })
 
   return (
     <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
@@ -56,84 +58,47 @@ const Achievement = (props) => {
               <Icon type="Ionicons" name="ios-arrow-round-back" />
               <Text style={styles.backTitle}> Back</Text>
             </TouchableOpacity>
-              {props?.navigation?.getParam("passer", false) == true && (
-                <TouchableOpacity
-                  style={[styles.backView, { marginLeft: 'auto' }]}
-                  onPress={() => {
-                    NavigationService.navigate(Screens.Home, { tabIdx: 5 })
-                  }}
-                >
-                  <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
-                </TouchableOpacity>
-              )}
+            {props?.navigation?.getParam("passer", false) == true && (
+              <TouchableOpacity
+                style={[styles.backView, { marginLeft: 'auto' }]}
+                onPress={() => {
+                  NavigationService.navigate(Screens.Home, { tabIdx: 5 })
+                }}
+              >
+                <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
+              </TouchableOpacity>
+            )}
           </View>
           <Formik
             innerRef={(r) => formRef.current = r}
-            initialValues={{ title: '', date: '', month: '', year: '', company: '', passportId: null }}
+            initialValues={{ title: '' }}
             validate={(values) => {
               const errors = {}
               if (!values.title) errors.title = "Required"
-              if (!values.company) errors.company = "Required"
-              if (!values.date) errors.date = "Required"
-
-              if (props?.navigation?.getParam("hidePicker", false) !== true) {
-                if (!values.passportId) errors.passportId = "Required"
-              }
 
               return errors
             }}
             onSubmit={values => {
-              if (props?.navigation?.getParam("hidePicker", false) == true) {
-                delete values.passportId
-              }
-              dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.STEP_ONE, state: values })
-              NavigationService.navigate(Screens.Description)
+              createPassport({ data: { name: values.title } })
+                .then((r) => {
+                  console.log(r.data)
+                  dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.STEP_ZERO, state: {passportId: r.data.id} })
+                  NavigationService.navigate(Screens.Achievement, { title: "You can now create your first achievement or do it later:", hidePicker: true })
+                })
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, setFieldValue, values, errors, touched }) => (
               <>
-                {props?.navigation?.getParam("hidePicker", false) !== true && loading && (
-                  <Spinner />
-                )}
-                {props?.navigation?.getParam("hidePicker", false) !== true && !loading && data && data.length != 0 && (
-                  <>
-                    <DropDownPicker
-                      items={data.length ? data.map(i => ({ label: i.name, value: i.id })) : []}
-                      defaultValue={props?.navigation?.getParam("passportId", undefined)}
-                      containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
-                      style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
-                      itemStyle={{ justifyContent: 'flex-start' }}
-                      dropDownStyle={{ backgroundColor: '#fafafa' }}
-                      placeholderStyle={{ color: 'gray' }}
-                      onChangeItem={item => setFieldValue("passportId", item.value)}
-                    />
-                    {errors.passportId && <ErrorLabel text={errors.passportId} />}
-                  </>
-                )}
-
-                {!loading && data && data.length == 0 && (
-                  <>
-                    <View style={[styles.buttonView, { marginTop: 0, width: '60%', marginLeft: 'auto', marginRight: 'auto' }]}>
-                      <TouchableOpacity
-                        style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }]}
-                        onPress={() => NavigationService.navigate("CreatePassport")}
-                      >
-                        <Text style={styles.buttonText}>Create New Passport</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </>
-                )}
 
                 <View style={styles.profileView}>
-                  <Text style={styles.profileTitle}>Welcome {profile.firstName}!</Text>
+                  <Text style={styles.profileTitle}>Let’s start your onboarding by creating a Passport.</Text>
                 </View>
-                {props.title && <Text style={styles.profileTitle}>{props.title}</Text>}
-                {!props.title && <Text style={styles.profileTitle}>Let’s start your onboarding by adding one achievement:</Text>}
-                <View style={styles.textInputBackground}>
+                <Text style={[styles.profileTitle, { justifyContent: 'flex-start', textAlign: 'left' }]}>Title:</Text>
+                <View style={[styles.textInputBackground]}>
                   <TextInput
                     placeholderTextColor="gray"
                     style={styles.textInput}
-                    placeholder="Title"
+                    placeholder="Examples: “Account Manager”, “Digital Nomad”"
                     autoCompleteType={'name'}
                     onChangeText={handleChange('title')}
                     onBlur={handleBlur('title')}
@@ -142,30 +107,18 @@ const Achievement = (props) => {
                 </View>
                 {errors.title && touched.title && <ErrorLabel text={errors.title} />}
 
-                <TouchableOpacity onPress={() => setShow(true)}>
-                  <View style={styles.textInputBackground}>
-                    <Text style={{ color: values.date ? 'black' : 'gray' }}>{values.date ? `${moment(values.date).format('MM')}/${moment(values.date).format('YYYY')}` : "Month/year"}</Text>
-                  </View>
-                </TouchableOpacity>
-                {errors.date && touched.date && <ErrorLabel text={errors.date} />}
-
-                <View style={styles.textInputBackground}>
-                  <TextInput
-                    placeholderTextColor="gray"
-                    style={styles.textInput}
-                    placeholder="Company/Organisation"
-                    autoCompleteType={'name'}
-                    onChangeText={handleChange('company')}
-                    onBlur={handleBlur('company')}
-                    value={values.company}
-                  />
+                <View style={[styles.tipView, { marginTop: '10%'}]}>
+                  <Image source={Images.Lamp} style={{ position: 'absolute', top: -30, left: 0 }} />
+                  <Text style={{ color: "#99879D", fontSize: 16 }}>Tips</Text>
                 </View>
-                {errors.company && touched.company && <ErrorLabel text={errors.company} />}
+                <Text style={styles.context}>
+                  You can create up to 5 different Passports and arrange your achievements associated. 
+                </Text>
 
                 <View style={styles.buttonView}>
                   <TouchableOpacity
-                    disabled={loading}
-                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }, loading && GlobalStyles.disabledButton]}
+                    disabled={createPassportReq.loading}
+                    style={[styles.textInputBackground, { backgroundColor: '#8BA5FA' }, createPassportReq.loading && GlobalStyles.disabledButton]}
                     onPress={handleSubmit}
                   >
                     <Text style={styles.buttonText}>
@@ -228,4 +181,4 @@ const Achievement = (props) => {
   );
 }
 
-export default Achievement;
+export default FirstPassport;
