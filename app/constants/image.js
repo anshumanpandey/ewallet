@@ -23,7 +23,8 @@ const Images ={
     Icon4:require('../assets/images/icon4.png'),
     Icon5:require('../assets/images/icon5.png'),
     Icon6:require('../assets/images/icon6.png'),
-    Setting:require('../assets/images/setting.png')
+    Setting:require('../assets/images/setting.png'),
+    Hierarchy:require('../assets/images/hierarchy.png')
 
 }
 
