@@ -12,8 +12,10 @@ import { FlatList } from 'react-native-gesture-handler'
 import Images from '../../constants/image'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer';
+import { useGlobalState, dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
 
 const AchievementListing = (props) => {
+  const [achivement, setAchivement] = useGlobalState("currentAchivemenSelected")
   const [selectedSchievement, setSelectedSchievement] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [{ loading, data }, refetch] = useAxios({
@@ -50,12 +52,15 @@ const AchievementListing = (props) => {
             renderItem={({ item }) => {
               return (
                 <View style={{ flexDirection: 'row' }}>
-                  <View style={[styles.detailView, { flexDirection: 'column', width: '85%' }]}>
+                  <TouchableOpacity onPress={() => {
+                    dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.ACHIVEMEN_SELECTED, state: item })
+                    props.onTabClick(3)
+                  }} style={[styles.detailView, { flexDirection: 'column', width: '85%' }]}>
                     <Text style={{ fontSize: 24 }}>{item.title}</Text>
                     <View>
                       <Text style={{ color: 'rgba(0,0,0,0.3)' }}>Associated to {item.Passports.length} Passports</Text>
                     </View>
-                  </View>
+                  </TouchableOpacity>
                   <TouchableOpacity disabled={item.Passports.length == 0} onPress={() => {
                     setShowModal(true)
                     setSelectedSchievement(item)
