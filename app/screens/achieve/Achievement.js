@@ -56,6 +56,16 @@ const Achievement = (props) => {
               <Icon type="Ionicons" name="ios-arrow-round-back" />
               <Text style={styles.backTitle}> Back</Text>
             </TouchableOpacity>
+              {props?.navigation?.getParam("passer", false) == true && (
+                <TouchableOpacity
+                  style={[styles.backView, { marginLeft: 'auto' }]}
+                  onPress={() => {
+                    NavigationService.navigate(Screens.Home, { tabIdx: 5 })
+                  }}
+                >
+                  <Text style={{ fontSize: 12, lineHeight: 14, color: '#9F8EA3' }}>Passer</Text>
+                </TouchableOpacity>
+              )}
           </View>
           <Formik
             innerRef={(r) => formRef.current = r}

@@ -16,7 +16,7 @@ const Header = (props) => {
             <StatusBar hidden={true} />
             <View style={styles.profileView}>
                 <TouchableOpacity onPress={() => NavigationService.navigate("ProfilePic")}>
-                    {profile?.profilePic && <Image style={{ height: 60, width: 60, borderRadius: 60/2 }} source={{ uri: profile.profilePic }} />}
+                    <Image style={{ height: 60, width: 60, borderRadius: 60/2 }} source={profile?.profilePic ? { uri: profile.profilePic }: Images.Avatar} />
                 </TouchableOpacity>
                 <View style={{ marginLeft: 10 }}>
                     <Text style={styles.title}>{profile?.firstName} {profile?.lastName}</Text>

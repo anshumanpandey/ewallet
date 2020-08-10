@@ -8,15 +8,8 @@ import Images from '../../constants/image'
 import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
 import Header from '../../components/Header';
 import NavigationService from '../../navigation/NavigationService';
+import { Icon } from 'native-base';
 import Modal from 'react-native-modal';
-
-const Item = React.memo(({ opacity, selected, vertical, fontSize, item }) => {
-   return (
-      <View style={{ height: 40 }}>
-         <Text style={{ color: selected ? '#8BA5FA' : 'black', borderColor: 'gray', paddingHorizontal: '15%', paddingVertical: '2%', textAlign: 'center', borderTopWidth: 1, borderColor: 'rgba(0,0,0,0.2)', fontSize: 22 }}>{item.name}</Text>
-      </View>
-   );
-});
 
 const ItemPassCard = (item) => {
    return (
@@ -45,55 +38,67 @@ const ItemPassCard = (item) => {
    )
 }
 
-const FingerPrint = (props) => {
+const PassportDetails = (props) => {
+   const [achievementToAttach, setAchievementToAttach] = useState(null);
    const [show, setShow] = useState(false);
    const [currentPassport, setCurrentPassport] = useState(null);
 
-   const [{ loading, data }] = useAxios({
+   const [{ loading, data }, fetchPassport] = useAxios({
       url: '/passport',
    })
+
+   const [achivementReq] = useAxios({
+      url: '/achivement',
+   })
+
+   const [linkReq, doLink] = useAxios({
+      url: '/achivement/link',
+      method: 'POST'
+   }, { manual: true })
 
    let body = (
       <Text style={styles.bodyText}>Loading...</Text>
    );
 
-   if (!loading && data && data.length == 0) {
+   if (!loading && data.length == 0) {
       body = (
          <Text style={styles.bodyText}>No passport created</Text>
       );
    }
 
-   if (!loading && data && data.length != 0) {
+   if (!loading && data.length != 0) {
       body = (
          <View style={{ padding: 15, flexGrow: 1 }}>
+            <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => props.onTabClick(12)}>
+               <Icon style={{ fontSize: 14 }} type="AntDesign" name="arrowleft" />
+               <Text>Back</Text>
+            </TouchableOpacity>
+            <View style={{ marginTop: '3%', borderColor: 'rgba(153, 135, 157, 0.24)', borderWidth: 1, backgroundColor: '#FFFFFF', borderRadius: 5 }}>
+               <Text style={{ fontSize: 24, padding: '5%' }}>{props?.item?.name}</Text>
+            </View>
             <FlatList
-               contentContainerStyle={{ flex: 0.5 }}
+               contentContainerStyle={{ marginTop: '5%'}}
                ListEmptyComponent={
                   <Text style={{ textAlign: 'center', marginTop: '10%' }}>No achivements create for this passport</Text>
                }
                horizontal={false}
-               data={currentPassport ? data.find(e => currentPassport?.id == e.id).Achivements : data[0].Achivements}
-               style={{ paddingHorizontal: 15, height: '100%' }}
+               data={currentPassport ? data.find(e => currentPassport == e.id).Achivements : data[0].Achivements}
                numColumns={1}
                keyExtractor={item => item.id}
                renderItem={({ item }) =>
                   <ItemPassCard {...item} passportId={currentPassport || data[0].id} {...props} />
                }
-               ListFooterComponent={
-                  <TouchableOpacity onPress={() => {
-                     setShow(true)
-                  }}>
-                     <View style={styles.detailView}>
-                        <View>
-                           <Text style={styles.detailTitle}>{(data.find(e => currentPassport == e.id) || data[0]).name}</Text>
-                           <Text style={styles.detailTitle}>Switch Passport</Text>
-                        </View>
-                        <Image source={Images.Personal} />
-                     </View>
-                  </TouchableOpacity>
-               }
-               ListFooterComponentStyle={{ marginTop: 'auto' }}
             />
+            <TouchableOpacity style={{ marginTop: 'auto'}} onPress={() => {
+               setShow(true)
+            }}>
+               <View style={styles.detailView}>
+                  <View>
+                     <Text style={styles.detailTitle}>Link an Achievement</Text>
+                  </View>
+                  <Image source={Images.Personal} />
+               </View>
+            </TouchableOpacity>
          </View>
       );
    }
@@ -112,17 +117,24 @@ const FingerPrint = (props) => {
                </View>
                <View style={{ height: 100, justifyContent: 'center', alignItems: 'center', paddingTop: -150, flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
                   <DropDownPicker
-                     items={data && data.length !== 0 ? data.map(i => ({ label: i.name, value: i.id, ...i })) : []}
+                     items={achivementReq.data && achivementReq.data.length !== 0 ? achivementReq.data.map(i => ({ label: i.title, value: i.id, ...i })) : []}
                      containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
                      style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
                      itemStyle={{ justifyContent: 'flex-start' }}
                      dropDownStyle={{ backgroundColor: '#fafafa' }}
                      placeholderStyle={{ color: 'gray' }}
-                     onChangeItem={item => setCurrentPassport(item)}
+                     onChangeItem={item => setAchievementToAttach(item)}
                   />
                </View>
                <View style={{ height: '15%' }}>
-                  <TouchableOpacity onPress={() => setShow(false)}>
+                  <TouchableOpacity disabled={linkReq.loading || !achievementToAttach} onPress={() => {
+                     const data = { achivementId: achievementToAttach.id, passportId: props.item.id }
+                     doLink({ data })
+                        .then(() => {
+                           fetchPassport()
+                           setShow(false)
+                        })
+                  }}>
                      <View style={{ alignItems: 'center', backgroundColor: '#8BA5FA', justifyContent: 'center', height: '100%', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
                         <Text style={{ alignSelf: 'center', color: 'white', textAlign: 'center', fontSize: 22 }}>Done</Text>
                      </View>
@@ -134,4 +146,4 @@ const FingerPrint = (props) => {
    );
 }
 
-export default FingerPrint;
+export default PassportDetails;

@@ -11,6 +11,9 @@ import FullFeedback from '../fullfeedback/FullFeedback'
 import EditProfile from '../editprofile/EditProfile'
 import Achievement from '../achieve/Achievement'
 import { ScrollView } from 'react-native-gesture-handler'
+import PassportListing from '../passportListing/PassportListing'
+import PassportDetails from '../passportDetails/PassportDetails'
+import AchievementListing from '../achievementListing/AchievementListing'
 
 class Home extends Component {
 
@@ -36,8 +39,8 @@ class Home extends Component {
     // Remove the event listener
     this.focusListener.remove();
   }
-  onTabClick = (index) => {
-    this.setState({ tab: index })
+  onTabClick = (index, params) => {
+    this.setState({ tab: index, params })
   }
   render() {
     const { tab } = this.state
@@ -46,7 +49,7 @@ class Home extends Component {
       <>
         <ScrollView contentContainerStyle={styles.container}>
           {
-            (tab !== 2 && tab !== 7 && tab !== 1) && (
+            ![12,1,7,2,13, 14].includes(tab) && (
               <Header onTabClick={this.onTabClick} />
             )
           }
@@ -64,7 +67,7 @@ class Home extends Component {
             }
             {
               tab === 1 && (
-                <FingerPrint onTabClick={this.onTabClick} />
+                <FingerPrint onTabClick={this.onTabClick} {...this.state.params} />
               )
             }
             {
@@ -85,6 +88,21 @@ class Home extends Component {
             {
               tab === 4 && (
                 <FullFeedback onTabClick={this.onTabClick} />
+              )
+            }
+            {
+              tab === 12 && (
+                <PassportListing onTabClick={this.onTabClick} />
+              )
+            }
+            {
+              tab === 13 && (
+                <PassportDetails onTabClick={this.onTabClick} {...this.state.params} />
+              )
+            }
+            {
+              tab === 14 && (
+                <AchievementListing onTabClick={this.onTabClick} {...this.state.params} />
               )
             }
           </View>

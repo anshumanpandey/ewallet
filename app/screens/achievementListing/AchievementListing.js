@@ -13,21 +13,11 @@ import Images from '../../constants/image'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer';
 
-const PassportListing = (props) => {
+const AchievementListing = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [{ loading, data }, refetch] = useAxios({
-    url: '/passport',
+    url: '/achivement',
   })
-
-  const [createPassportReq, createPassport] = useAxios({
-    url: '/passport/create',
-    method: 'POST'
-  }, { manual: true })
-
-  const [doDeleteReq, doDelete] = useAxios({
-    url: '/passport',
-    method: 'DELETE'
-  }, { manual: true })
 
   useEffect(() => {
     refetch()
@@ -39,11 +29,6 @@ const PassportListing = (props) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <Header onTabClick={props.onTabClick} />
-      {(doDeleteReq.loading || loading) && (
-        <View style={{ zIndex: 2, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(255,255,255,0.8)', justifyContent: 'center', alignItems: 'center' }}>
-          <Spinner color={"#8BA5FA"} size={120} />
-        </View>
-      )}
 
       <View style={styles.loginContainer}>
 
@@ -53,40 +38,26 @@ const PassportListing = (props) => {
 
           <FlatList
             contentContainerStyle={{ flexGrow: 1 }}
-            ListEmptyComponent={<Text style={{ textAlign: 'center', marginTop: '15%' }}>No passport created</Text>}
+            ListEmptyComponent={<Text style={{ textAlign: 'center', marginTop: '15%' }}>No achivements created</Text>}
             data={data}
             keyExtractor={i => i.id}
             renderItem={({ item }) => {
               return (
                 <View style={{ flexDirection: 'row' }}>
-                  <View style={[styles.detailView, { flexDirection: 'column', width: '90%' }]}>
-                    <Text style={{ fontSize: 24 }}>{item.name}</Text>
+                  <View style={[styles.detailView, { flexDirection: 'column', width: '85%' }]}>
+                    <Text style={{ fontSize: 24 }}>{item.title}</Text>
                     <View>
-                      <Text style={{ color: 'rgba(0,0,0,0.3)' }}>{item.Achivements.length} Achievements</Text>
-                      <Text style={{ color: 'rgba(0,0,0,0.3)' }}>{item.Achivements.length == 0 && "0 Recommendations"}</Text>
+                      <Text style={{ color: 'rgba(0,0,0,0.3)' }}>Associated to {item.Passports.length} Passports</Text>
                     </View>
                   </View>
                   <TouchableOpacity onPress={() => {
                     props.onTabClick(13, { item })
-                  }} style={[styles.detailView, { width: '10%', justifyContent: 'center', alignItems: 'center', padding: 0 }]}>
-                    <Icon type="AntDesign" name="right" />
+                  }} style={[styles.detailView, { width: '15%', justifyContent: 'center', alignItems: 'center', padding: 0 }]}>
+                    <Text>View</Text>
                   </TouchableOpacity>
                 </View>
               );
             }}
-            ListFooterComponent={
-              <TouchableOpacity onPress={() => {
-                setShowModal(true)
-                refetch()
-              }}>
-                <View style={styles.detailView}>
-
-                  <Text style={styles.detailTitle}>Create a new passport</Text>
-                  <Image source={Images.Personal} />
-                </View>
-              </TouchableOpacity>
-            }
-            ListFooterComponentStyle={{ marginTop: 'auto' }}
           />
 
 
@@ -100,16 +71,12 @@ const PassportListing = (props) => {
 
             return errors
           }}
-          onSubmit={(values, { resetForm }) => {
+          onSubmit={values => {
             createPassport({ data: { name: values.title } })
-            .then(() => {
-              setShowModal(false)
-              resetForm({ values: { title: ''}})
-              refetch()
-            })
+            .then(() => setShowModal(false))
           }}
         >
-          {({ handleChange, handleBlur, handleSubmit,values, errors, touched }) => (
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <Modal onBackdropPress={() => setShowModal(false)} isVisible={showModal}>
               <View style={{ height: '50%', backgroundColor: '#8BA5FA', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
                 <View style={{ alignItems: 'center', backgroundColor: 'white', justifyContent: 'center', height: '15%', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
@@ -130,7 +97,7 @@ const PassportListing = (props) => {
                   {errors.title && touched.title && <ErrorLabel text={errors.title} />}
                 </View>
                 <View style={{ height: '15%' }}>
-                  <TouchableOpacity style={{ opacity: createPassportReq.loading ? 0.5: 1 }} disabled={createPassportReq.loading} onPress={handleSubmit}>
+                  <TouchableOpacity onPress={handleSubmit}>
                     <View style={{ alignItems: 'center', backgroundColor: '#8BA5FA', justifyContent: 'center', height: '100%', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
                       <Text style={{ alignSelf: 'center', color: 'white', textAlign: 'center', fontSize: 22 }}>Done</Text>
                     </View>
@@ -145,4 +112,4 @@ const PassportListing = (props) => {
   )
 }
 
-export default PassportListing;
+export default AchievementListing;

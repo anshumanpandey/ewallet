@@ -96,12 +96,13 @@ const styles=StyleSheet.create({
     },
     textInput:{
         height:Dimension.px50,
-        width:'100%',
+        width:Dimension.px100,
         justifyContent:'center',
         alignItems:'center',
         color:'black',
         borderRadius:Dimension.px25,       
         flexDirection:'row',       
+      
      
         fontSize:13
 

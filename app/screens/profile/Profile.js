@@ -14,7 +14,7 @@ const ItemCard = ({ item, onTabClick }) => {
   onSwitch = (path) => {
 
     if (path === 'FingerPrint') {
-      onTabClick(1)
+      onTabClick(14)
     }
     else if (path === 'EditProfile') {
       NavigationService.navigate(path)
