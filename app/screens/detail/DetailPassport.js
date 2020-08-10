@@ -55,7 +55,7 @@ const DetailPassport = (props) => {
                         <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: '30%', width: '100%' }}>
                             <TouchableOpacity
                                 style={[{ height: Dimension.px50, backgroundColor: '#EEF4FD', borderRadius: 8, justifyContent: 'center', marginTop: Dimension.px20, paddingHorizontal: 10, backgroundColor: '#8BA5FA', width: '50%' }]}
-                                onPress={() => NavigationService.navigate("Achievement")}
+                                onPress={() => NavigationService.navigate("Experience")}
                             >
                                 <Text style={[styles.memberText, { color: 'white', textAlign: 'center' }]}>Ask for a recommendation</Text>
                             </TouchableOpacity>
