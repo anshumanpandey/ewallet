@@ -11,11 +11,11 @@ import ErrorLabel from '../../components/ErrorLabel';
 import { dispatchAchivementFormState, ACHIVEMENT_STATE_ACTIONS, getAchivementFromState } from '../../state/AchivementFormState'
 import GlobalStyles from '../../constants/globalStyles';
 import * as Progress from 'react-native-progress';
-import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
+import { dispatchGlobalState, GLOBAL_STATE_ACTIONS, useGlobalState } from '../../state/GlobalState';
 
 const ProfilePic = () => {
     const [currentFormState, setCurrentFormState] = useState();
-    const [sendAttempNo, setSendAttempNo] = useState(0);
+    const [profile] = useGlobalState('profile');
 
     const [createReq, doUploadPicture] = useAxios({
         url: '/uploadProfilePic',
@@ -69,7 +69,7 @@ const ProfilePic = () => {
 
                         data.append('awardFile', {
                             uri: values['file'].uri,
-                            name: values['file'].fileName ? values['file'].fileName: new Date().valueOf(),
+                            name: values['file'].fileName ? values['file'].fileName: new Date().valueOf().toString(),
                             type: values['file'].type,
                         })
 
@@ -116,7 +116,9 @@ const ProfilePic = () => {
                                     });
                                 }}>
                                     <View style={styles.textInputBackground}>
-                                        <Text style={{ color: values.date ? 'black' : 'gray' }}>{values.file ? values.file?.fileName : "Attach"}</Text>
+                                        <Text style={{ color: values.date ? 'black' : 'gray' }}>{values.file && values.file?.fileName}</Text>
+                                        <Text style={{ color: values.date ? 'black' : 'gray' }}>{profile?.profilePic && !values.file && profile?.profilePic}</Text>
+                                        <Text style={{ color: values.date ? 'black' : 'gray' }}>{(!values?.file && !profile?.profilePic) && "Attach"}</Text>
                                     </View>
                                 </TouchableOpacity>
                                 {errors.file && touched.file && <ErrorLabel text={errors.file} />}
