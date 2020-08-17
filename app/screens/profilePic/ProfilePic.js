@@ -11,6 +11,7 @@ import ErrorLabel from '../../components/ErrorLabel';
 import { dispatchAchivementFormState, ACHIVEMENT_STATE_ACTIONS, getAchivementFromState } from '../../state/AchivementFormState'
 import GlobalStyles from '../../constants/globalStyles';
 import * as Progress from 'react-native-progress';
+import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
 
 const ProfilePic = () => {
     const [currentFormState, setCurrentFormState] = useState();
@@ -18,6 +19,11 @@ const ProfilePic = () => {
 
     const [createReq, doUploadPicture] = useAxios({
         url: '/uploadProfilePic',
+        method: 'POST'
+    }, { manual: true })
+
+    const [getUserReq, getUser] = useAxios({
+        url: '/getUser',
         method: 'POST'
     }, { manual: true })
 
@@ -73,8 +79,10 @@ const ProfilePic = () => {
                                 "content-type": "multipart/form-data"
                             }
                         })
+                            .then(() => getUser())
                             .then((r) => {
                                 console.log(r.data)
+                                dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.PROFILE, state: r.data })
                                 NavigationService.navigate(Screens.Home)
                             })
                     }}
