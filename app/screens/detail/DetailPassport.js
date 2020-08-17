@@ -28,9 +28,11 @@ const DetailPassport = (props) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                         <View>
                             <Text style={{ fontSize: 20, lineHeight: 26, color: '#120E21' }}>Additional</Text>
-                            <TouchableOpacity onPress={() => setIsVisible(true)}>
-                                <Text style={{ padding: 10, backgroundColor: '#FBEAFF', borderRadius: 6 }}>Certification</Text>
-                            </TouchableOpacity>
+                            {achivement.awardFilename && (
+                                <TouchableOpacity onPress={() => setIsVisible(true)}>
+                                    <Text style={{ padding: 10, backgroundColor: '#FBEAFF', borderRadius: 6 }}>Certification</Text>
+                                </TouchableOpacity>
+                            )}
                             <ImageView
                                 images={[{ uri: achivement.awardFilename }]}
                                 imageIndex={0}

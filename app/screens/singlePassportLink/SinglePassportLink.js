@@ -97,10 +97,11 @@ const SinglePassportLink = (props) => {
               delete jsonData.date;
 
               Object.keys(jsonData).forEach(i => {
-                console.log(i)
-                data.append(i, jsonData[i])
+                console.log(jsonData[i])
+                if (jsonData[i]) {
+                  data.append(i, jsonData[i])
+                }
               })
-
 
               doCreate({
                 data,
@@ -111,7 +112,7 @@ const SinglePassportLink = (props) => {
                 .then((r) => {
                   console.log(r.data)
                   NavigationService.navigate(Screens.Congrats)
-                  dispatchAchivementFormState(ACHIVEMENT_STATE_ACTIONS.RESET)
+                  dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.RESET, state: {} })
                 })
             }}
           >

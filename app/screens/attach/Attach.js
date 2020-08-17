@@ -84,7 +84,9 @@ const Attach = () => {
 
                             Object.keys(jsonData).forEach(i => {
                                 console.log(i)
-                                data.append(i, jsonData[i])
+                                if (jsonData[i]) {
+                                    data.append(i, jsonData[i])
+                                }
                             })
 
 
@@ -96,6 +98,7 @@ const Attach = () => {
                             })
                                 .then((r) => {
                                     console.log(r.data)
+                                    dispatchAchivementFormState({ type: ACHIVEMENT_STATE_ACTIONS.RESET, state: {} })
                                     NavigationService.navigate(Screens.Congrats)
                                 })
                         }

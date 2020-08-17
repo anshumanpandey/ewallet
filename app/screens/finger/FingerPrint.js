@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { View, FlatList, TouchableOpacity, Text, Image } from 'react-native'
 import useAxios from 'axios-hooks'
@@ -9,6 +9,7 @@ import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalSta
 import Header from '../../components/Header';
 import NavigationService from '../../navigation/NavigationService';
 import Modal from 'react-native-modal';
+import { Dropdown } from 'react-native-material-dropdown';
 
 const Item = React.memo(({ opacity, selected, vertical, fontSize, item }) => {
    return (
@@ -35,9 +36,11 @@ const ItemPassCard = (item) => {
                      <Text>{item.companyName}</Text>
                      <Text>{item.date}</Text>
                   </View>
-                  <View style={{ padding: 10, backgroundColor: '#FBEAFF', borderRadius: 6 }}>
-                     <Text >Certification</Text>
-                  </View>
+                  {item.awardFilename && (
+                     <View style={{ padding: 10, backgroundColor: '#FBEAFF', borderRadius: 6 }}>
+                        <Text >Certification</Text>
+                     </View>
+                  )}
                </View>
             </View>
          </View>
@@ -47,6 +50,7 @@ const ItemPassCard = (item) => {
 
 const FingerPrint = (props) => {
    const [show, setShow] = useState(false);
+   const [tempPassport, setTempPassport] = useState(false);
    const [currentPassport, setCurrentPassport] = useState(null);
 
    const [{ loading, data }] = useAxios({
@@ -67,33 +71,29 @@ const FingerPrint = (props) => {
       body = (
          <View style={{ padding: 15, flexGrow: 1 }}>
             <FlatList
-               contentContainerStyle={{ flex: 0.5 }}
                ListEmptyComponent={
                   <Text style={{ textAlign: 'center', marginTop: '10%' }}>No achivements create for this passport</Text>
                }
                horizontal={false}
                data={currentPassport ? data.find(e => currentPassport?.id == e.id).Achivements : data[0].Achivements}
-               style={{ paddingHorizontal: 15, height: '100%' }}
+               style={{ paddingHorizontal: 15 }}
                numColumns={1}
                keyExtractor={item => item.id}
                renderItem={({ item }) =>
                   <ItemPassCard {...item} passportId={currentPassport || data[0].id} {...props} />
                }
-               ListFooterComponent={
-                  <TouchableOpacity onPress={() => {
-                     setShow(true)
-                  }}>
-                     <View style={styles.detailView}>
-                        <View>
-                           <Text style={styles.detailTitle}>{(data.find(e => currentPassport == e.id) || data[0]).name}</Text>
-                           <Text style={styles.detailTitle}>Switch Passport</Text>
-                        </View>
-                        <Image source={Images.Personal} />
-                     </View>
-                  </TouchableOpacity>
-               }
-               ListFooterComponentStyle={{ marginTop: 'auto' }}
             />
+            <TouchableOpacity onPress={() => {
+               setShow(true)
+            }}>
+               <View style={styles.detailView}>
+                  <View>
+                     <Text style={styles.detailTitle}>{(data.find(e => currentPassport?.id == e.id) || data[0]).name}</Text>
+                     <Text style={styles.detailTitle}>Switch Passport</Text>
+                  </View>
+                  <Image source={Images.Personal} />
+               </View>
+            </TouchableOpacity>
          </View>
       );
    }
@@ -110,19 +110,23 @@ const FingerPrint = (props) => {
                <View style={{ alignItems: 'center', backgroundColor: 'white', justifyContent: 'center', height: '25%', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
                   <Text style={{ alignSelf: 'center', color: '#8BA5FA', textAlign: 'center', fontSize: 22 }}>Select</Text>
                </View>
-               <View style={{ height: 70, justifyContent: 'center', alignItems: 'center', paddingTop: -100, flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
-                  <DropDownPicker
-                     items={data && data.length !== 0 ? data.map(i => ({ label: i.name, value: i.id, ...i })) : []}
-                     containerStyle={{ height: Dimension.px50, borderRadius: 8, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
-                     style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
-                     itemStyle={{ justifyContent: 'flex-start' }}
-                     dropDownStyle={{ backgroundColor: '#fafafa' }}
-                     placeholderStyle={{ color: 'gray' }}
-                     onChangeItem={item => setCurrentPassport(item)}
+               <View style={{ justifyContent: 'center', alignItems: 'center', paddingTop: -100, flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
+                  <Dropdown
+                     value={data ? (data?.find(e => currentPassport?.id == e.id) || data[0]).id : undefined}
+                     containerStyle={{ width: '90%'}}
+                     valueExtractor={(item) => item.id}
+                     labelExtractor={(item) => item.name}
+                     onChangeText={(o)=> {
+                        setTempPassport(data.find(i => i.id == o))
+                     }}
+                     data={data}
                   />
                </View>
-               <View style={{ height: '25%' }}>
-                  <TouchableOpacity onPress={() => setShow(false)}>
+               <View style={{ height: '25%', zIndex: -100 }}>
+                  <TouchableOpacity onPress={() => {
+                     setCurrentPassport(tempPassport)
+                     setShow(false)
+                  }}>
                      <View style={{ alignItems: 'center', backgroundColor: '#8BA5FA', justifyContent: 'center', height: '100%', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
                         <Text style={{ alignSelf: 'center', color: 'white', textAlign: 'center', fontSize: 22 }}>Done</Text>
                      </View>

@@ -86,7 +86,7 @@ const Achievement = (props) => {
                   <Text style={styles.profileTitle}>Welcome {profile.firstName}!</Text>
                 </View>
                 {props.title && <Text style={styles.profileTitle}>{props.title}</Text>}
-                {!props.title && <Text style={styles.profileTitle}>Let’s start your onboarding by adding one achievement:</Text>}
+                {!props.title && <Text style={styles.profileTitle}>You can now create your first achievement or do it later:</Text>}
                 <View style={styles.textInputBackground}>
                   <TextInput
                     placeholderTextColor="gray"

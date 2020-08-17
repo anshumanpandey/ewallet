@@ -52,15 +52,20 @@ const AchievementListing = (props) => {
             renderItem={({ item }) => {
               return (
                 <View style={{ flexDirection: 'row' }}>
-                  <TouchableOpacity onPress={() => {
-                    setShowModal(true)
-                    setSelectedSchievement(item)
-                  }} style={[styles.detailView, { flexDirection: 'column', width: '85%' }]}>
+                  <TouchableOpacity disabled={true} style={[styles.detailView, { flexDirection: 'column', width: '70%' }]}>
                     <Text style={{ fontSize: 24 }}>{item.title}</Text>
                     <View>
                       <Text style={{ color: 'rgba(0,0,0,0.3)' }}>Associated to {item.Passports.length} Passports</Text>
                     </View>
                   </TouchableOpacity>
+                  
+                  <TouchableOpacity disabled={item.Passports.length == 0} onPress={() => {
+                    setShowModal(true)
+                    setSelectedSchievement(item)
+                  }} style={[styles.detailView, { width: '15%', justifyContent: 'center', alignItems: 'center', backgroundColor: 'red',padding: 0 }]}>
+                    <Text style={{ opacity: 1, color: 'white', fontSize: 40 }}>-</Text>
+                  </TouchableOpacity>
+
                   <TouchableOpacity disabled={item.Passports.length == 0} onPress={() => {
                     dispatchGlobalState({ type: GLOBAL_STATE_ACTIONS.ACHIVEMEN_SELECTED, state: item })
                     props.onTabClick(3)

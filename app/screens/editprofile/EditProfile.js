@@ -139,13 +139,25 @@ const EditProfile = (props) => {
                   <TextInput
                     placeholderTextColor="gray"
                     style={styles.textInput}
-                    placeholder="Designation, Company Name"
-                    onChangeText={handleChange('positionAt')}
-                    onBlur={handleBlur('positionAt')}
-                    value={values.positionAt}
+                    placeholder="Designation"
+                    onChangeText={handleChange('companyTitle')}
+                    onBlur={handleBlur('companyTitle')}
+                    value={values.companyTitle}
                   />
                 </View>
-                {errors.positionAt && touched.positionAt && <ErrorLabel text={errors.positionAt} />}
+                {errors.companyTitle && touched.companyTitle && <ErrorLabel text={errors.companyTitle} />}
+
+                <View style={styles.textInputBackground}>
+                  <TextInput
+                    placeholderTextColor="gray"
+                    style={styles.textInput}
+                    placeholder="Company Name"
+                    onChangeText={handleChange('companyName')}
+                    onBlur={handleBlur('companyName')}
+                    value={values.companyName}
+                  />
+                </View>
+                {errors.companyName && touched.companyName && <ErrorLabel text={errors.companyName} />}
 
 
                 <View style={styles.buttonView}>

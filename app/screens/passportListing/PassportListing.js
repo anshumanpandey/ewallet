@@ -63,7 +63,10 @@ const PassportListing = (props) => {
                     <Text style={{ fontSize: 24 }}>{item.name}</Text>
                     <View>
                       <Text style={{ color: 'rgba(0,0,0,0.3)' }}>{item.Achivements.length} Achievements</Text>
-                      <Text style={{ color: 'rgba(0,0,0,0.3)' }}>{item.Achivements.length == 0 && "0 Recommendations"}</Text>
+                      <Text style={{ color: 'rgba(0,0,0,0.3)' }}>{`${item.Achivements.reduce((counter, feedbacks) => {
+                        counter = feedbacks.length
+                        return counter
+                      }, 0) || 0} Recommendations`}</Text>
                     </View>
                   </View>
                   <TouchableOpacity onPress={() => {
@@ -102,14 +105,14 @@ const PassportListing = (props) => {
           }}
           onSubmit={(values, { resetForm }) => {
             createPassport({ data: { name: values.title } })
-            .then(() => {
-              setShowModal(false)
-              resetForm({ values: { title: ''}})
-              refetch()
-            })
+              .then(() => {
+                setShowModal(false)
+                resetForm({ values: { title: '' } })
+                refetch()
+              })
           }}
         >
-          {({ handleChange, handleBlur, handleSubmit,values, errors, touched }) => (
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <Modal onBackdropPress={() => setShowModal(false)} isVisible={showModal}>
               <View style={{ height: '50%', backgroundColor: '#8BA5FA', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
                 <View style={{ alignItems: 'center', backgroundColor: 'white', justifyContent: 'center', height: '15%', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
@@ -130,7 +133,7 @@ const PassportListing = (props) => {
                   {errors.title && touched.title && <ErrorLabel text={errors.title} />}
                 </View>
                 <View style={{ height: '15%' }}>
-                  <TouchableOpacity style={{ opacity: createPassportReq.loading ? 0.5: 1 }} disabled={createPassportReq.loading} onPress={handleSubmit}>
+                  <TouchableOpacity style={{ opacity: createPassportReq.loading ? 0.5 : 1 }} disabled={createPassportReq.loading} onPress={handleSubmit}>
                     <View style={{ alignItems: 'center', backgroundColor: '#8BA5FA', justifyContent: 'center', height: '100%', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
                       <Text style={{ alignSelf: 'center', color: 'white', textAlign: 'center', fontSize: 22 }}>Done</Text>
                     </View>

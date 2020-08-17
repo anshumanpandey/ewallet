@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { View, FlatList, TouchableOpacity, Text, Image } from 'react-native'
 import useAxios from 'axios-hooks'
-import DropDownPicker from 'react-native-dropdown-picker';
+import { Dropdown } from 'react-native-material-dropdown';
 import styles from './styles';
 import Images from '../../constants/image'
 import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
@@ -18,20 +18,23 @@ const ItemPassCard = (item) => {
          item.onTabClick(3)
       }}>
          <View>
-            <View style={styles.card}>
-               <View style={styles.certiView}>
-                  <Text style={styles.certTitle}>{item.title}</Text>
-                  <Image source={Images.Hat} />
-               </View>
-               <View style={[styles.certiView, { marginTop: 10 }]}>
-                  <View>
-                     <Text>{item.companyName}</Text>
-                     <Text>{item.date}</Text>
+            <View style={[styles.card, { flexDirection: 'row', justifyContent: 'space-between' }]}>
+               <View style={{ padding: 15 }}>
+                  <View style={styles.certiView}>
+                     <Text style={styles.certTitle}>{item.title}</Text>
                   </View>
-                  <View style={{ padding: 10, backgroundColor: '#FBEAFF', borderRadius: 6 }}>
-                     <Text >Certification</Text>
+                  <View style={[styles.certiView, { marginTop: 10 }]}>
+                     <View>
+                        <Text>{item.companyName}</Text>
+                        <Text>{item.date}</Text>
+                     </View>
                   </View>
                </View>
+               <TouchableOpacity onPress={() => {
+                  item.onDelete(item)
+               }} style={{ backgroundColor: 'red', padding: '4%' }}>
+                  <Text style={{ fontSize: 40, color: 'white' }}>-</Text>
+               </TouchableOpacity>
             </View>
          </View>
       </TouchableOpacity>
@@ -41,7 +44,7 @@ const ItemPassCard = (item) => {
 const PassportDetails = (props) => {
    const [achievementToAttach, setAchievementToAttach] = useState(null);
    const [show, setShow] = useState(false);
-   const [currentPassport, setCurrentPassport] = useState(null);
+   const [currentPassport, setCurrentPassport] = useState(props.item);
 
    const [{ loading, data }, fetchPassport] = useAxios({
       url: '/passport',
@@ -53,6 +56,11 @@ const PassportDetails = (props) => {
 
    const [linkReq, doLink] = useAxios({
       url: '/achivement/link',
+      method: 'POST'
+   }, { manual: true })
+
+   const [unlinkReq, doUnlink] = useAxios({
+      url: '/achivement/unlink',
       method: 'POST'
    }, { manual: true })
 
@@ -77,19 +85,25 @@ const PassportDetails = (props) => {
                <Text style={{ fontSize: 24, padding: '5%' }}>{props?.item?.name}</Text>
             </View>
             <FlatList
-               contentContainerStyle={{ marginTop: '5%'}}
+               refreshing={unlinkReq.loading}
+               onRefresh={() => null}
+               contentContainerStyle={{ marginTop: '5%' }}
                ListEmptyComponent={
                   <Text style={{ textAlign: 'center', marginTop: '10%' }}>No achivements create for this passport</Text>
                }
                horizontal={false}
-               data={currentPassport ? data.find(e => currentPassport == e.id).Achivements : data[0].Achivements}
+               data={currentPassport ? data.find(e => props.item.id == e.id).Achivements : data[0].Achivements}
                numColumns={1}
                keyExtractor={item => item.id}
                renderItem={({ item }) =>
-                  <ItemPassCard {...item} passportId={currentPassport || data[0].id} {...props} />
+                  <ItemPassCard {...item} onDelete={(item) => {
+                     const data = { achivementId: item.id, passportId: item.passportId.id }
+                     doUnlink({ data })
+                        .then(() => fetchPassport())
+                  }} passportId={currentPassport || data[0].id} {...props} />
                }
             />
-            <TouchableOpacity style={{ marginTop: 'auto'}} onPress={() => {
+            <TouchableOpacity style={{ marginTop: 'auto' }} onPress={() => {
                setShow(true)
             }}>
                <View style={styles.detailView}>
@@ -116,14 +130,14 @@ const PassportDetails = (props) => {
                   <Text style={{ alignSelf: 'center', color: '#8BA5FA', textAlign: 'center', fontSize: 22 }}>Select</Text>
                </View>
                <View style={{ height: 100, justifyContent: 'center', alignItems: 'center', paddingTop: -150, flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
-                  <DropDownPicker
-                     items={achivementReq.data && achivementReq.data.length !== 0 ? achivementReq.data.map(i => ({ label: i.title, value: i.id, ...i })) : []}
-                     containerStyle={{ height: Dimension.px50, borderRadius: 8, marginTop: Dimension.px20, width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
-                     style={{ backgroundColor: '#EEF4FD', borderWidth: 0 }}
-                     itemStyle={{ justifyContent: 'flex-start' }}
-                     dropDownStyle={{ backgroundColor: '#fafafa' }}
-                     placeholderStyle={{ color: 'gray' }}
-                     onChangeItem={item => setAchievementToAttach(item)}
+                  <Dropdown
+                     containerStyle={{ width: '90%' }}
+                     valueExtractor={(item) => item.id}
+                     labelExtractor={(item) => item.title}
+                     onChangeText={(o) => {
+                        setAchievementToAttach(achivementReq.data.find(i => i.id == o))
+                     }}
+                     data={achivementReq.data && achivementReq.data.length !== 0 ? achivementReq.data : []}
                   />
                </View>
                <View style={{ height: '15%' }}>
