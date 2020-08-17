@@ -116,7 +116,7 @@ const ProfilePic = () => {
                                     });
                                 }}>
                                     <View style={styles.textInputBackground}>
-                                        <Text style={{ color: values.date ? 'black' : 'gray' }}>{values.file && values.file?.fileName}</Text>
+                                        <Text style={{ color: values.date ? 'black' : 'gray' }}>{values?.file && values?.file?.fileName ? values.file?.fileName : values?.file?.uri}</Text>
                                         <Text style={{ color: values.date ? 'black' : 'gray' }}>{profile?.profilePic && !values.file && profile?.profilePic}</Text>
                                         <Text style={{ color: values.date ? 'black' : 'gray' }}>{(!values?.file && !profile?.profilePic) && "Attach"}</Text>
                                     </View>
