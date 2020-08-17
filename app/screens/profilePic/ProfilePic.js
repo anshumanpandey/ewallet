@@ -69,7 +69,7 @@ const ProfilePic = () => {
 
                         data.append('awardFile', {
                             uri: values['file'].uri,
-                            name: values['file'].fileName,
+                            name: values['file'].fileName ? values['file'].fileName: new Date().toString(),
                             type: values['file'].type,
                         })
 
