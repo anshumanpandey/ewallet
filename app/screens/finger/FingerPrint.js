@@ -105,7 +105,7 @@ const FingerPrint = (props) => {
          <Header
             hideIcons={true}
             customButton={() => {
-               return <TouchableOpacity disabled={!currentPassport && data.length == 0} onPress={() => {
+               return <TouchableOpacity disabled={!currentPassport && data && data.length == 0} onPress={() => {
                   let shareOptions = {
                      title: `${(currentPassport || data[0]).name} passport by ${profile.firstName} ${profile.lastName}`,
                      message: "This is my passport with all my achievements",
