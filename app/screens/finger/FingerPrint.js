@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import { View, FlatList, TouchableOpacity, Text, Image } from 'react-native'
 import useAxios from 'axios-hooks'
-import DropDownPicker from 'react-native-dropdown-picker';
+import Share from 'react-native-share';
 import styles from './styles';
 import Images from '../../constants/image'
-import { dispatchGlobalState, GLOBAL_STATE_ACTIONS } from '../../state/GlobalState';
+import { dispatchGlobalState, GLOBAL_STATE_ACTIONS, useGlobalState } from '../../state/GlobalState';
 import Header from '../../components/Header';
 import NavigationService from '../../navigation/NavigationService';
 import Modal from 'react-native-modal';
@@ -52,6 +52,7 @@ const FingerPrint = (props) => {
    const [show, setShow] = useState(false);
    const [tempPassport, setTempPassport] = useState(false);
    const [currentPassport, setCurrentPassport] = useState(null);
+   const [profile] = useGlobalState('profile')
 
    const [{ loading, data }] = useAxios({
       url: '/passport',
@@ -103,6 +104,19 @@ const FingerPrint = (props) => {
       <View style={{ backgroundColor: 'white', flexGrow: 1 }}>
          <Header
             hideIcons={true}
+            customButton={() => {
+               return <TouchableOpacity disabled={!currentPassport && data.length == 0} onPress={() => {
+                  let shareOptions = {
+                     title: `${(currentPassport || data[0]).name} passport by ${profile.firstName} ${profile.lastName}`,
+                     message: "This is my passport with all my achievements",
+                     url: `https://passport-backend.herokuapp.com/feedback/passport/${(currentPassport || data[0]).id}`,
+                     subject: "Share Link" //  for email
+                   };
+                   Share.open(shareOptions).catch((err) => { err && console.log(err); })
+               }}>
+                  <Text>Share</Text>
+               </TouchableOpacity>
+            }}
          />
          {body}
          <Modal onBackdropPress={() => setShow(false)} isVisible={show}>
