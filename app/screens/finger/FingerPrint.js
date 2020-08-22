@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import { View, FlatList, TouchableOpacity, Text, Image } from 'react-native'
+import { View, FlatList, TouchableOpacity, Text, Image, Alert } from 'react-native'
 import useAxios from 'axios-hooks'
-import Share from 'react-native-share';
+import Clipboard from "@react-native-community/clipboard";
 import styles from './styles';
 import Images from '../../constants/image'
 import { dispatchGlobalState, GLOBAL_STATE_ACTIONS, useGlobalState } from '../../state/GlobalState';
 import Header from '../../components/Header';
-import NavigationService from '../../navigation/NavigationService';
 import Modal from 'react-native-modal';
 import { Dropdown } from 'react-native-material-dropdown';
 
@@ -50,6 +49,7 @@ const ItemPassCard = (item) => {
 
 const FingerPrint = (props) => {
    const [show, setShow] = useState(false);
+   const [showClipModal, setShowClipModal] = useState(false);
    const [tempPassport, setTempPassport] = useState(false);
    const [currentPassport, setCurrentPassport] = useState(null);
    const [profile] = useGlobalState('profile')
@@ -105,14 +105,10 @@ const FingerPrint = (props) => {
          <Header
             hideIcons={true}
             customButton={() => {
-               return <TouchableOpacity disabled={!currentPassport && data && data.length == 0} onPress={() => {
-                  let shareOptions = {
-                     title: `${(currentPassport || data[0]).name} passport by ${profile.firstName} ${profile.lastName}`,
-                     message: "This is my passport with all my achievements",
-                     url: `https://passport-backend.herokuapp.com/feedback/passport/${(currentPassport || data[0]).id}`,
-                     subject: "Share Link" //  for email
-                   };
-                   Share.open(shareOptions).catch((err) => { err && console.log(err); })
+               if (!data) return
+               const passport = currentPassport || data[0]
+               return <TouchableOpacity disabled={passport == null || passport == undefined} onPress={() => {
+                  setShowClipModal(`https://passport-backend.herokuapp.com/feedback/passport/${passport.id}`)
                }}>
                   <Text>Share</Text>
                </TouchableOpacity>
@@ -127,10 +123,10 @@ const FingerPrint = (props) => {
                <View style={{ justifyContent: 'center', alignItems: 'center', paddingTop: -100, flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
                   <Dropdown
                      value={data ? (data?.find(e => currentPassport?.id == e.id) || data[0]).id : undefined}
-                     containerStyle={{ width: '90%'}}
+                     containerStyle={{ width: '90%' }}
                      valueExtractor={(item) => item.id}
                      labelExtractor={(item) => item.name}
-                     onChangeText={(o)=> {
+                     onChangeText={(o) => {
                         setTempPassport(data.find(i => i.id == o))
                      }}
                      data={data}
@@ -143,6 +139,28 @@ const FingerPrint = (props) => {
                   }}>
                      <View style={{ alignItems: 'center', backgroundColor: '#8BA5FA', justifyContent: 'center', height: '100%', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
                         <Text style={{ alignSelf: 'center', color: 'white', textAlign: 'center', fontSize: 22 }}>Done</Text>
+                     </View>
+                  </TouchableOpacity>
+               </View>
+            </View>
+         </Modal>
+
+         <Modal onBackdropPress={() => setShowClipModal(false)} isVisible={showClipModal !== false}>
+            <View style={{ height: '30%', backgroundColor: '#8BA5FA', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
+               <View style={{ alignItems: 'center', backgroundColor: 'white', justifyContent: 'center', height: '25%', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
+                  <Text style={{ alignSelf: 'center', color: '#8BA5FA', textAlign: 'center', fontSize: 22 }}>Copy To Clipboard</Text>
+               </View>
+               <View style={{ justifyContent: 'center', alignItems: 'center', paddingTop: -100, flexDirection: 'row', flex: 1, backgroundColor: 'white' }}>
+                  <Text style={[styles.textInputBackground, { width: '90%'}]}>{showClipModal}</Text>
+               </View>
+               <View style={{ height: '25%', zIndex: -100 }}>
+                  <TouchableOpacity onPress={() => {
+                     Clipboard.setString(showClipModal)
+                     Alert.alert("","Link copied to clipboard")
+                     setShowClipModal(false)
+                  }}>
+                     <View style={{ alignItems: 'center', backgroundColor: '#8BA5FA', justifyContent: 'center', height: '100%', borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
+                        <Text style={{ alignSelf: 'center', color: 'white', textAlign: 'center', fontSize: 22 }}>Copy</Text>
                      </View>
                   </TouchableOpacity>
                </View>
